@@ -1150,12 +1150,12 @@ Orientability of a manifold refers to the possibility of consistently defining w
     A manifold is \textit{orientable} if an atlas can be chosen such that for every overlap of charts, the transition map \(\phi_{\beta} \circ \phi_{\alpha}^{-1} : \mathbb{R}^n \rightarrow \mathbb{R}^n\) has a positive Jacobian determinant. This positive determinant indicates that orientation is preserved between overlapping charts.
 \end{theorem}
 
-\subsection{Calculus on manifolds}
+\section{Calculus on manifolds}
 
 While local regions of manifolds look like Euclidean space, the global topology can significantly differ. Ordinary calculus doesn't directly address how to define derivatives when the underlying space (manifold) can curve or loop back on itself.
 How to handle calculations across manifold charts, where local Euclidean views must seamlessly connect through transition maps. Nor does it help in computing derivatives that respect the manifold's intrinsic geometry, which can be critical in physics for understanding phenomena like gravity or electromagnetism in curved spacetime. To address these issues, calculus on manifolds formalizes and extends the concepts of differentiation and integration to work in curved spaces. 
 
-\subsubsection{Tangent Vectors and Tangent Space} 
+\subsection{Tangent Vectors and Tangent Space} 
 
 The concept of a differentiable manifold is crucial because it allows us to apply calculus as we do in $\mathbb{R}^n$, thanks to local equivalence. To manage this, we employ coordinate charts to transition from manifold calculus to $\mathbb{R}^n$. The main complexity arises in transferring calculations between multiple charts that cover the manifold.
 
@@ -1225,6 +1225,424 @@ This operator, $\frac{dx^i}{dt} (p(t)) \frac{\partial}{\partial x^i}$, maps any 
 X(fg) = (Xf)g + f(Xg).
 \]
 
+\subsection{Tensor Fields and differential forms} 
+
+Let's start from the previous part. Vector at a point takes a function to a another function in the below manner. 
+
+\[ X : f \to X f \]
+
+Where we define the X in two ways. In the abstract way we mean the following 
+
+\[ X(fg) = (Xf)g + f(Xg) \]
+
+this is the product form. But in coordinates we say that $ X = a^i \frac{\partial}{\partial x^i}$. So its the gradient operator along some curve based on what we choose on the manifold. This is called vector at a point. But a vector field extends the idea in a differentiable way over the whole manifold. For example 
+
+\[ X:f \to Xf \]
+if X were to be a vector field that would mean X now sends to all over the manifold. Also all of these are now \( C^{\infty}\)
+
+Now to define a tensor field. We first start the abstract manner. Let's take a collection of functions \( f_1 \cdot \cdot f_n\) and treat them as a n component vector. 
+Now a tensor field of rank n which satisfies the product rule 
+
+\begin{theorem}
+    
+ A tensor field of rank $n$ is a multilinear map
+\begin{equation}
+X : (f_1, \ldots, f_n) \to X(f_1, \ldots, f_n)
+\end{equation}
+satisfying
+\begin{equation}
+X((f_1, \ldots, f_n) \ast (g_1, \ldots, g_n)) = (X(f_1, \ldots, f_n)) \ast (g_1, \ldots, g_n) + (f_1, \ldots, f_n) \ast (X(g_1, \ldots, g_n))
+\end{equation}
+
+\end{theorem}
+In coordinate system, we get 
+\begin{equation}
+a = a^{i_1 i_2 \ldots i_n}(x) \frac{\partial}{\partial x^{i_1}} \otimes \frac{\partial}{\partial x^{i_2}} \otimes \ldots \otimes \frac{\partial}{\partial x^{i_n}}
+\end{equation}
+
+The transformation law for the gradient can be found by chain rule. So requiring X to be coordinate independent givees us the law for $ a = a^{i_1 i_2 \ldots i_n}(x) $
+
+So if i change the coordinate system \( x^i \to x^{i'} \) then  $ a^{i_1 i_2 \ldots i_n}(x) \to a^{i^{'}_1 i^{'}_2 \ldots i^{'}_n}(x) $ 
+can be defined as 
+
+\[ 
+a'^{i_1 \ldots i_n}(x') = \frac{\partial x^{i_1}}{\partial x^{j_1}} \ldots \frac{\partial x^{i_n}}{\partial x^{j_n}} a^{j_1 \ldots j_n}(x)
+\] 
+
+these can be called the components of the tensor and X is the tensor. The above is called in contravariant tensor in physics term which is derived from old mathematical textbooks a modern way to represent it would be to call it components of a tensor field. 
+
+Now suppose we have two \( C^\infty \) manifolds with a map 
+\[ \phi:M \to N \] 
+such that there is another function for which 
+\[ f:N \to \mathbb{R} \]
+So basically we now have a functional mapping of the form 
+\[ f \circ \varphi :M \to \mathbb{R} \]
+the above is a point wise map from M to N. We can define a general mapping of the form 
+\[ \varphi_{*} : T_{p} (M) \to T_{\varphi(p)} (N) \]
+Here \(T_{p}(M) \) denotes the tangest vector space at point p over the manifold M. So \( \varphi_{*}  \) is a map from tangent space on M at point p to the tangent space at the image point \( \varphi(p) \) over the manifold N. The map has the following property. 
+
+\[ \varphi_{*} : X \in T_{p}(M) \to \varphi_{*}X \in T_{\varphi(p)}(N) \] 
+Which by definition means that \( \varphi_{*}X \) is vector field on N which acts on functions f by the following process. 
+
+\[ (\varphi_{*}X)f = X(f\circ \varphi) \]
+
+\begin{theorem}
+    If X,Y two vector fields on M and \( f : M \to \mathbb{R} \) then 
+    \[ XYf = X(Yf) \]
+    \[ YXf = Y(Xf) \] 
+
+    Since they dont have to be the same we define \( [X,Y] \) is the vecor field whose action on a function \( f:M \to \mathbb{R} \) is 
+
+    \[ [X,Y]f  = XYf - YXf \]
+    this is also called the lie bracket or simply the commutator. 
+\end{theorem}
+
+In coordinates:
+\begin{align*}
+X &= a^i(x) \frac{\partial}{\partial x^i}, & Y &= b^i(x) \frac{\partial}{\partial x^i} \\
+X(Yf) &= a^i \frac{\partial}{\partial x^i} \left( b^j \frac{\partial f}{\partial x^j} \right) \\
+      &= a^i b^j \frac{\partial^2 f}{\partial x^i \partial x^j} + a^i \frac{\partial b^j}{\partial x^i} \frac{\partial f}{\partial x^j} \\
+Y(Xf) &= b^j \frac{\partial a^i}{\partial x^j} \frac{\partial f}{\partial x^i} + b^j a^i \frac{\partial^2 f}{\partial x^j \partial x^i} \\
+(XY - YX)f &= \left( a^i \frac{\partial b^j}{\partial x^i} - b^i \frac{\partial a^j}{\partial x^i} \right) \frac{\partial f}{\partial x^j} \\
+[X,Y] &=c^{j}\frac{\partial f}{\partial x^j} 
+\end{align*}
+
+where \[ c^j (x) = a^i \frac{\partial b^j}{\partial x^i} - b^i \frac{\partial a^j}{\partial x^i} \]
+
+This is how the lie bracket work. The components of the lie bracket are these combination of components of the original vector fields. This also has a geometric meaning. The vector fields mentioned above are supposed to generate a motion on those differentiable manifold along some curve. They can come from a particular curve or can be used to construct a particular curve. Either way they generate some sort of motion. So if i have X,Y two different vector fields. One will generate a motion along one curve and the other will generate a motion along some other curve. 
+
+So a commutator is basically saying let me travel along a bit on one curve and then travel along the other curve for a bit. After that let's compare the results. So i move in two independent directions and the difference of those two will give me the lie bracket. 
+
+Now let's talk about differential forms. 
+
+\section{Differential forms}
+We first start off with dual vectors. 
+
+Given a vector space \( V \) with a basis \( \{e_i\} \) where \( i = 1, \ldots, n \), the dual vector space \( V^* \) is defined as the vector space generated by the dual basis \( \{e^i\} \), such that:
+\[
+\langle e^i, e_j \rangle = \delta^i_j
+\]
+
+For finite-dimensional vector spaces, \( V^* \) is isomorphic to \( V \). The pairing between elements of \( V \) and \( V^* \) leads to different properties for these spaces, which are influenced by their transformation properties under coordinate changes. The inner product remains invariant under certain transformations.
+
+In this context, we want to focus on the dual of the tangent space, deriving the transformation laws for elements of this space to ensure coordinate invariance. This involves expressing elements of \( V \) and \( V^* \) in terms of their respective bases, and studying the behavior under coordinate transformations.
+
+In general, elements of \( V \) and \( V^* \) can be expressed in terms of their respective bases:
+\[
+a = \sum_{i} a^i e_i \quad \text{in} \, V, \quad a' = \sum_{i} a'_i e^{i} \quad \text{in} \, V^*
+\]
+
+Then, the pairing between \( a' \) and \( a \) is given by:
+\[
+\langle a', a \rangle = a'_i a^j \langle e^i, e_j \rangle = a'_i a^i \quad (\text{summation implied})
+\]
+Thus, the pair \( a' \in V^*, a \in V \) gets mapped onto a real number, or in other words, \( \langle \cdot, \cdot \rangle \) is a bilinear map:
+\[
+V^* \otimes V \to \mathbb{R}
+\]
+
+There is an alternative way to look at this. For a given \( a' \in V^* \), we have a linear map
+\[
+\langle a', \cdot \rangle : V \to \mathbb{R}
+\]
+defined by
+\[
+\langle a', a \rangle : a \in V \mapsto \langle a', a \rangle \in \mathbb{R}
+\]
+
+Thus the dual vector space to \( V \) is the space of linear functionals on \( V \).
+
+
+An important property of dual spaces is that if we have a map of vector spaces \( V, W \):
+\[
+f : V \to W
+\]
+
+then this induces a dual map in the opposite direction:
+\[
+f^* : W^* \to V^*
+\]
+
+If \( b' \in W^* \), then \( f^*b' \) acts on vector \( a \in V \) by:
+\[
+\langle f^*(b'), a \rangle: \to \langle f^*(b'), a \rangle = \langle b', f(a) \rangle
+\]
+In summary 
+
+  \[
+  \langle f^*(b'), a \rangle = \langle b', f(a) \rangle
+  \]
+
+Here the Left Side (\(\langle f^*(b'), a \rangle\)) is the evaluation of the functional \( f^*(b') \) at the vector \( a \) in \( V \). It produces a real number since \( f^*(b') \) is a functional in \( V^* \).
+The right side (\(\langle b', f(a) \rangle\)) \( f(a) \) maps the vector \( a \) from \( V \) to \( W \), and then \( b' \) is evaluated at this new vector \( f(a) \) in \( W \). The equality shows that \( f^*(b') \) acting on \( a \) in \( V \) is equivalent to \( b' \) acting on the image of \( a \) under \( f \) in \( W \). This is fundamental in the definition of the dual map, where \( f^* \) effectively "pulls back" the functional \( b' \) along the map \( f \), allowing it to act directly on vectors in \( V \) as though they were in \( W \).
+
+In the study of differentiable manifolds, we defined the tangent space \(T_p(M)\) at a point \(p\), with basis \(\frac{\partial}{\partial x^i}\). Now we will define its dual.
+
+\begin{theorem}
+The space dual to \(T_p(M)\) is called the \textit{cotangent space} \(T^*_p(M)\).    
+\end{theorem}
+
+We denote the dual basis of \(T^*_p(M)\) by \(dx^i\). Note that this is a formal symbol for the moment and does not represent an infinitesimal amount of anything! Thus
+\[
+\langle dx^i, \frac{\partial}{\partial x^j} \rangle = \delta^i_j
+\]
+We can see that the right side of this is completely coordinate independent. So for two different coordinate systems, we should have the same results. Meaning, 
+ \[
+\langle dy^i, \frac{\partial}{\partial y^j} \rangle = \delta^i_j
+\]
+
+If we assign to \(dx^i\) the transformation law
+\[
+dx^i \to dy^i = \frac{\partial y^i}{\partial x^j} dx^j
+\]
+
+Here though, the notation \(dx^i\) serves to remind us that this object transforms like an infinitesimal distance. Meaning we can treat it as an abstract object. So previously we stated them as an object while using the same notation as infinitesimals. We now state them as an object much more than that of infinitesimals. They basically mean basis which follow the above transformation rule. 
+
+Ok, But now how does \( \frac{\partial}{\partial y^i} \) transform? Using chain rule, we can say that 
+\[ \frac{\partial}{\partial y^i} = \frac{\partial x^j}{\partial y^i} \frac{\partial}{\partial x^j} \]
+
+They are related to the above but in an opposite way of transformation 
+
+so using the above of, we see that 
+
+\[ \langle dy^i, \frac{\partial}{\partial y^j} \rangle = \langle dx^i, \frac{\partial}{\partial x^j} \rangle = \delta^i_j \] 
+
+This shows that dual space is well defined. The dual basis can be defined for any coordinate system and its not the same across all coordinate systems. 
+
+So far we have concluded now is that dual basis is : \( dx^i \) in a coordinate system. For an arbitrarily vector \( \omega \in V^{*} \) in the dual space. It can be expanded using the following format.  
+
+\[ \omega = \omega_i dx^i \]
+The above is called an 1-form.  
+
+\begin{theorem}
+    The dual to a vector field at point p is called an 1-form
+\end{theorem}
+
+So for a vector we have : \( a^i \frac{\partial}{\partial x^i} \), and for a 1-form we have: \( \omega_i dx^i \)
+So now the inner product is 
+
+\begin{align*}
+ \langle \omega, a \rangle &= \langle \omega_i dx^i, a^i \frac{\partial}{\partial x^i} \rangle \\ 
+                           &= \omega^i a_j \delta^i_j
+\end{align*}
+
+In the physics, we are more engrossed in the idea that we can take the inner product of a ny two vectors in tangent plane. But it need not be true. We need to define a metric space first for that to happen. The above are elements of a vector fields and their dual vector space. We can only take inner product of the elements of those spaces and not the spaces themselves. We cant take inner product of the same space. 
+
+We must not confuse notations. Here \[ a^i \frac{\partial}{\partial x^i} \to a^i(x) \frac{\partial}{\partial x^i} \] means a vector to a vector space. Similarly, 
+\[ \omega_i dx^i \to \omega_i(x) dx^i \] refers to from 1-form to a differential 1-form.  
+
+The key point here is that the use of vector in vector space and dual in dual space doesnot involve any metrics. But the inner product of two vectors in the same space does need a metric. 
+
+Dot product and inner product are not the same. Dot product refers to some operation on the same vector space. Inner product refers to operations between an element in the vector space and another element in the dual space. 
+
+Another thing to note is that, we have used derivatives as a sort of basis. In the abstract sense its true. If we want to incorporate our general idea, then it can be thought of as some thing along the lines of a derivative generating a force or a motion. In the abstract space its all the same. 
+
+In this context, a vector refers to an element of the tangent space, while a 1-form belongs to the cotangent space. Both the tangent and cotangent spaces are defined on manifolds. We employ charts and atlases to describe these manifolds. It is important to note that points are not defined within the tangent or cotangent spaces.
+
+Vectors were introduced by their action on functions. However, defining a function on a manifold involves a specific process. First, we identify a chart, and then we utilize this chart to define the function or to perform differentiation.
+
+The cotangent space is isomorphic to the tangent space but when we think about it they are different. Only as vector fields they are isomorphic. 
+
+An important example of a differential 1-form is as follows:
+
+Suppose we have a function \( f: M \to \mathbb{R} \). Consider the 1-form defined by
+\[
+\frac{\partial f}{\partial x^i} dx^i = df.
+\]
+In this context, \( f \) is defined on a manifold \( M \), and \( df \) transforms in a specific way with the basis \( dx^i \). We have introduced a new operator \( d \), known as the exterior derivative.
+
+The exterior derivative \( d \) of a function on a manifold yields a 1-form. Formally, we have
+\[
+d: f \to df,
+\]
+where \( f \) is a function \( M \to \mathbb{R} \), and \( df \) is the differential 1-form. Thus, \( d \) is a map from a function to a differential form.
+
+Now, consider a vector field \( X \). Differentiating a function \( f \) with respect to \( X \) gives us \( Xf \). On the other hand, if we take the inner product of \( df \) with \( X \), we note that \( df \) is in the cotangent space and \( X \) is in the tangent space. The inner product of \( df \) with \( X \) yields a real number for every function \( f \), thus defining a new function.
+
+Therefore,
+\[
+Xf = \langle df, X \rangle.
+\]
+This means that a vector field acting on a function produces a new function. Similarly, the inner product of a vector field with the exterior derivative of a function yields the same result.
+
+Given that \( X = a^i \frac{\partial}{\partial x^i} \), we have
+\[
+Xf = a^i \frac{\partial f}{\partial x^i},
+\]
+and
+\[
+\langle df, X \rangle = \left\langle \frac{\partial f}{\partial x^i} dx^i, a^j \frac{\partial}{\partial x^j} \right\rangle = a^i \frac{\partial f}{\partial x^i}.
+\]
+
+Thus, the action of a vector field on a function is equivalent to the function defined by the inner product of the vector field with the exterior derivative of that function.
+
+A vector field acts on a function. A differential form doesnot act on a function. On the contrary, from the function we can make a differential form by taking it's df. So we should get used to the idea that vectors and differential forms are not same. They do their thing in their own way even though they are dual to each other. 
+
+
+Can we apply the exterior derivative to a 1-form? Let's explore this idea.
+
+We know that the exterior derivative \( d \) acts on a function \( f \) as follows:
+\[
+d: f \to df.
+\]
+Now, can it act on any 1-form \(\omega\)? Consider a 1-form \(\omega\) given by
+\[
+\omega = \omega_i(x) dx^i.
+\]
+If we apply the exterior derivative to \(\omega\), we get:
+\[
+d\omega = \frac{\partial \omega_i}{\partial x^j} dx^j \wedge dx^i.
+\]
+This simplifies to:
+\[
+d\omega = \partial_j \omega_i dx^j \wedge dx^i.
+\]
+
+However, there is a problem: while \(\omega_i\) transforms nicely under a change of coordinates, \(\partial_j \omega_i\) does not.
+
+The solution is to antisymmetrize the differentiation, resulting in an expression that remains well-behaved under coordinate transformations. The correct definition of \(d\) acting on \(\omega\) is:
+\[
+d\omega = \frac{1}{2} (\partial_j \omega_i - \partial_i \omega_j) dx^i \wedge dx^j.
+\]
+This antisymmetrization cancels out unwanted terms, resembling the curl operation. This method allows us to go from 1-forms to 2-forms on a differentiable manifold without requiring a metric.
+
+In terms of notation, we have:
+\[
+d\omega = \partial_j \omega_i dx^j \wedge dx^i,
+\]
+where
+\[
+dx^i \wedge dx^j = \frac{1}{2} (dx^i \otimes dx^j - dx^j \otimes dx^i).
+\]
+
+The rule for the exterior derivative is:
+\[
+\omega_i \to \partial_j \omega_i - \partial_i \omega_j.
+\]
+In general, this operation produces antisymmetric objects in \(T_p^* \otimes T_p^*\). This process can be repeated \(N\) times, where \(N\) is the dimension of the manifold.
+
+The set of all differential forms includes:
+\begin{itemize}
+    \item \( f \): 0-forms
+    \item \( \omega^{(1)} = \omega_i^{(1)}(x) dx^i \): 1-forms
+    \item \( \omega^{(2)} = \omega_{ij}^{(2)} dx^i \wedge dx^j \): 2-forms
+\end{itemize}
+
+The transformation properties of \(\omega_{ij}^{(2)}\) are clear because \(dx^i\) and \(dx^j\) transform under infinitesimal coordinate changes, ensuring coordinate invariance.
+
+In general:
+\[
+\omega^{(n)} = \omega_{i_1, i_2, \ldots, i_n}^{(n)} dx^{i_1} \wedge \ldots \wedge dx^{i_n},
+\]
+where \(n\) is the dimension of the manifold.
+
+\begin{theorem}
+    The exterior derivative on $n$-forms is a map
+\[
+d : a \in \Lambda^n(M) \to da \in \Lambda^{n+1}(M)
+\]
+defined by:
+\[
+a = a_{i_1 \ldots i_n}(x) \, dx^{i_1} \wedge \cdots \wedge dx^{i_n} \quad \longrightarrow \quad da = \left( \frac{\partial}{\partial x^{i_{n+1}}} a_{i_1 \ldots i_n}(x) \right) dx^{i_{n+1}} \wedge dx^{i_1} \wedge \cdots \wedge dx^{i_n}
+\]    
+\end{theorem}
+The components of $da$ are totally antisymmetrized, as is manifest in the notation. 
+
+An example would be the vector potential, defined as a 1-form:
+
+\[ 
+A = A_i(x) \, dx^i 
+\]
+
+Applying the exterior derivative \( d \) to \( A \):
+
+\[
+d: A \to dA = \partial_j A_i \, dx^j \wedge dx^i 
+\]
+This can be expressed as:
+\[
+dA = \partial_j A_i \, dx^j \wedge dx^i 
+    = \frac{1}{2} (\partial_i A_j - \partial_j A_i) \, dx^i \wedge dx^j 
+    = \frac{1}{2} F_{ij} \, dx^i \wedge dx^j 
+\]
+
+where
+
+\[
+F_{ij} = \partial_i A_j - \partial_j A_i.
+\]
+
+In traditional physics, we work on Euclidean space with a metric. However, the beauty of differential forms is that they allow us to define such operations without relying on a specific metric. Our differentiable manifold, which in this example is \(\mathbb{R}^n\), demonstrates this.
+
+The key point here is that these formulae do not require the manifold to be specifically \(\mathbb{R}^n\). We can define a 1-form \( A \) on any manifold. Therefore, the principles of electromagnetism can be generalized to any manifold, supporting the idea that it is possible to define and understand electromagnetism in a broader geometric context, without the need for a predefined metric.
+
+Now what happens if we take a second derivative. 
+The electromagnetic (EM) field strength 2-form is given by:
+\[
+F \equiv \frac{1}{2} F_{ij} \, dx^i \wedge dx^j
+\]
+
+To find the exterior derivative \( dF \):
+
+\[
+dF \equiv \partial_k F_{ij} \, dx^k \wedge dx^i \wedge dx^j
+\]
+
+Given the antisymmetry of the wedge product and the properties of the partial derivatives, we have:
+
+\[
+dF = 0
+\]
+
+This is an example of the fact that applying the exterior derivative twice yields zero
+
+\[
+d^2 = 0
+\]
+
+Derivation of Maxwell's Equations from \(dF = 0\)
+
+The electromagnetic (EM) field strength 2-form is given by:
+\[
+F \equiv \frac{1}{2} F_{\mu\nu} \, dx^\mu \wedge dx^\nu
+\]
+where the components of the field strength tensor are:
+\[
+F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu
+\]
+with \(A_\mu\) being the components of the vector potential 1-form \(A = A_\mu \, dx^\mu\).
+
+Applying the exterior derivative \(d\) to \(F\), we get:
+\[
+dF = d \left(\frac{1}{2} F_{\mu\nu} \, dx^\mu \wedge dx^\nu\right)
+\]
+Using the property of the exterior derivative and the antisymmetry of the wedge product:
+\[
+dF = \frac{1}{2} (\partial_\lambda F_{\mu\nu}) \, dx^\lambda \wedge dx^\mu \wedge dx^\nu
+\]
+Due to the antisymmetry of the wedge product, this expression must be antisymmetric in all three indices \(\lambda, \mu, \nu\).
+
+The equation \(dF = 0\) implies:
+\[
+\partial_\lambda F_{\mu\nu} + \partial_\mu F_{\nu\lambda} + \partial_\nu F_{\lambda\mu} = 0
+\]
+This is the differential form of the homogeneous Maxwell equations.
+
+In three dimensions, the components of \(F_{\mu\nu}\) can be expressed in terms of the electric field \(\mathbf{E}\) and the magnetic field \(\mathbf{B}\):
+\[
+F_{0i} = -E_i, \quad F_{ij} = \epsilon_{ijk} B^k
+\]
+where \(i, j, k\) run over spatial coordinates \(1, 2, 3\), and \(\epsilon_{ijk}\) is the Levi-Civita symbol.
+
+Substituting these into \(dF = 0\), we obtain the homogeneous Maxwell equations:
+\[
+\nabla \cdot \mathbf{B} = 0
+\]
+\[
+\nabla \times \mathbf{E} + \frac{\partial \mathbf{B}}{\partial t} = 0
+\]
+
+So \( dF = 0 \), encompasses two of the maxwell's equation.
 
 \end{document}
 
