@@ -20,7 +20,7 @@
 
 \newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
 
-\declaretheoremstyle[name=Theorem,]{thmsty}
+\declaretheoremstyle[name=,]{thmsty}
 \declaretheorem[style=thmsty,numberwithin=section]{theorem}
 \tcolorboxenvironment{theorem}{colback=LightGray}
 
@@ -1644,5 +1644,808 @@ Substituting these into \(dF = 0\), we obtain the homogeneous Maxwell equations:
 
 So \( dF = 0 \), encompasses two of the maxwell's equation.
 
-\end{document}
+\section{Calculus on manifolds -II} 
 
+\subsection{A brief summary of what we did so far} 
+
+Recall \textbf{Vector field} \(X\)
+
+A vector field \(X \in T_p(M)\) at each point \(p\) is defined such that:
+\[
+X(fg) = (Xf)g + f(Xg)
+\]
+and it is linear.
+
+Equivalently, in coordinates:
+\[
+X = a^i(x) \frac{\partial}{\partial x^i}
+\]
+
+It is important to note that \( x^i \) is not the component of any vector field by itself. Additionally, all of these are \( C^\infty \) functions. 
+
+Under the coordinate transformation \( x^i \rightarrow x'^i(x) \), the components of the vector field transform as:
+\[
+a'^i(x') = \frac{\partial x'^i}{\partial x^j} a^j(x)
+\]
+
+This transformation property of vector fields can be extended to tensor fields. Specifically, a tensor field \( T \) can be written as:
+\[
+T = T^{i_1 \ldots i_n}(x) \frac{\partial}{\partial x^{i_1}} \otimes \cdots \otimes \frac{\partial}{\partial x^{i_n}}
+\]
+
+At each point, \( T \in T^{(k)}_p M \), where \( T^{(k)}_p M \) is the tensor product space at point \( p \) on the manifold \( M \).
+
+To understand the dual relationship, we define the dual of a vector field as \( dx^i \) such that:
+\[
+\langle dx^i, \frac{\partial}{\partial x^j} \rangle = \delta^i_j
+\]
+
+For a more general way of understanding, consider the 1-form \(\omega\) and the vector field \(X\):
+\[
+\omega = \omega_i(x) \, dx^i
+\]
+\[
+X = a^i(x) \, \frac{\partial}{\partial x^i}
+\]
+
+Then,
+\[
+\langle \omega, X \rangle = \omega_i a^i
+\]
+
+This inner product is coordinate invariant, ensuring consistency across different coordinate systems. Note that \( \omega \in T_p^*(M) \).
+
+Next, we define the exterior derivative \( d \):
+\[
+d: f \to df = \frac{\partial f}{\partial x^i} dx^i
+\]
+
+We can extend \( T_p^*(M) \) in two ways:
+
+1. \( T_p^*(M) \wedge T_p^*(M) \wedge \cdots \wedge T_p^*(M) \)
+
+This extension is antisymmetric, forming differential forms:
+\[
+\beta = \xi_{i_1 \ldots i_n} \, dx^{i_1} \wedge \cdots \wedge dx^{i_n}
+\]
+
+The space of differential forms of rank \( n \) is called \( \Lambda^n \).
+
+The exterior derivative \( d \) can be applied to these forms:
+\[
+d: \Lambda^n \to \Lambda^{n+1}
+\]
+
+For instance, applying the exterior derivative to \(\beta\):
+\[
+d: \beta \to d\beta = \frac{\partial \xi_{i_1 \ldots i_n}}{\partial x^{i_{n+1}}} dx^{i_{n+1}} \wedge dx^{i_1} \wedge \cdots \wedge dx^{i_n}
+\]
+
+2. \( T_p^*(M) \otimes \cdots \otimes T_p^*(M) \)
+
+This extension represents an \( n \)-th rank covariant tensor. Differential forms are a subspace of these tensors. However, the exterior derivative \( d \) does not map:
+\[
+(T_p^*(M))^n \to (T_p^*(M))^{n+1}
+\]
+
+This is because there are extra factors involved in this extension.
+
+The original inner product:
+\[
+\langle \omega, X \rangle
+\]
+extends to:
+\[
+\langle \omega^{(n)}, X^{(n)} \rangle
+\]
+where \(\omega^{(n)}\) is an \(n\)-th rank covariant tensor and \(X^{(n)}\) is an \(n\)-th rank "contravariant" tensor.
+
+For example:
+\begin{align*}
+&\langle \omega_{i_1 \ldots i_n} \, dx^{i_1} \otimes \cdots \otimes dx^{i_n}, \, X^{j_1 \ldots j_n} \, \frac{\partial}{\partial x^{j_1}} \otimes \cdots \otimes \frac{\partial}{\partial x^{j_n}} \rangle \\ 
+&= \omega_{i_1 \ldots i_n} X^{i_1 \ldots i_n}
+\end{align*}
+
+We can also consider cases where \(\omega\) is a rank 2 tensor, and given two vector fields \(X, Y\):
+\[
+\langle \omega; X, Y \rangle = \omega_{ij} X^i Y^j
+\]
+
+This can be represented as:
+\[
+\begin{array}{ccc}
+T_p^* \otimes T_p^* & \longrightarrow & T_p(M) \\
+\omega_{ij} & & X^i Y^j
+\end{array}
+\]
+
+Now lets start the next part.
+
+\subsection{Riemannian Geometry}
+
+We start off with the question, wouldnt it be nice to have an inner product on tangent  vectors. This would take two tangent vectors from the tangent plane and give me a real number. And the answer to it is yes. This births general relativity. 
+
+We change the notations. The vector fields which were X and Y will now be denoted as A, B. 
+
+\[
+A = A^\mu(x) \frac{\partial}{\partial x^\mu}, \quad B = B^\mu(x) \frac{\partial}{\partial x^\mu}
+\]
+
+where \(\mu = 1,2,\dots n \)
+
+The inner product \(\langle A, B \rangle\) is given by:
+\[
+\langle A, B \rangle = G_{\mu\nu}(x) A^\mu B^\nu
+\]
+This results in a real number and is coordinate-independent.
+
+Let \( G \in T_p^*(M) \otimes T_p^*(M) \):
+\[
+G = g_{\mu\nu}(x) \, dx^\mu \otimes dx^\nu
+\]
+
+This \(G\) is chosen to be symmetric. This is opposite to differential forms, where we antisymmetrize. The symmetry of \(G\) ensures that its components transform in such a way that \(G\) remains coordinate-independent. We assume that we always know how \(dx^\mu\) and \(dx^\nu\) transform. 
+
+Therefore, the metric tensor \(G\) allows for the inner product of vector fields to be consistent across different coordinate systems. The components of \(G\) transform as follows:
+
+\[
+g'_{\mu\nu}(x') = \frac{\partial x^\alpha}{\partial x'^\mu} \frac{\partial x^\beta}{\partial x'^\nu} g_{\alpha\beta}(x)
+\]
+
+Additionally, \(G\) should be non-degenerate, meaning it should have no zero eigenvalues. This property ensures that the metric tensor provides a meaningful measure of distance and angles on the manifold. So that means \( g_{ \mu \nu}\) should be invertible as a matrix. 
+
+In particular, we have:
+\[
+\langle A, A \rangle_G = g_{\mu\nu} A^\mu A^\nu
+\]
+which represents the squared norm of \(A\). 
+
+This is close to the definition of a metric on \( T_p(M) \). The metric tensor \( G \) provides a metric on \( T_p(M) \):
+\begin{enumerate}
+    \item \(\langle A, A \rangle_G = 0 \iff A = 0\) (non-degeneracy)
+    \item \(\langle A, B \rangle_G = \langle B, A \rangle_G\) (symmetry)
+    \item Triangle inequality holds, contributing to the definition of a metric space.
+\end{enumerate}
+
+This leads to the definition of a Riemannian metric:
+\begin{theorem}
+    A Riemannian metric is a differentiable manifold equipped with a metric tensor \( G \) that is symmetric, non-degenerate, and positive-definite at each point.
+\end{theorem}
+
+Now, Let \( A \) be a vector field defined as:
+\[
+A = \frac{dx^\mu}{dt} \frac{\partial}{\partial x^\mu}
+\]
+Then, the squared norm of \( A \) with respect to the metric tensor \( G \) is:
+\[
+\langle A, A \rangle_G = G_{\mu \nu} \frac{dx^\mu}{dt} \frac{dx^\nu}{dt}
+\]
+
+Consider a path \( p(t) \) on the manifold, with \( p(t_0) = p_1 \) and \( p(t_f) = p_2 \). The length of this path between points \( p_1 \) and \( p_2 \), defined via the metric tensor \( G \), is:
+\[
+\text{Length of } p = \int_{t_0}^{t_f} \sqrt{G_{\mu \nu} \frac{dx^\mu}{dt} \frac{dx^\nu}{dt}} \, dt
+\]
+
+The distance \( d(p_1, p_2) \) on the manifold is given by the minimum of this integral over all possible paths connecting \( p_1 \) and \( p_2 \):
+\[
+d(p_1, p_2) = \min \left\{ \int_{t_0}^{t_f} \sqrt{g_{\mu \nu} \frac{dx^\mu}{dt} \frac{dx^\nu}{dt}} \, dt \right\}
+\]
+
+There is a nice way to rewrite this. Since the above is parametrized in terms of t. 
+\[
+d(p_1, p_2) = \min \left\{ \int_{p_1}^{p_2} \sqrt{g_{\mu \nu} dx^\mu dx^\nu } \right\}
+ = \min \left\{ \int_{p_1}^{p_2} \sqrt{ds} 
+    \right\}
+\]
+The squared distance element \( ds^2 \) is given by:
+\[
+ds^2 = g_{\mu \nu} dx^\mu dx^\nu
+\]
+This represents the squared distance between points represented by infinitesimal displacements \( dx^\mu \). This is how Riemannian metrics are presented. It is also called the invariant distance. 
+
+\subsection{Frames}
+
+In a manifold $M$, at a point $p$, the tangent space $T_p(M)$ can be described by a basis. The basis vectors are denoted as:
+\[
+E_a, \quad a = 1, \ldots, n
+\]
+Each vector $E_a$ in this basis can be expressed as a linear combination of the coordinate basis vectors:
+\[
+E_a = E_a^\mu \frac{\partial}{\partial x^\mu}
+\]
+where $E_a^\mu$ are the components of $E_a$ in this coordinate system.
+
+The components of $E_a$, namely $E_a^\mu$, transform under changes of coordinates and changes of basis as follows:
+
+\begin{enumerate}
+    \item \textbf{Change of Coordinates:}
+    
+    Under a change of coordinates, the components of the vector transform according to the Jacobian matrix:
+    \[
+    E_a \to E_a' = \frac{\partial x'^\mu}{\partial x^\nu} E_a^\nu
+    \]
+    Here, the index $a$ remains unchanged, indicating that the transformation applies to the same vector represented in a different coordinate system.
+
+    \item \textbf{Change of Basis:}
+    
+    When the basis is changed, the transformation of vector $E_a$ is represented by a matrix $O_a^b$, which modifies the basis from one to another within the tangent space:
+    \[
+    E_a \to E_a' = O_a^b E_b^\mu
+    \]
+    This equation reflects the change of components from the old basis to a new basis using the transformation matrix $O_a^b$.
+\end{enumerate}
+
+Now we want the orthonormal basis: since its the most convenient one. We can implement by thus: 
+
+\[ \langle E_a, E_b \rangle = \delta_{ab} \]
+
+where $\langle \cdot, \cdot \rangle$ denotes the inner product and $\delta_{ab}$ is the Kronecker delta, indicating that the basis vectors are orthogonal to each other and each has unit length.
+
+To maintain the orthonormality under basis transformations, the transformation matrix $O_{ab}$ must be orthogonal, thus belonging to the orthogonal group $O(n)$:
+\[
+O_{ab} \in O(n)
+\]
+
+This concept can be extended from a single point to the entire manifold. Since $E_a$ form a basis for the tangent spaces, any vector field $A$ on the manifold can be expressed in terms of these basis vectors:
+\[
+A = A^a(x) E_a(x)
+\]
+where $A^a(x)$ are the components of the vector field $A$ in the orthonormal basis. Under rotation by the orthogonal matrix, these components transform as:
+\[
+A^a \to O_{ab} A^b
+\]
+which is coordinate independent. This implies that the vector field remains invariant in form under an orthogonal transformation of the basis.
+
+Despite the coordinate independence of the basis components, the original vector field $A$ can also be expressed in terms of the coordinate basis vectors $\frac{\partial}{\partial x^\mu}$:
+\[
+A = A^\mu \frac{\partial}{\partial x^\mu}
+\]
+Here, $A^\mu$ are the coordinate components of the vector field, which depend on the coordinate chart. To relate the frame components $A^a(x)$ to the coordinate components $A^\mu$, one must consider the expressions of the basis vectors $E_a$ in terms of the coordinate basis:
+\[
+E_a = E_a^\mu \frac{\partial}{\partial x^\mu}
+\]
+Hence, the relationship between the two sets of components can be derived by substituting the expression for $E_a$ into the expansion of $A$:
+\[
+A = A^a E_a = A^a E_a^\mu \frac{\partial}{\partial x^\mu} = A^\mu \frac{\partial}{\partial x^\mu} 
+\]
+
+Equating components from the two different expansions of $A$ gives us:
+\[
+A^\mu = A^a E_a^\mu
+\]
+This relation bridges the gap between the abstract frame components and the concrete coordinate-dependent components, providing a comprehensive understanding of how vector fields transform under changes in basis and coordinates across the manifold.
+
+Given \( E_a \) (basis for \( T_p(M) \)) there is a natural dual basis for \( T_p^{*}(M)\) called \( e^a\) defined by 
+\[ \langle e^a, E_b \rangle = \delta_b^{a} \]
+
+where \( e^a \in T_p^{*}(M) \) such that \( e^a = e^a_{\mu} dx^\mu \)
+We are using \(E_a\) to denote the basis for the vector in the tangent space and \(e^a\) as the basis for the vectors in the dual space. 
+
+Now consider \( \sum_{a}^{} e^a \otimes e^a \in T_p^{*}(M) \otimes T_p^{*}(M)  \)
+the left term is \( O(n) \) invariant. One can show that \( \sum_{a}^{} e^a \otimes e^a 
+= G \)
+
+in components, 
+
+\[ G_{\mu \nu} = e^a_{\mu} e^a_{\nu} \]
+sometimes it is said that e is the square root of G. To prove this we do the following. 
+
+\begin{align*}
+    \langle e^a \otimes e^a; E_b,E_c \rangle = \delta^a_{b} \delta_c^{a} = \delta_{bc} \\
+\end{align*}
+
+If we calculate 
+
+\[ \langle G; E_b, E_c \rangle = \langle E_b, E_c \rangle_G \delta_{bc} \]
+
+so we can say that \[ G_{\mu \nu} = e^a_{\mu} e^a_{\nu} \]
+Another thing is given a set of basis vectors $\{E_a\}$, we consider the tensor product of each basis vector with itself, summed over all indices:
+\[
+\sum_a E_a \otimes E_a = h^{\mu \nu} \frac{\partial}{\partial x^\mu} \otimes \frac{\partial}{\partial x^\nu}
+\]
+Here, $h^{\mu \nu}$ represents a tensor that can be seen as the inverse of the metric tensor $g_{\mu \nu}$. This is symbolically represented as:
+\[
+h^{\mu \lambda} g_{\lambda \nu} = \delta^\mu_\nu
+\]
+where $\delta^\mu_\nu$ is the Kronecker delta, effectively serving as the identity in the context of tensor indices.
+
+Given the frame components \(A^a\) and the corresponding coordinate components \(A^\mu\), the relationship between these can be expressed as:
+
+\[
+A^\mu = E_a^\mu A^a
+\]
+
+Conversely, the frame components can be derived from the coordinate components by:
+
+\[
+A^a = e^a_\mu A^\mu
+\]
+
+where \(E_a^\mu\) and \(e^a_\mu\) represent the components of the transformation matrices between the coordinate and frame basis, typically representing the direct and inverse transformations respectively. 
+
+Now Consider a 1-form $\omega$. It can be expanded in a frame and then related to the coordinate basis:
+\[
+\omega = \omega_a e^a = \omega_a e^a_\mu dx^\mu
+\]
+where $e^a_\mu$ are the components that relate the frame basis $e^a$ to the coordinate differentials $dx^\mu$. This transformation shows how the 1-form components $\omega_a$ relate to their coordinate form $\omega_\mu$:
+\[
+\omega_\mu = \omega_a e^a_\mu
+\]
+
+the inverse is also possible 
+\[ \omega_a = E^\mu_a \omega_\mu  \]
+
+By going to the frame components, we avoid talking about the coordinates. These objects are scalar now under coordinate transformation. But we have to use \( O(n) \) for this.
+
+In general relativity, spacetime is described by a pseudo-Riemannian metric, which is not positive definite and includes a negative component in its signature. This is reflected in the line element for flat spacetime (Minkowski spacetime):
+\[
+ds^2 = -c^2 dt^2 + dx^2 + dy^2 + dz^2
+\]
+This metric signature \((-1, +1, +1, +1)\) indicates one time-like dimension and three space-like dimensions, essential for describing the correct causal structure of spacetime.
+
+The term \textit{pseudo-Riemannian} specifically refers to the inclusion of both time-like and space-like dimensions, distinguishing it from purely Riemannian metrics, which are used primarily to describe space alone and are positive definite.
+
+The distinct nature of the signature in a pseudo-Riemannian metric allows for the mathematical treatment of spacetime that accommodates both the speed of light as a limiting velocity and the non-Euclidean geometries required by the theory of relativity. For example, the condition:
+\[
+d(A, A) = 0
+\]
+implies that the spacetime interval \( A \) for light (or any radiation traveling at the speed of light) is zero, reflecting the null geodesic paths followed by light in the spacetime manifold.
+
+\section{Covariant Derivatives} 
+
+Before discussing covariant derivatives, it is essential to consider the framework of pseudo-Riemannian manifolds, particularly pertinent to the modeling of spacetimes in general relativity.
+
+\subsection*{Comment on the Pseudo-Riemannian Case}
+
+In the realm of pseudo-Riemannian manifolds, the concept of \emph{orthonormal frames} is fundamental. These frames, consisting of vectors \(E_a\) and their corresponding dual vectors \(e^a\), provide a structured approach to navigating the complex geometry of spacetimes.
+
+\begin{itemize}
+    \item \textbf{Orthonormal Frames \(E_a\)}: These vectors form a basis for the tangent spaces at each point of the manifold. They are termed \emph{orthonormal} with respect to the pseudo-Riemannian metric, satisfying the relation \(g(E_a, E_b) = \eta_{ab}\), where \(\eta_{ab}\) denotes the matrix representing the metric signature, typically \((+,-,-,-)\) in spacetime scenarios.
+    
+    \item \textbf{Dual Frames \(e^a\)}: Serving as a basis for the cotangent spaces, these covectors meet the condition \(e^a(E_b) = \delta^a_b\), where \(\delta^a_b\) is the Kronecker delta. This property ensures that each dual vector \(e^a\) measures the component of a tangent vector parallel to \(E_a\).
+\end{itemize}
+
+\textbf{Transformation Properties:}
+\begin{itemize}
+    \item Within general coordinate transformations, the components of \(E_a\) and \(e^a\) adjust as scalars, adhering to vector and covector transformation rules, which help maintain the orthonormality of the frame across transformations.
+
+    \item The internal structure of the frame, however, undergoes transformation as vectors under the orthogonal group \(O(n)\), preserving the inner product defined by the pseudo-Riemannian metric and reflecting the manifold's geometric symmetries.
+\end{itemize}
+
+\subsection*{Generalizations of Frames}
+
+To adapt to more complex spacetime structures, several generalizations are proposed:
+\begin{enumerate}
+    \item \textbf{Metric Signature and Positivity:} The metric \(g_{\nu\mu}(u)\) in this generalized setting does not necessarily satisfy traditional positivity, leading to the condition:
+    \[
+    \langle A, B \rangle_g = 0 \not\Leftrightarrow A = B.
+    \]
+    This indicates that a zero inner product does not imply vector identity, accommodating the distinct characteristics of light-like or null vectors.
+
+    \item \textbf{Choice of Metric Signature:} The selection of ``metrics'' \(g_{\nu\mu}\) with a signature \((-,-,+,+)\) allows for the modeling of spacetimes with complex interactions, where multiple time-like dimensions may be considered.
+
+    \item \textbf{Lorentzian Frames:} Replacing orthonormal frames, Lorentzian frames respect the Lorentz signature of the metric, managing the distinctions between time-like and space-like intervals. These frames transform under the Lorentz group \(O(n-1,1)\), highlighting their adaptability to the spacetime's underlying structure.
+\end{enumerate}
+
+\textbf{Recall:} The orthogonal group \(O(n)\) satisfies \(O^T O = I\), ensuring rotations preserve the Euclidean metric, while \(O(n-1,1)\), the Lorentz group, preserves the metric of spacetimes with a Lorentzian signature.
+
+Now lets go back to differentiation. 
+Given a differential form \(A\), which can be expressed in terms of its components as \(A = A_\mu dx^\mu\), the external derivative \(dA\) is computed as follows:
+
+\[
+dA = \partial_\nu A_\mu \, dx^\nu \wedge dx^\mu
+\]
+
+Here, \( \partial_\nu A_\mu \) represents the partial derivative of the component \(A_\mu\) with respect to the coordinate \(x^\nu\), and \(dx^\nu \wedge dx^\mu\) signifies the wedge product between the differentials \(dx^\nu\) and \(dx^\mu\). This operation ensures the antisymmetric nature of the form, crucial for the properties of the exterior derivative.
+
+Using frames, we define the components of a differential form \(A\) as follows:
+\[
+A_a = E_a^\mu A_\mu
+\]
+Here, \(E_a^\mu\) represents the frame components, and \(A_\mu\) are the components of the differential form \(A\) in a coordinate basis. 
+
+The transformed components \(A_a\) behave as scalars under general coordinate transformations but act as vectors under the action of the orthogonal group \(O(n)\). 
+
+Upon differentiating the component \(A_a\) of a differential form, we obtain:
+\[
+dA_a = \partial_\mu A_a \, dx^\mu
+\]
+Here, \(\partial_\mu A_a\) represents the partial derivative of \(A_a\) with respect to the coordinate \(x^\mu\), and \(dx^\mu\) is the differential of \(x^\mu\). The result \(dA_a\) is a 1-form.
+
+It is important to note that \(dA_a\) does not transform "properly" under the orthogonal group \(O(n)\) anymore. This implies that while \(A_a\) initially behaves as a scalar under general coordinate transformations and as a vector under \(O(n)\), its differential \(dA_a\) does not maintain these transformation properties, which can have significant implications in the context of differential geometry and the application of frames.
+
+Considering the transformation of tensor components under the orthogonal group \(O(n)\), we start with a component \(A^b\) transforming as:
+\[
+A^b(x) \rightarrow A^b_{\text{new}} = \Lambda^b_a A^a(x)
+\]
+Upon differentiating this transformed component, we express the differentiation as:
+\[
+dA^b = d(\Lambda^b_a A^a) = \Lambda^b_a dA^a + d\Lambda^b_a \cdot A^a
+\]
+Here, the term \(\Lambda^b_a dA^a\) follows the expected transformation rule, but the additional term \(d\Lambda^b_a \cdot A^a\) represents an extra contribution that does not conform to the standard transformation properties under \(O(n)\). This extra term arises due to the derivative of the transformation matrix itself.
+
+This demonstrates that the external derivative is not an optimal operator on vectors or tensors that transform under \(O(n)\) because it introduces additional terms that do not transform "properly" under \(O(n)\). 
+
+To address the non-ideal transformation properties of the exterior derivative \(d\) under the orthogonal group \(O(n)\), we define a new "covariant" exterior derivative denoted by \(D\). This new derivative is designed to maintain the proper transformation behavior for tensors under \(O(n)\), ensuring consistency in various applications, particularly in curved spacetime and gauge theories. 
+
+The covariant exterior derivative \(DA^a\) of a tensor component \(A^a\) is defined as:
+\[
+DA^a = dA^a + \omega^a_b(x) A^b
+\]
+where:
+\begin{itemize}
+    \item \(dA^a\) is the ordinary exterior derivative, which results in a 1-form.
+    \item \(\omega^a_b(x)\) is a connection 1-form, necessary to adjust the transformation properties of \(A^a\).
+    \item \(\omega^a_b = \omega^a_{b\mu} dx^\mu\) explicitly, where \(\omega^a_{b\mu}\) are the components of the connection form, responsible for compensating the additional terms that arise during transformation.
+\end{itemize}
+
+The primary reason for introducing \(D\) instead of using \(d\) directly is to ensure that \(DA^a\) transforms as a tensor under all transformations, including those under the group \(O(n)\). This is critical because while \(dA^a\) alone transforms correctly as a scalar under coordinate transformations, it does not adhere to the tensor transformation rules under \(O(n)\) due to the additional terms that arise. The addition of the connection form \(\omega^a_b(x) A^b\) compensates for these discrepancies, thus ensuring that \(DA^a\) retains the desired transformation properties as a true tensor field. 
+
+Also using the definition of 1-forms, we can write, 
+
+\[
+DA^a = dA^a + \omega^a_b(x) A^b = ( \partial_\mu A_a + \omega_{\mu a}^b A_\delta ) dx^\mu
+\]
+
+To understand the behavior of covariant derivatives under orthogonal transformations, consider the transformation of a tensor component \(A_a\) and a connection 1-form \(\omega_a\). The transformations are given by:
+\[
+A_a \rightarrow A_a' = \Lambda_a^b A_b, \quad \omega_a \rightarrow \omega_a' = \Lambda_a^b \omega_b
+\]
+
+Upon applying these transformations, the transformed covariant derivative \((DA')_a\) is expressed as:
+\[
+(DA')_a = dA_a' + \omega_a' \wedge A_a'
+\]
+Expanding each term, we get:
+\[
+= d(\Lambda_a^b A_b) + \Lambda_a^b \omega_b \wedge \Lambda_c^d A_d
+\]
+\[
+= \Lambda_a^b dA_b + d\Lambda_a^b \wedge A_b + \Lambda_a^b \omega_b \wedge \Lambda_c^d A_d
+\]
+\[
+= \Lambda_a^b \left( dA_b + (\Lambda^{-1})_c^d d\Lambda_c^d \wedge A_d + (\Lambda^{-1})_c^d \omega_c' \wedge \Lambda_d^e A_e \right)
+\]
+
+Requiring \((DA')_a = \Lambda_a^b D A_b\) for consistency under \(O(n)\) transformation, we compare terms and derive the transformation rule for the connection form:
+\[
+\Lambda^{-1} d\Lambda + \Lambda^{-1} \omega' \Lambda = \omega
+\]
+
+\[
+\omega' = \Lambda \omega \Lambda^{-1} - d\Lambda \Lambda^{-1}
+\]
+
+It's linear but not homogeneous. This is called the spin connection. This O(n) and Lorentzian groups have a special class representation called the spinor representations. We have used the fact that frames give us vectors and tensors of O(n). 
+\[ DA_a = dA_a + \omega^b_a A_b \] 
+
+If we have a tensor, then it becomes 
+\[ DT_{ab} = dT_{ab} + \omega^c_a T_{cb} + \omega^c_b T_{ac} \]
+
+With this the D of any tensor is also a tensor in the same group. 
+
+We have shown that the connection form \(\omega^a_b\) transforms inhomogeneously under the orthogonal group \(O(n)\), known as a spin connection in certain contexts. It can be demonstrated that:
+\[
+\omega'^T = \Lambda \omega^T \Lambda^{-1} + d\Lambda \Lambda^{-1}
+\]
+where \(\Lambda\) is the transformation matrix. Adding and subtracting these transformations reveals that the symmetric part of \(\omega\) behaves as a tensor, whereas the antisymmetric part follows an inhomogeneous transformation. This \( \omega\) term is called the spinor connection. 
+
+The antisymmetry of \(\omega\) allows for specific identities in covariant differentiation to hold, as seen in:
+\[
+d(A_a, A^a) = (DA_a, A^a) + A_a \wedge (DA)^a
+\]
+This identity emphasizes the consistency of covariant derivatives with the metric tensor properties.
+
+Now the question is \( \omega^b_a \) unique? The answer is no. It only becomes unique if we place some extra conditions. Now two interesting tensors arise from our definition of exterior derivatives. The first one is the basis in the dual frames \( e^a \), These were dual to the \( E^a \) where \( E^a \) were vector fields. So \( e^a \) are the dual 1-forms. Now what is the exterior derivative of this dual 1-form? If we are allowed to act D on \( O(n) \) vectors. Then in particular we can also use the exterior derivative on general coordinate 1-forms. Then \( D e^a \) is an example of something that is both an \( O(n) \) vector and a general coordinate 1-form. So the result is guaranteed to be a general coordinate 2-form. This is defined as torsion. 
+
+\begin{theorem}
+
+The torsion 2-form \( T^a \) is defined by:
+\[
+T^a = D e^a = de^a + \omega^a_b \wedge e^b
+\]
+
+\end{theorem}
+and is a critical structure in the manifold \(M\), providing information about the manifold's lack of symmetry under parallel transport.
+
+In the above \(\omega^a_b = \omega^b_a \) cause for the orthogonal group, they preserve the identity matric. And in the identity metric there is no lower or upper index. This is not the same for Lorentz or Minkowski metric, there is a sign change. In general coordinate Transformations however the upper and lower indices mean completely different vector fields and differential forms.  
+
+Now the second one arises from the aspect that \(d^2 = 0\). This means that if i take 
+\[ d(d\omega) = 0\]
+since 
+\[ d^2 = \partial_\mu \partial_\nu dx^\nu \wedge dx^\mu \Lambda \dots = 0 \]
+Since the partial derivatives commute and the wedge products are anti symmetriezed. 
+
+Now what about \( D^2 ?\) This is not 0. 
+
+\begin{align*}
+    D^2 A^a &= D(DA^a) \\ 
+            &= D(dA^a+ \omega_a^b A_b) \\ 
+            &= d(dA^a + \omega_a^b A_b) + \omega^a_c (dA^c + \omega^c_b A) 
+            &= 0 + d\omega^a_b A^b - \omega^a_b A^b + \omega^a_c dA^c + \omega^a_c \omega^c_b A^b \\  
+            &= (d \omega^a_b + \omega^a_c \wedge \omega^c_b )A^b \\
+            &= (d \omega + \omega \wedge \omega )^a_b A^b
+\end{align*}
+
+the minus in the 4th line is due to the antisymmetry of the 1-form. The final line is a 2-form acting on \( A^b \). The first part is just the exterior derivative of the spin connection. Our spin connection was not an \( O(n) \) vector but it was a proper 1-form.the second term is also a 2-form. Now the question is shouldnt wedge product be zero? The trick here is that the \( \omega\) is also a matrix. Thus it is not zero since they donot commute. 
+
+This leads us to the below definition of curvature 2-form.
+
+\begin{theorem}
+The square of the covariant exterior derivative \(D^2\) leads to the definition of the curvature 2-form \(R^a_b\):
+\[
+(D^2 A)^a = R^a_b \wedge A^b
+\]
+where \(R^a_b = d\omega^a_b + \omega^a_c \wedge \omega^c_b\) and can be expanded as:
+\[
+R^a_b = \frac{1}{2} R^a_{b\mu\nu} dx^\mu \wedge dx^\nu = R^a_{bcd} e^c \wedge e^d
+\]
+
+\end{theorem}
+This form measures the failure of second covariant derivatives to commute, reflecting the intrinsic curvature of the manifold.
+
+Some useful things happen when we take the derivative of these two second rank tensors. 
+
+\[ D T^a = R^a_b \wedge e^b \]
+\[ D R^a_b = dR^a_b + \omega^a_c \wedge R^c_b + \omega^c_b \wedge R^a_c  = 0 \] 
+
+This is called the bianchi identity. The Riemannian Geometry of a manifold is captured by the \( ( T^a, R^a_b ) \). These are both tensor and functions all over the manifold. 
+Its similar but not the same as the ones we see in General relativity. The reason is, in GR, curvature is introduced making use of orthonormal frames. So the ones we saw previously came later after the GR. 
+
+What we have tried to do so far is to allow the derivative to preserve the behaviour with respect to the change of frame rotations or Lorentz rotations. There is a another point of view, an older one which does not use frame rotations. 
+
+Suppose we have a general coordinate transformation vector field. Can we differentiate it? 
+
+\[ A = A^\mu \frac{\partial }{\partial x^\mu} \] 
+
+Now the partial derivative of this \( \partial_\nu A^\mu \) does not transform properly under general coordinate transformation. 
+
+\[ A^\mu(x) \to A^{\mu^{'}}(y) = \frac{\partial y^\mu}{\partial x^\nu} A^\nu(x) \]
+\[ \partial_\lambda A^\mu \to \frac{\partial (\frac{\partial y^\mu}{\partial x^\nu } A^\nu) }{\partial x^\lambda} \]
+
+This will give me two terms. The one with the double derivative will not be characteristic of any vector field or tensor field under the change of coordinates. So this is not a good object under general coordinate transformation. 
+
+How do we remedy this. Consider, 
+
+\[ D_\lambda A^\mu = \partial_\lambda A^\mu + \Gamma ^\mu _{\lambda \nu} A^\nu \]
+This looks somewhat similar to the way we introduce a spin connection. But the difference is that, here we have no frames or any frames transformation. Therefore differentiation introduces a new index. Like \( \omega\), \( \Gamma\) has three indices. Two of which are from the rotation of the original vector and the third one comes from the derivative. The \( \Gamma^\mu _{\lambda \nu} \) is called the affine connection. Now we play the same game. 
+
+If we require under the transformation, \( x \to y\)
+\[ D_\lambda A^\mu \to \frac{\partial y^\mu}{\partial x^\beta} \frac{\partial x^\alpha}{\partial y^\lambda} D_\alpha A^\beta \]
+\[ \Gamma^{' \mu}_{\nu \lambda(y)} = \frac{\partial 
+y^\mu}{\partial x^\alpha} \frac{\partial x^\beta}{\partial y^\nu} \frac{\partial x^\gamma}{\partial y^\lambda} \Gamma^\alpha_{\beta \gamma} + \frac{\partial y^\mu}{\partial x^\alpha} \frac{\partial^2 x^\alpha}{\partial y^\nu \partial y^\lambda} \]
+
+the second derivative here is an inhomogeneous term. This gives us a covariant derivative which acting on general coordinate transformation vector fields gives out general coordinate transformation tensors. Actually it gives a mixed tensor of covariant and contravariant as the derivative always has a lower index. We can also check that it holds but is different than the affine connection one. 
+\[ D_\lambda A_\mu = \partial_\lambda A_\mu - \Gamma ^\alpha _{\lambda \mu} A^\alpha \]
+
+Even though they look the same from the GR perspective, they are not the same. These are two sets of different formula with different properties. Now the question should be is \( \Gamma^\mu _{\nu \lambda} \) unique?  Once again, No. 
+
+To fix the \( \omega \Gamma\) uniquely, we need some additional conditions. This will allow \( \omega\) to be determined completely in terms of frames and \( \Gamma\) in terms of metrics. 
+
+\textbf{Condition for \(O(n)\):}
+\begin{itemize}
+    \item Consider the Minkowski spacetime metric. The covariant derivative is given by 
+        \[ D \eta_{ab} = d \eta_{ab} + \omega_a^c \eta_{cb} + \omega_b^c \eta_{ac}\]
+        which should be zero since it denotes flat space time. Now the first term is automatically zero since its a constant. Now to uniquely determine the \( \omega^{ab}\) we require the below condition 
+        \[ \omega_{ab} + \omega_{ba} =0 \]
+    \item Now consider the torsion tensor. Since the representation is not that much friendly. We can assume that it is zero considering that this is an extra thing not connected to geometry. 
+        \[ T^a = 0\]
+\end{itemize}
+The above two conditions can determine the \(\omega_{ab}\) uniquely in terms of \(e^a, E_a\) which is given below 
+
+\[ \omega_{\mu b}^\alpha  = \frac{1}{2} E^{\alpha \nu} [ \partial_\mu e_{b\nu} - \partial_\nu e{b_\mu} - e^c_\mu E^{b \sigma} ( \partial_\nu e_{c \sigma} - \partial_\rho e_{c \nu}   )   ] - a <\to> b  \]
+
+Here \( E \) is our original choice for orthonormal frames in tangent space. \( e\) is the dual of that. And as matrices they are inverses of each other for a fixed basis and coordinate system.
+
+This is important cause it says that this is not a new degree of freedom. Only E is independent.
+
+\textbf{Condition for General Coordinates Transformation: }
+\begin{itemize}
+    \item Notice that \(\Gamma^\alpha _{\mu \nu}\) has no definite symmetry in the lower indices. but \[ \Gamma^\alpha _{\mu \nu} - \Gamma^\alpha_{\nu \mu} \] is a tensor even though \( \Gamma^\alpha_{\mu \nu } \) is not. Its because it has an extra inhomogeneous term which gets cancelled out when antisymmetrize it. 
+    Keep in mind that this antisymmetrized version is called the torsion tensor. Its not the same as the previous one. The previous one was torsion 2-form in context of frames in \(O(n)\) vector. So the choice is to set it to 0. 
+     \[ \Gamma^\alpha _{\mu \nu} - \Gamma^\alpha_{\nu \mu} = 0 \] 
+    
+    \item The second condition is that the metric should be covariantly constant. This is also called the "metricity". 
+        \[ D_\mu g_{\alpha\beta} = \partial_\mu g_{\alpha\beta} - \Gamma^\nu_{\mu \alpha} g_{\nu \beta} - \Gamma^\nu_{\mu \beta}g_{\alpha\nu} = 0 \]
+We are basically saying that covariant differentiation should preserve the Riemannian metric of a Riemannian manifold.
+\end{itemize}
+With these two conditions \( \Gamma^\alpha_{\mu \nu}\) is completely determined in terms of g. 
+
+Now for the affine connection side, we get 
+
+\[ \Gamma^\alpha_{\mu \nu} = \frac{1}{2} g^{\alpha \beta} (g_{\beta \mu, \nu} + g_{\beta \nu, \mu } - g_{\mu \nu, \beta} ) \]
+where, 
+\[    g_{\beta \mu, \nu} =  \partial_\nu g_{\beta \mu}  \]
+\[    g_{\beta \mu; \nu} =  D_\nu g_{\beta \mu}  \]
+This is also called the christoffel symbol under these conditions. 
+
+\section{Integration on Manifolds}
+
+\subsection{Isometry}
+Let's start with isometry. To start off remember that we had a bunch of equivalence relations. For the topological spaces we had Homeomorphism. It was basically a map which was continuous in both directions with respect to the continuity of topology. For differentiable manifolds we had the equivalence relation called Diffeomorphism. Diffeomorphism is a Homeomorphism, its not just continuous in both directions but also differentiable in both directions. The third one is Isometry. This is the equivalence for Riemannian Manifolds. Isometry is a Diffeomorphism with extra properties. It preserves the metric. 
+
+Recall that, if X and Y are tangent vectors in the metric G then, 
+\[ \langle X,Y \rangle_G = G_{\mu \nu} X^\mu Y^\nu \]
+
+Given G on M. Recall that 
+given \( \varphi: M \to N\), there is a differential map
+\[ \varphi_{*}: T_p(M) \to T_p(N) \]
+
+Now if \( X \in T_p(M)\) then \( \varphi_{*} X \in T_p(M) \) is defined by 
+\[ \varphi_{*}X(f) = X(f \circ \varphi) \]
+
+such that \[ f:N \to \mathbb{R} \]
+
+Now we have a direct connection from M to \( \mathbb{R} \). This differential map gives me a unique tangent vector on N starting from a given tangent vector on M. Now we can define what it means to preserve the metric given below.  
+
+\[ \langle X,Y \rangle_{G_M} = \langle \varphi_{*} X, \varphi_{*} Y \rangle_{G_N} \]
+
+This is the statement of isometry. 
+
+\subsection{Volume form}
+Recall that we had defined dual frames (1-forms) \( e^a = e^a_\mu dx^\mu\). The wedge product is n-form given by 
+\[ \lambda = e^1 \wedge e^2 \dots \wedge e^n = n-form \]
+This is called the volume form of the manifold. There is a small problem the volume element defined by above is dependent on the order in which they are written. \( O(n) \) transformations of the frames can also reverse their orientation. 
+
+So for this problem we restrict ourselves to the \( SO(n)\) frame rotations. Where we have \( || O || = +1\). But this can only be done on orientable manifold. So we will restrict our discussions to only orientable manifold.
+Now what does \( e^a \) do under orthogonal group rotation or Lorentz Transformation. 
+\[ e^a \to O^a_b e^b, O^a_b \in O(n) \]
+
+We can show that \( \lambda \to |det O| \lambda \)
+for \( SO(n)\), \( \lambda\) is invariant. This allows us to rewrite the volume element.
+
+\begin{align*}
+\lambda &= e^1 \wedge e^2 \dots \wedge e^n = n-form \\
+        &= e^1_{\mu_1} e^2_{\mu_2} \dots e^n_{\mu_n} dx^{\mu_1} \wedge \dots dx^{\mu_n} \\
+\end{align*}
+
+But now it has an interesting property. One of them follows from antisymmetrization. Since we have n basis vectors and the differential term antisymmetrizes all of them
+we can write the volume element as follows. 
+
+\[ \lambda = |\det e(x)| dx^1 \wedge dx^2 \wedge \dots dx^n \]
+
+So we first wrote the volume element in terms of dual frames. But the above shows that it can be written in terms of coordinates as well. Also 
+\[ ||g|| = || \det e ||^2\]
+from \[ g_{\mu \nu} = e^a_\mu e^a_\nu \]
+which means that 
+\[ \lambda = \sqrt{|g|} dx^1 \wedge dx^2 \wedge \dots dx^n  \]
+
+This is a n-form. Another way to write it would be to use the \( \epsilon \) symbol. 
+where 
+\begin{align*}
+    \epsilon_{\mu_1, \dots, \mu_n} &= 0 if \mu_i = \mu_j \\
+                                   &= +1 \text{if even permutation}  \\
+                                   &= -1 \text{if odd permutation} \\
+\end{align*}
+so using this we can once again rewrite the volume element. 
+
+\[ \lambda = \frac{\sqrt{g}}{n!} \epsilon_{\mu_1, \dots, \mu_n} dx^{\mu_1}\wedge dx^{\mu_n} \]
+
+Now this takes care of the orientation and sign problem. We now proceed to define the following 
+\[ \epsilon^{\mu_1, \dots, \mu_n}(x) = g^{\mu_1 \nu_1}(x) \dots g^{\mu_n \nu_n}(x) \epsilon_{\nu_1 \dots \nu_n} \]
+
+Notice the lower indices \( \epsilon \) has components plus and minus one only.  But all the others have functions of x. It means that in a non trivial manifold, the lower indices \(\epsilon\) is a plus or minus one component but the upper indices is not. Also the \( g^{\mu_1 \nu_1}(x) \) is actually \( g^{-1}\). We can also use a mixed combination of upper and lower indices if we want as well. Now we can define the Hodge Dual.
+
+\subsection{Hodge Form}
+A property of differential forms can be induced through the structure of n-forms. 0-form is a function. 1-form is given by \( \omega_\mu dx^\mu \). It can have n components. A 2-form is given by \( \omega_{\mu \nu} dx^\mu \wedge dx^\nu \) which has \( \frac{n(n-1)}{2}\) components. Then a 3 form has components \( N_{C_3} \). The n-form will then have 1 component. This tells us that a p-form and an n-p form have the same number of independent components. So there is some relation between these two. This is given by the Hodge dual. With the \( \epsilon\) symbol or equivalently with the volume form, we can define a n-p form given any p form. This is called the Hodge Dual. 
+
+\begin{theorem}
+    \textbf{Hodge Dual:} Given a P-form in a n Dimensional Manifold where \( n \geq p\), 
+    \[ \omega = \omega_{\mu_1 \dots \mu_p} dx^{\mu_1} \wedge \dots \wedge dx^{\mu_p}\]
+    then \[ *\omega = \frac{\sqrt{|g|} }{(n-p)!} \omega_{\mu_1 \dots \mu_p} \epsilon^{\mu_1 \dots \mu_p}_{\mu_{p-1}\dots\mu_n} dx^{\mu_{p+1}} \wedge \dots \wedge dx^{\mu_n} \] 
+    also \[ *(* \omega) = \omega \]
+\end{theorem}
+The above dual is the (n-p) form.
+
+\textbf{An example: } for \( n = 3 \) the \[ \lambda = dx^1 \wedge dx^2 \wedge dx^3 \]
+the dual is given by 
+\begin{align*}
+    *dx^1  &= dx^2 \wedge dx^3 \\
+*dx^1 \wedge dx^2 &= dx^3  \\
+\end{align*}
+For a more general case, if we have 1-form like \( a = a_i dx^i, b = b_i dx^i \)
+Then \[ a \wedge b = a_i b_j dx^i \wedge dx^j = \frac{1}{2} (a_i b_j - a_j b_i) dx^i \wedge dx^j \]
+
+This is a 2 form made up off 2 vectors. The next step would be to find the dual 
+
+\[ * (a \wedge b) = a_i b_j \epsilon^{ij}_k dx^k \]
+Now what is \( \epsilon^{ijk} a_i b_j ?\) it is basically just \( c^k \) where 
+\[ \bar a \times \bar b = \bar c \]
+
+So the moral of this story is that the hodge dual of the wedge product of two 1-forms is the cross product of those two 1-forms in 3-D only. Notice that the hodge dual of the wedge product of two 1-forms is going to be an n-2 forms in n dimensions. When \( n=3 \) we have an 1-form. 
+
+The real meaning of cross product is that it is related to a particular plane. It is associated to the plane spanned by the two vectors. Now only in 3-d the normal to a plane is a line. That's why this wedge from \( a \wedge b \) maps to 1-form \( bar c \). But then why do we have this permutation term in it? Under improper rotations like \( O(3) \) when we change the orientation of the frames, this changes sign. Thus \( c^k \) changes sign under frame  change opposite to the way how a normal vector would behave. Thus we call it the Pseudo-Vector. Cause its not a vector but a 2-form and to get the vector c we would have to get the dual. So when we use the Hodge dual we have to use the \( \epsilon \) 
+
+This is the reason why there is no cross product in GR. The reason is you cannot take the cross product of Four velocity or Four momentum to get a vector, you will get a 2nd rank tensor. If it is antisymmetrized then we can dualize it to another tensor with the same information. 
+
+\subsection{Integral form}
+
+Consider the hodge dual of the volume form. 
+\begin{align*}
+\lambda &= e^1 \wedge \dots e^n  \\
+&=  \sqrt{g} dx^1  \wedge \dots dx^n \\ 
+\end{align*}
+
+Now we want to integrate on a manifold. We consider a manifold with charts and maybe infintely many charts. In practice lets take a compact manifold. Which means that every open cover admits a finite sub cover. Now we will use this finite sub cover. We call it \( U_\alpha, \Phi_\alpha \) where \( \Phi_\alpha (U_\alpha) \subset \mathbb{R}^n \)
+
+We are going to integrate an n-form on an n-manifold. We may wish to integrate functions over the manifold. But it has no meaning. Since we dont know it. Now
+
+\[ \omega = \omega_{\mu_1 \dots \mu_n} dx^{\mu_1}\dots dx^{\mu_n} \]
+and define 
+\[ a(x) = \epsilon^{\mu_1 \dots \mu_n} \omega_{\mu_1 \dots \mu_n}(x) \]
+
+This is a single function which carries all the information of the n form. Then 
+\[ \int_{U_\alpha}^{} \omega \, = \int_{\Phi_\alpha(U_\alpha) \subset \mathbb{R}^n}^{} a(x)\, d^n x  \]  
+
+The integral of \( \omega \) is coordinate-less. But the definition is given on the chart as specified by the right side of the formula using coordinates. The right part is basically the Euclidean Thing. We are claiming that the right side defines the integral of a n-form on a chart of a manifold. Why is the left side called coordinate-independent ? Try 
+\[ x^i \to y^i(x) \]
+Now \( d^n x \) is no longer invariant. 
+\[ d^n x \to d^n y = || \frac{\partial y^i}{\partial x^i} || \]
+But due to the \( a(x) \) definition. we get 
+
+\[ a(x) \to a^{'}(y) = || \frac{\partial x^j}{\partial y^i} || a(x) \]
+
+which effectively mitigates the previous change. Thus it is independent of change of coordinates. So we have a coordinate-independent representation of a patch. 
+
+Now we patch these up to get the whole integral over the manifold. We need something called the partition of unity \( f_\alpha(x) \). This is a family of differentiable functions on M, one for each chart of the atlas. It has the properties 
+
+\begin{theorem}
+    \( f_\alpha (x) \) is a family of differentiable functions on \( M \), one for each chart of the atlas which has the below properties: 
+    \begin{itemize}
+        \item \( f_\alpha: C^{\infty} \)
+        \item \( 0\leq f_\alpha(x) \leq 1, \forall \alpha,x \in U_\alpha \)    
+        \item \( f_\alpha(x) = 0 if x \not\in U_\alpha\)
+        \item \( \sum_{\alpha}^{} f_\alpha(x) = 1 \)
+    \end{itemize}
+\end{theorem}
+
+Then the integration can be defined as 
+\[ \int_{M}^{} \omega\, = \sum_{\alpha}^{} \int_{U_\alpha}^{} f_\alpha(x) \omega\, \]
+This is independent of the partition of unity. 
+
+\subsection{Laplacian}
+With a metric we have an inner product \( T_p(M) \) Do we get an inner product on \( T_p^{*}(M) \). The answer is yes. It can be written as 
+
+\[ \langle \alpha, \beta \rangle = \int_{M}^{} \alpha \wedge *\beta \, \]
+Here both \( \alpha \& \beta \) are P-form. But the dual of \( *\beta \) is of n-p form. So the right hand side gives me n form due to the wedge product. So integration over the manifold allows us to define the inner product of any two forms of any dimension as long as they both have the same form number. It can be shown that the inner product is symmetric. 
+
+\[ \langle \alpha, \beta \rangle = \langle \beta, \alpha \rangle  \]
+\[ \langle \alpha, \alpha \rangle \geq 0 \text{in Euclidean} \]
+
+Now we define an adjoint 
+\begin{theorem}
+    Given \( \alpha \) which is a p-form, the adjoint \( \delta \alpha \) is a (p-1) form defined by 
+    \[ \langle \alpha, d\beta \rangle = \langle \delta \alpha, \beta \rangle  \]
+\end{theorem}
+The \( \alpha  \) is a p-form. the \( \beta \) is a (p-1) form such that when d acts on it, it gives a p-form. On the right side the \( \delta \alpha \) is a p-1 form. Now \( \delta \) cant act on 0-form. By the integral definition we can write the below. 
+
+\[ \int_{M}^{} \alpha \wedge * d \beta\,  = (-1)^{np} \int_{}^{} (*d*\alpha) \wedge \beta\,  \]
+
+So upto a sign we have \( \delta = *d* \)
+
+using this adjoint on a 1-form we get: 
+\[ \delta: \omega = \omega_i dx^i = \frac{1}{\sqrt{g}} \partial_i (\sqrt{g}\omega^i) \]
+
+This is the generalization of divergence.
+Now remember that \( d^2 \omega = 0 \). This implies that the adjoint of adjoint is also a zero. 
+\[ \delta^2 \omega = (*d*)(*d*) \omega = *d^2 * \omega = 0 \]
+
+Now we have the Laplacian on a manifold is given by 
+
+\begin{align*}
+\Delta &= (d+\delta)^2 \\
+&= d^2 + \delta^2 + d \delta + \delta d  \\
+&= d \delta + \delta d  \\
+\end{align*}
+
+for a generalised manifold we have, 
+
+\[ \bar \Delta^2 = \frac{1}{\sqrt{g}} \partial_i (\sqrt{g} g^{ij} \partial_j) \]
+
+Final one would be the Hodge Decomposition rule. Any differential p-form can be uniquely decomposed as 
+
+\[ \omega = d \alpha + \delta \beta + \gamma \] 
+
+where \( \Delta \gamma = 0 \)
+\end{document}
+ 
