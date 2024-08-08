@@ -1,0 +1,1683 @@
+\documentclass{article}
+
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{tikz-cd}
+\usepackage{thmtools}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{framed}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\usetikzlibrary{patterns}
+\colorlet{LightGray}{White!90!Periwinkle}
+\colorlet{LightOrange}{Orange!15}
+\colorlet{LightGreen}{Green!15}
+
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+
+\declaretheoremstyle[name=,]{thmsty}
+\declaretheorem[style=thmsty,numberwithin=section]{theorem}
+\tcolorboxenvironment{theorem}{colback=LightGray}
+
+\declaretheoremstyle[name=,]{prosty}
+\declaretheorem[style=prosty,numberlike=theorem]{notes}
+\tcolorboxenvironment{proposition}{colback=LightOrange}
+
+\declaretheoremstyle[name=,]{prcpsty}
+\declaretheorem[style=prcpsty,numberlike=theorem]{question}
+\tcolorboxenvironment{principle}{colback=LightGreen}
+
+\setstretch{1.2}
+\geometry{
+    textheight=9in,
+    textwidth=5.5in,
+    top=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+}
+
+% ------------------------------------------------------------------------------
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% Cover Page and ToC
+% ------------------------------------------------------------------------------
+
+\title{ \normalsize \textsc{Lie Groups and Lie Algebra}
+		\\ [2.0cm]
+		\HRule{1.5pt} \\
+        \LARGE \textbf{\uppercase{A lecture note on Lie Groups and Lie Algebra for Noob Wannabe Physicists}
+		\HRule{2.0pt} \\ [0.6cm] \LARGE{} \vspace*{10\baselineskip}}
+		}
+        %\date{}
+\author{\textbf{Author} \\ 
+		Mushrafi Munim Sushmit \\
+		Department of Physics, University of Dhaka \\
+		}
+
+\maketitle
+\newpage
+
+\tableofcontents
+\newpage
+
+\section*{Preface} % The asterisk prevents LaTeX from numbering the section
+\addcontentsline{toc}{section}{Preface} 
+
+This document draws primarily from the online lectures delivered by Jonathan Evans, which are available on YouTube. The whole lecture notes only deals with matrices. 
+\newpage 
+
+
+% ------------------------------------------------------------------------------
+\section{Matrix Exponential Calculation}
+
+We start with a matrix \(A\) defined as:
+\[
+A = \begin{pmatrix}
+0 & -\theta \\
+\theta & 0
+\end{pmatrix}
+\]
+
+We compute higher powers of \(A\):
+\begin{align*}
+A^2 &= \begin{pmatrix}
+0 & -\theta \\
+\theta & 0
+\end{pmatrix}
+\begin{pmatrix}
+0 & -\theta \\
+\theta & 0
+\end{pmatrix}
+= \begin{pmatrix}
+-\theta^2 & 0 \\
+0 & -\theta^2
+\end{pmatrix} = -\theta^2 I, \\
+A^3 &= A^2A = -\theta^2 A = \begin{pmatrix}
+0 & \theta^3 \\
+-\theta^3 & 0
+\end{pmatrix}, \\
+A^4 &= \theta^4 I, \quad \text{and so forth.}
+\end{align*}
+
+Now, we compute the matrix exponential \(\exp(A)\):
+\[
+\exp(A) = I + A + \frac{1}{2!}A^2 + \frac{1}{3!}A^3 + \frac{1}{4!}A^4 + \cdots
+\]
+
+Breaking this into even and odd powers of \(A\), we get:
+\[
+\exp(A) = I + \frac{1}{2!}A^2 + \frac{1}{4!}A^4 + \cdots + A\left(1 + \frac{1}{3!}A^2 + \frac{1}{5!}A^4 + \cdots\right)
+\]
+
+\[
+\exp(A) = \begin{pmatrix}
+1 - \frac{\theta^2}{2} + \frac{\theta^4}{4!} \dots & -\theta + \frac{\theta^3}{3!} \dots\\
+\theta - \frac{\theta^3}{3!} \dots & 1 - \frac{\theta^2}{2} + \frac{\theta^4}{4!} \dots
+\end{pmatrix}
+\]
+
+Using the series expansions for cosine and sine, we find:
+\[
+\exp(A) = \begin{pmatrix}
+\cos\theta & -\sin\theta \\
+\sin\theta & \cos\theta
+\end{pmatrix}
+\]
+
+This is the 2D rotation matrix, rotating points in the plane by an angle \(\theta\).
+In fact, any antisymmetric matrix like above when exponentiated gives a matrix of the same size. We can expand this idea to 3-D or even higher planes. 
+
+The matrix exponential is thus defined as:
+
+\begin{theorem}
+\[
+\exp(A) = \sum_{n=0}^{\infty} \frac{1}{n!} A^n, \quad \text{where } A^0 = I
+\]   
+\end{theorem}
+
+\subsection*{Properties of \(\exp(A)\)}
+\begin{enumerate}
+    \item \textbf{Convergence:}
+    \begin{itemize}
+        \item \(\exp(A)\) converges absolutely, meaning that the sum of the absolute values of the series' terms is finite. This property ensures that the function is well-defined and the series can be rearranged without changing the value of the sum.
+        \item It converges uniformly along with its partial derivatives, which guarantees that operations involving limits and derivatives with respect to elements of \(A\) or parameters will behave consistently.
+        \item The convergence holds on any bounded set of matrices \(A\), facilitating the application across various mathematical and physical contexts where \(A\) varies within certain bounds.
+        \item This allows for the differentiation of the exponential inside the sum, making it possible to perform term-by-term differentiation. 
+    \end{itemize}
+
+    \item \textbf{Differentiability:}
+    \[
+    \frac{d}{dt} \exp(tA) = A \exp(tA).
+    \]
+  consider:
+\[
+\frac{d}{dt} \exp(tA) = \frac{d}{dt} \left( \sum_{n=0}^{\infty} \frac{1}{n!} (tA)^n \right)
+\]
+We apply the derivative term-by-term:
+\[
+\frac{d}{dt} \exp(tA) = \sum_{n=0}^{\infty} \frac{1}{n!} \frac{d}{dt} (tA)^n
+\]
+Utilizing the chain rule, this becomes:
+\[
+= \sum_{n=1}^{\infty} \frac{1}{n!} n t^{n-1} A^n = A \sum_{n=1}^{\infty} \frac{1}{(n-1)!} t^{n-1} A^{n-1}
+\]
+By re-indexing the sum (let \( m = n-1 \)):
+\[
+= A \sum_{m=0}^{\infty} \frac{1}{m!} t^m A^m = A \exp(tA)
+\]
+Thus, we have shown that:
+\[
+\frac{d}{dt} \exp(tA) = A \exp(tA)
+\] 
+    \item \textbf{Multiplicative Property:}
+    \[
+    \text{If } AB = BA, \text{ then } \exp(A) \exp(B) = \exp(A + B).
+    \]
+    This property implies that the exponential functions of two commuting matrices can be expressed as the exponential of their sum, simplifying calculations. 
+
+    The exponential of a matrix is defined by the series:
+\[
+\exp(A) = \sum_{n=0}^\infty \frac{A^n}{n!}, \quad \exp(B) = \sum_{n=0}^\infty \frac{B^n}{n!}.
+\]
+
+To multiply two series, we apply the Cauchy product formula for infinite series, which states:
+\[
+\left(\sum_{n=0}^\infty a_n\right)\left(\sum_{n=0}^\infty b_n\right) = \sum_{n=0}^\infty \left(\sum_{k=0}^n a_k b_{n-k}\right).
+\]
+For the matrix exponentials, this becomes:
+\[
+\exp(A) \exp(B) = \left(\sum_{n=0}^\infty \frac{A^n}{n!}\right)\left(\sum_{n=0}^\infty \frac{B^n}{n!}\right) = \sum_{n=0}^\infty \left(\sum_{k=0}^n \frac{A^k}{k!} \frac{B^{n-k}}{(n-k)!}\right).
+\]
+
+Since \(A\) and \(B\) commute, we can rearrange terms freely within the sum:
+\[
+\sum_{k=0}^n \frac{A^k}{k!} \frac{B^{n-k}}{(n-k)!} = \frac{1}{n!} \sum_{k=0}^n \binom{n}{k} A^k B^{n-k} = \frac{(A+B)^n}{n!},
+\]
+where we used the binomial theorem for the last equality. Hence,
+\[
+\exp(A) \exp(B) = \sum_{n=0}^\infty \frac{(A+B)^n}{n!} = \exp(A+B).
+\]
+
+   \item \textbf{Invertibility:}
+    \[
+    \exp(A) \text{ is invertible with inverse } \exp(-A).
+    \]
+    The matrix exponential is always invertible, with the inverse being the exponential of the negated original matrix. 
+
+\end{enumerate}
+
+\section{Matrix Logarithm}
+
+The exponential map (\(\exp\)) is a fundamental concept in the study of Lie groups and Lie algebras, particularly important in the context of linear algebraic groups. It maps all \(n \times n\) matrices from the Lie algebra \(\mathfrak{gl}(n, \mathbb{R})\) (the set of all \(n \times n\) real matrices) to the general linear group \(GL(n, \mathbb{R})\) (the group of all invertible \(n \times n\) matrices over \(\mathbb{R}\)):
+\[
+\exp: \mathfrak{gl}(n, \mathbb{R}) \to GL(n, \mathbb{R}).
+\] 
+
+In the notation \(\mathfrak{gl}(n, \mathbb{R})\), the Lie algebra is traditionally written in lowercase to distinguish it from its corresponding Lie group, which is written in uppercase (\(GL(n, \mathbb{R})\)). This convention helps in easily differentiating between the algebraic structures (which are more abstract and involve operations like the Lie bracket) and the group structures (which involve matrix operations like multiplication and are typically thought of as transformation groups).
+
+These unknown terms will be further elaborated upon in the upcoming chapters. For the time being, just sit back and ignore. 
+
+The logarithm of a matrix, commonly referred to as the "log", is critical in the field of Lie groups and Lie algebras for understanding the inverse of the exponential map. The exponential map, denoted as \(\exp: \mathfrak{gl}(n, \mathbb{R}) \rightarrow GL(n, \mathbb{R})\), maps elements from a Lie algebra to its corresponding Lie group.
+
+\subsubsection*{Key Motivations and Challenges}
+\begin{itemize}
+    \item \textbf{Inverse Mapping:} The exponential map is well-defined for all elements in a Lie algebra but is not necessarily injective. Defining the logarithm addresses the need for an inverse function, particularly in neighborhoods around the identity of the group.
+    \item \textbf{Local Diffeomorphisms:} The exponential map is a local diffeomorphism around the identity element, implying the existence of a neighborhood where the map is bijective. Defining the logarithm in such a context provides a way to uniquely reverse the exponential transformation.
+    \item \textbf{Analytic Continuation:} Many matrices, such as rotation and scaling matrices, can be expressed as exponentials of simpler matrices. The logarithm helps uncover these underlying simple matrices
+\end{itemize}
+
+\begin{theorem}
+    There exist neighborhoods \( 0 \in U \subseteq \mathfrak{gl}(n, \mathbb{R})\) and \( \mathbb{I} \in V \subseteq GL(n, \mathbb{R}) \) such that the exponential map \(\exp|_U: U \to V\) is bijective.    
+\end{theorem}
+This theorem demonstrates that within these specific neighborhoods, every matrix in \( V \) which is sufficiently close to the identity \( \mathbb{I} \), has a unique pre-image in \( U \) close the to the \( 0 \) matrix, under the exponential map. The pre-image is calculated using the logarithm, which acts as the local inverse of the exponential map. The defined neighborhoods \( U \) and \( V \) are small enough to avoid multi-valuedness issues of the logarithm which ensures that the map is well-defined and continuous.
+
+To prove this we use the below theorem. 
+\begin{theorem}
+    \textbf{Theorem (Inverse Function Theorem):}
+Suppose \( F: \mathbb{R}^N \rightarrow \mathbb{R}^N \) is a differentiable map such that the derivative at origin \( 0 \), denoted \( d_0 F \), given by the Jacobian matrix:
+\[
+d_0 F = \begin{pmatrix}
+\frac{\partial F_1}{\partial x_1}(0) & \cdots & \frac{\partial F_1}{\partial x_N}(0) \\
+\vdots & \ddots & \vdots \\
+\frac{\partial F_N}{\partial x_1}(0) & \cdots & \frac{\partial F_N}{\partial x_N}(0)
+\end{pmatrix}
+\]
+is invertible. 
+Where the map \( F \) at any point \((x_1, \ldots, x_N)\) in \(\mathbb{R}^N\) is represented by the matrix:
+    \[
+    F = \begin{pmatrix}
+    F_1(x_1, \ldots, x_N) \\
+    \vdots \\
+    F_N(x_1, \ldots, x_N)
+    \end{pmatrix}
+    \]
+
+Then, if \( y = F(0) \), there exist neighborhoods \( O \subseteq \mathbb{R}^N \) and \( V \subseteq \mathbb{R}^N \) such that \( F|_U: U \rightarrow V \) is a bijection and \( F^{-1} \) is differentiable. Furthermore, the derivative of the inverse function \( F^{-1} \) at \( y \) is given by:
+\[
+d_y (F^{-1}) = (d_0 F)^{-1}
+\]
+  
+\end{theorem}
+
+This theorem guarantees that around a point where the Jacobian is non-singular, not only is the function locally invertible, but this local inverse is also differentiable, and its derivative can be explicitly calculated using the inverse of the original function's derivative at the point.
+
+Now back to the proof, 
+
+The exponential map is a fundamental concept in the theory of Lie groups and Lie algebras, denoted as:
+\[
+\exp: \mathfrak{gl}(n, \mathbb{R}) \rightarrow GL(n, \mathbb{R})
+\]
+where \(\mathfrak{gl}(n, \mathbb{R})\) is the Lie algebra of all \(n \times n\) real matrices, and \(GL(n, \mathbb{R})\) is the general linear group of all invertible \(n \times n\) matrices over \(\mathbb{R}\).
+
+The map can also be viewed as a transformation between vector spaces:
+\[
+\mathbb{R}^{n^2} \rightarrow \mathbb{R}^{n^2}
+\]
+This interpretation arises because the set of all \(n \times n\) matrices (elements of \(\mathfrak{gl}(n, \mathbb{R})\)) can be thought of as points in a \(n^2\)-dimensional real vector space, and similarly for \(GL(n, \mathbb{R})\).
+
+Now since we have established the map, We look at the differential map of the matrix. 
+
+The Jacobian matrix of the exponential map at \( A \) with respect to the matrix entries \( A_{ij} \) is represented by:
+\[
+\begin{pmatrix}
+\frac{\partial (\exp A)_{11}}{\partial A_{11}} & \frac{\partial (\exp A)_{11}}{\partial A_{12}} & \cdots & \frac{\partial (\exp A)_{11}}{\partial A_{1n}} \\
+\frac{\partial (\exp A)_{12}}{\partial A_{11}} & \frac{\partial (\exp A)_{12}}{\partial A_{12}} & \cdots & \frac{\partial (\exp A)_{12}}{\partial A_{1n}} \\
+\vdots & \vdots & \ddots & \vdots \\
+\frac{\partial (\exp A)_{1n}}{\partial A_{11}} & \frac{\partial (\exp A)_{1n}}{\partial A_{12}} & \cdots & \frac{\partial (\exp A)_{1n}}{\partial A_{1n}} \\
+\vdots & \vdots & \vdots & \vdots \\
+\frac{\partial (\exp A)_{nn}}{\partial A_{n1}} & \frac{\partial (\exp A)_{nn}}{\partial A_{n2}} & \cdots & \frac{\partial (\exp A)_{nn}}{\partial A_{nn}}
+\end{pmatrix}
+\]
+This is evaluated at zero. 
+
+Also we make the assumption that 
+
+\[
+\exp(A) \approx I + A
+\]
+This approximation holds because the higher order terms in the series expansion of \( \exp(A) \) are negligible when \( A \) is small. Formally, we express this as:
+\[
+\exp(A) = I + A + O(A^2)
+\]
+where \( O(A^2) \) denotes terms of second order and higher, which become insignificant as \( A \) approaches zero.
+
+Then the jacobian can now be written as 
+
+\[
+\begin{pmatrix}
+\frac{\partial A_{11}}{\partial A_{11}} & \frac{\partial A_{11}}{\partial A_{12}} & \cdots & \frac{\partial A_{11}}{\partial A_{1n}} \\
+\frac{\partial A_{12}}{\partial A_{11}} & \frac{\partial A_{12}}{\partial A_{12}} & \cdots & \frac{\partial A_{12}}{\partial A_{1n}} \\
+\vdots & \vdots & \ddots & \vdots \\
+\frac{\partial A_{1n}}{\partial A_{11}} & \frac{\partial A_{1n}}{\partial A_{12}} & \cdots & \frac{\partial A_{1n}}{\partial A_{1n}} \\
+\vdots & \vdots & \vdots & \vdots \\
+\frac{\partial A_{nn}}{\partial A_{n1}} & \frac{\partial A_{nn}}{\partial A_{n2}} & \cdots & \frac{\partial A_{nn}}{\partial A_{nn}}
+\end{pmatrix}
+\]
+
+which will result in \( \mathbb{I} \) which is invertible. So thereby using the inverse function theorem, Near neighborhoods of \( 0 \), the exponential map is invertible and its inverse is called the logarithm.
+
+Another way of thinking about it is, 
+
+For a smooth function \( F: \mathbb{R} \to \mathbb{R}^n \), its Taylor expansion around 0 is given by:
+\[
+F(x) = F(0) + d_0F(x) + \cdots
+\]
+where \( d_0F \) denotes the derivative of \( F \) at 0, applied to \( x \).
+
+Similarly, for the matrix exponential function \( \exp: \mathfrak{gl}(n, \mathbb{R}) \to GL(n, \mathbb{R}) \), the expansion around a matrix \( A \) close to zero is:
+\[
+\exp(A) = I + d_0 \exp(A) + \cdots
+\]
+where \( I \) is the identity matrix, and \( d_0 \exp \) represents the derivative of the exponential map at 0, applied to \( A \). Notably, for the exponential map:
+\[
+d_0 \exp(A) = A.
+\]
+This indicates that the first derivative of the exponential map at 0 is the identity map, meaning \( d_0 \exp = \text{id} \), which simplifies to \( A \) when applied to \( A \).
+
+\begin{theorem} 
+    For a matrix \( A \), the logarithm of the matrix \( I + A \), where \( I \) is the identity matrix, can be expressed as a series expansion:
+\[
+\log(I + A) = A - \frac{1}{2} A^2 + \frac{1}{3} A^3 - \frac{1}{4} A^4 + \cdots
+\]
+
+\end{theorem}
+This series is valid under the condition that \( A \) is sufficiently small, typically when the eigenvalues of \( A \) lie within the unit disk in the complex plane, ensuring the convergence of the series.
+
+\section{Baker-Campbell-HaussDorff Formula}
+
+We start off by the question, if A and B matrices do not commute, what will happen to the exponential formula ? The answer is given in the logarithm definition in the last section. 
+
+The expression for the logarithm of the product of two exponential matrices can be expanded as follows:
+
+\begin{align*}
+\log(\exp(A) \exp(B)) &= \log \left( \left( I + A + \frac{A^2}{2} + \cdots \right) \left( I + B + \frac{B^2}{2} + \cdots \right) \right) \\
+&= \log \left( I + A + B + AB + \frac{A^2}{2} + \frac{B^2}{2} + A^2B + \frac{AB^2}{2} + \cdots \right) \\
+&= X - \frac{X^2}{2} + \frac{X^3}{3} - \cdots \\
+&= A + B + AB + \frac{1}{2} A^2 + \frac{1}{2} B^2 + \cdots \\
+&\quad - \frac{1}{2} \left( A^2 + AB + BA + B^2 + \cdots \right) \\
+&= A + B + \frac{1}{2}(AB - BA) + \cdots
+\end{align*}
+
+Here \( X \) is the series \( A + B + AB + \frac{A^2}{2} + \frac{B^2}{2} + \cdots \). The final expression:
+\[
+    A + B + \frac{1}{2}[A,B]  + \cdots
+\]
+approximates the Baker-Campbell-Hausdorff formula where \( \frac{1}{2}[A,B] \) is the first term in the series expansion of commutators, representing the non-commutative nature of matrix multiplication.
+
+We have ignored the higher order terms starting from \( X^3 \). We could in principal expand it more for higher order terms but they would come up as commutators, or more generally known as lie bracket notations.
+
+\begin{theorem}
+For matrices \(A\) and \(B\), the formula is given by:
+\[
+\exp(A) \exp(B) = \exp \left( A + B + \frac{1}{2}[A, B] + \cdots \right)
+\]    
+where \([A, B] = AB - BA\) is the commutator of \(A\) and \(B\). 
+
+The BCH formula can be expanded as follows:
+\[
+A + B + \frac{1}{2}[A, B] + \frac{1}{12}[A, [A, B]] - \frac{1}{12}[B, [A, B]] + \cdots
+\]
+
+\end{theorem}
+
+It describes how to express the product of two exponential operations within a Lie algebra as a single exponential operation involving a series that includes commutators. The formula includes not only simple linear terms \(A\) and \(B\) but also higher order terms involving iterated commutators. These higher order terms account for the non-commutative nature of matrix multiplication and are essential for certain applications in physics, such as quantum mechanics and the study of dynamical systems.
+
+\section{Lie algebra of a Matrix Lie group}
+
+Lie algebras of matrices are intimately connected to Lie groups that consist of matrix elements. These Lie algebras describe the infinitesimal transformations around the identity element of the group and are crucial for understanding the local structure of the group.
+
+Based on the properties we have found so far for the exponential map of general linear  matrices. The Lie algebra of a matrix group is given below: 
+
+\begin{theorem}
+Let \( G \) be a topologically closed subgroup of \( GL(n, \mathbb{R}) \). Define \( \mathfrak{g} \) as follows:
+\[
+\mathfrak{g} = \{ X \in \mathfrak{gl}(n, \mathbb{R}) : \exp(tX) \in G \quad \text{for all } t \in \mathbb{R} \}.
+\]     
+
+Then \( \mathfrak{g} \) has the following properties:
+\begin{enumerate}
+  \item \( \mathfrak{g} \) is a vector space.
+  \item For any \( X, Y \in \mathfrak{g} \), the Lie bracket \( [X, Y] \) also belongs to \( \mathfrak{g} \).
+  \item \( \mathfrak{g} \) is parallel to the tangent space of \( G \) at the identity element \( I \).
+  \item The exponential map \( \exp: \mathfrak{g} \to G \) is locally invertible.
+\end{enumerate}
+
+\end{theorem}
+
+\section*{Remarks}
+\begin{enumerate}
+  \item Topologically closed subgroups of \( GL(n, \mathbb{R}) \) are Lie groups. There are examples of Lie groups which are not matrix groups, but most interesting examples are.
+  \item Being topologically closed means if \( g_1, g_2, \dots \) is a sequence of elements of \( G \) such that \( g_k \) converges in \( GL(n, \mathbb{R}) \), then \( \lim_{k \to \infty} g_k \in G \).
+  \item  A \emph{matrix group} is defined as a topologically closed subgroup of \( GL(n, \mathbb{R}) \). If \( G \subseteq GL(n, \mathbb{R}) \) is a subgroup, then the closure \( \overline{G} \) of \( G \) is also a topologically closed subgroup. This property ensures that \( G \) includes all limit points of sequences within \( G \), thereby forming a complete and closed structure under the topology induced by \( GL(n, \mathbb{R}) \). 
+\end{enumerate} 
+
+The tangent space at the identity element of a Lie group provides a linearized approximation of the group near the identity. The elements of the Lie algebra can be viewed as vectors in this tangent space, representing infinitesimal generators of group transformations. By stating that the Lie algebra is parallel to this tangent space, we emphasize that the Lie algebra captures all possible infinitesimal directions of movement within the group starting from the identity.  
+
+\section{O(n) group}
+
+Orthogonal matrices are defined as matrices \( A \) satisfying
+\[
+A^TA = I,
+\]
+where \( I \) is the identity matrix. This condition ensures that the columns of \( A \) are orthonormal.
+
+\subsection*{Lie Algebra of Orthogonal Matrices}
+The Lie algebra \( \mathfrak{o}(n) \) associated with the orthogonal group \( O(n) \) consists of all matrices \( X \) such that
+\[
+\exp(tX) \in O(n) \quad \text{for all } t \in \mathbb{R}.
+\]
+This definition can be further understood by examining the properties of the exponential map:
+
+\begin{itemize}
+  \item If \( \exp(tX) \) is orthogonal for all \( t \), then by the definition of orthogonality,
+    \[
+    (\exp(tX))^T \exp(tX) = I.
+    \]
+  \item Differentiating both sides with respect to \( t \) and setting \( t = 0 \) reveals that
+    \[
+    X^T + X = 0,
+    \]
+    meaning \( X \) is skew-symmetric.
+\end{itemize}
+
+This calculation confirms that \( X \) must belong to \( \mathfrak{o}(n) \), which is characterized by skew-symmetric matrices. The key relations are:
+\[
+(\exp(tX))^T = \exp(tX^T) \quad \text{and} \quad \exp(-tX) = \exp(tX)^{-1}.
+\]
+If \( X^T = -X \), then \( \exp(tX^T) = \exp(-tX) \), further validating that \( X \) is indeed an element of \( \mathfrak{o}(n) \).
+
+\subsection*{Topological Closure} 
+
+The orthogonal group \(O(n)\) is defined as the set of \(n \times n\) matrices \(A\) satisfying \(A^T A = I\), where \(I\) is the identity matrix. This group is topologically closed in the space of all \(n \times n\) matrices over \(\mathbb{R}\). The closure property can be understood through the function \(F: \mathfrak{gl}(n, \mathbb{R}) \rightarrow \mathfrak{gl}(n, \mathbb{R})\) defined by \(F(A) = A^T A\). The orthogonal group can be characterized as:
+\[
+O(n) = F^{-1}(I),
+\]
+where \(I\) is the identity matrix. Since \(F\) is continuous, if \(A_k\) is a sequence in \(O(n)\) converging to some matrix \(A\), then
+\[
+\lim_{k \to \infty} F(A_k) = F\left(\lim_{k \to \infty} A_k\right) = F(A) = I,
+\]
+therefore \(A \in O(n)\), confirming the topological closure of \(O(n)\). 
+
+\subsection*{Lie Algebra of \(O(n)\)}
+The Lie algebra \(\mathfrak{o}(n)\) associated with \(O(n)\) consists of skew-symmetric matrices. A key property of elements \(X, Y \in \mathfrak{o}(n)\) is that the Lie bracket \([X,Y]\) defined by
+\[
+[X,Y] = XY - YX
+\]
+also belongs to \(\mathfrak{o}(n)\). This demonstrates the closure of \(\mathfrak{o}(n)\) under the Lie bracket operation, a crucial aspect of Lie algebras.
+
+For a matrix \(X\) in \(\mathfrak{o}(n)\), the skew-symmetry condition means \(X^T = -X\)
+Now, suppose \(X, Y \in \mathfrak{o}(n)\), which implies \(X^T = -X\) and \(Y^T = -Y\). We need to show that \((XY - YX)^T = -(XY - YX)\).
+
+We start by computing the transpose of the Lie bracket:
+\[
+(XY - YX)^T = (XY)^T - (YX)^T.
+\]
+Using the property of the transpose of a product (which reverses the order of multiplication and transposes each factor), we have:
+\[
+(XY)^T = Y^T X^T \quad \text{and} \quad (YX)^T = X^T Y^T.
+\]
+Substituting the skew-symmetry conditions \(X^T = -X\) and \(Y^T = -Y\), we get:
+\[
+(Y^T X^T) = (-Y)(-X) = YX \quad \text{and} \quad (X^T Y^T) = (-X)(-Y) = XY.
+\]
+Thus, the transpose of the Lie bracket becomes:
+\[
+(XY - YX)^T = YX - XY.
+\]
+Notice that \(YX - XY\) is exactly \(-(XY - YX)\), which means:
+\[
+(XY - YX)^T = -(XY - YX).
+\]
+This demonstrates that \([X, Y]\) is skew-symmetric, hence it belongs to \(\mathfrak{o}(n)\).
+
+\section{SL(2,\( \mathbb{C}\) )}
+
+The special linear group \(SL(2, \mathbb{C})\) consists of \(2 \times 2\) complex matrices with determinant equal to 1. The Lie algebra \(\mathfrak{sl}(2, \mathbb{C})\) of this group consists of matrices where the exponential map's determinant remains 1 for all \(t\).
+
+\subsection*{Matrix Determinant under the Exponential Map}
+Consider a matrix 
+\[
+A = \begin{pmatrix} a & b \\ c & d \end{pmatrix} \in \mathfrak{sl}(2, \mathbb{C}),
+\]
+where we need to ensure that the determinant of the exponential of \(tA\) is 1 for all \(t\):
+\[
+\det(\exp(tA)) = 1 \quad \text{for all } t.
+\]
+Expanding \(\exp(tA)\) and considering the terms up to the first order of \(t\), we get:
+\[
+\exp(tA) = I + tA + O(t^2) = \begin{pmatrix} 1+ta & tb \\ tc & 1+td \end{pmatrix} + O(t^2).
+\]
+Computing the determinant, we have:
+\[
+\det(\exp(tA)) = \det \left(\begin{pmatrix} 1+ta & tb \\ tc & 1+td \end{pmatrix} + O(t^2)\right) = (1+ta)(1+td) - t^2bc + O(t^2).
+\]
+Expanding the product, it simplifies to:
+\[
+1 + t(a+d) + O(t^2).
+\]
+To maintain the determinant at 1 for all \(t\), we require:
+\[
+a + d = 0.
+\]
+This condition defines the elements of the Lie algebra \(\mathfrak{sl}(2, \mathbb{C})\), where the trace of any matrix in this algebra must be zero.
+
+The Lie algebra \(\mathfrak{sl}(2, \mathbb{C})\) consists of all \(2 \times 2\) complex matrices with trace zero. Thus, any matrix in \(\mathfrak{sl}(2, \mathbb{C})\) can be written as:
+\[
+\begin{pmatrix} a & b \\ c & d \end{pmatrix}
+\]
+where the condition \(a + d = 0\) holds. Hence, these matrices have the form:
+\[
+\begin{pmatrix} a & b \\ c & -a \end{pmatrix}
+\]
+This form ensures that the trace of the matrix, \(a - a\), is zero, meeting the criteria for inclusion in \(\mathfrak{sl}(2, \mathbb{C})\).
+
+A typical element in \(\mathfrak{sl}(2, \mathbb{C})\) can be expressed as a linear combination of the basis matrices:
+\[
+\begin{pmatrix} a & b \\ c & -a \end{pmatrix} = a \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} + b \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix} + c \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}.
+\]
+The basis matrices, often denoted as \(H\), \(X\), and \(Y\), are defined as follows:
+\[
+H = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}, \quad X = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}, \quad Y = \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}.
+\]
+These matrices form a basis for the Lie algebra \(\mathfrak{sl}(2, \mathbb{C})\) because any matrix in this algebra can be uniquely expressed as a linear combination of these basis elements:
+\[
+aH + bX + cY.
+\]
+
+For the basis elements \(H\), \(X\), and \(Y\) of \(\mathfrak{sl}(2, \mathbb{C})\), we calculate the Lie brackets:
+
+\begin{itemize}
+    \item \([H, X]\):
+    \[
+    [H, X] = HX - XH = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}\begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix} - \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}\begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} = \begin{pmatrix} 0 & 2 \\ 0 & 0 \end{pmatrix} = 2X
+    \]
+    
+    \item \([H, Y]\):
+    \[
+    [H, Y] = HY - YH = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}\begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix} - \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}\begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} = \begin{pmatrix} 0 & 0 \\ -2 & 0 \end{pmatrix} = -2Y
+    \]
+    
+    \item \([X, Y]\):
+    \[
+    [X, Y] = XY - YX = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}\begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix} - \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}\begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} = H
+    \]
+
+    \item \([X, X]\):
+    \[
+    [X, X] = XX - XX = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix} = 0
+    \]
+    
+    \item \([X, H]\):
+    \[
+    [X, H] = XH - HX = -[H, X] = -2X
+    \]
+\end{itemize}
+
+These calculations illustrate the structure constants of the Lie algebra \(\mathfrak{sl}(2, \mathbb{C})\), which help describe its algebraic properties and underlying symmetry.
+
+Now to check if they are confined in the \(\mathfrak{sl}(2, \mathbb{C})\), we do the following, Then any linear combination of these basis will also be in the same vector space. Remember we are dealing with vector spaces in lie algebra. Which in turn will tell us that every trace 0 matrix is \(\mathfrak{sl}(2, \mathbb{C})\). 
+
+For the matrix \(H\) in the Lie algebra \(\mathfrak{sl}(2, \mathbb{C})\), defined as
+\[
+H = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix},
+\]
+the exponential map \(\exp(tH)\) for all \(t \in \mathbb{R}\) is calculated as follows:
+\[
+\exp(tH) = \exp\left(t \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}\right) = \begin{pmatrix} e^t & 0 \\ 0 & e^{-t} \end{pmatrix}.
+\]
+
+We first expanded the matrix then added the terms. Only the final term is written. 
+
+The determinant of \(\exp(tH)\) is given by:
+\[
+\det(\exp(tH)) = e^t \cdot e^{-t} = 1,
+\]
+demonstrating that \(\exp(tH) \in SL(2, \mathbb{C})\) for all \(t\), as \(SL(2, \mathbb{C})\) consists of \(2 \times 2\) complex matrices with determinant 1.
+
+The Lie algebra \(\mathfrak{sl}(2, \mathbb{C})\) can thus be defined as:
+\[
+\mathfrak{sl}(2, \mathbb{C}) = \{\text{trace-free } 2 \times 2 \text{ matrices}\}.
+\]
+
+\section{Lie Algebra}
+
+\begin{theorem}
+    A Lie algebra is a vector space \(\mathfrak{g}\) equipped with a map 
+\[
+[,]: \mathfrak{g} \times \mathfrak{g} \rightarrow \mathfrak{g}
+\]
+satisfying the following properties:
+\begin{enumerate}
+    \item The bracket is bilinear, i.e.,
+    \[
+    [aX + bY, Z] = a[X, Z] + b[Y, Z] \quad \text{and} \quad [X, aY + bZ] = a[X, Y] + b[X, Z],
+    \]
+    for all \(X, Y, Z \in \mathfrak{g}\) and scalars \(a, b\).
+
+    \item The bracket is antisymmetric,
+    \[
+    [X, X] = 0 \quad \text{for all } X \in \mathfrak{g}.
+    \]
+
+    \item The bracket satisfies the Jacobi identity,
+    \[
+    [X, [Y, Z]] + [Y, [Z, X]] + [Z, [X, Y]] = 0 \quad \text{for all } X, Y, Z \in \mathfrak{g}.
+    \]
+\end{enumerate}
+    
+\end{theorem}
+These properties are equivalent to saying that for the matrices, the bracket \([A, B] = AB - BA\) holds for matrix indices.
+
+\begin{theorem}
+A \emph{subalgebra} \(\mathfrak{h}\) of a Lie algebra \(\mathfrak{g}\) is a subspace such that for any \(X, Y \in \mathfrak{h}\), the Lie bracket \([X, Y]\) is also in \(\mathfrak{h}\). 
+\[
+\text{That is, } \mathfrak{h} \subseteq \mathfrak{g} \text{ and } [X, Y] \in \mathfrak{h} \text{ for all } X, Y \in \mathfrak{h}.
+\]    
+\end{theorem}
+
+All our examples are subalgebras of \(\mathfrak{gl}(n, \mathbb{R})\), the general linear Lie algebra of \(n \times n\) matrices over \(\mathbb{R}\).
+
+\begin{theorem}
+Any finite-dimensional Lie algebra over a field \( k \) is a Lie subalgebra of \(\mathfrak{gl}(n, k)\) for some \( n \).    
+\end{theorem}
+This theorem asserts that every finite-dimensional Lie algebra can be embedded into the general linear algebra of some dimension, indicating the representation of the Lie algebra as matrices over its field.
+
+
+\section{\(\mathfrak{g}\) as a Tangent Space}
+
+Consider \(\mathfrak{g}\), the Lie algebra of a Lie group \(G\), defined as:
+\[
+\mathfrak{g} = \{X \in \mathfrak{gl}(n, \mathbb{R}) : \exp(tX) \in G \text{ for all } t \in \mathbb{R}\}.
+\]
+
+\begin{theorem}
+If \( Y(s) \) is a path in \( G \) at \( Y(0) = I \) (the identity matrix), then the derivative of \( Y(s) \) at \( s = 0 \) lies in the Lie algebra \(\mathfrak{g}\):
+\[
+\text{If } Y(s) \text{ is a path in } G \text{ at } Y(0) = I, \text{ then } \frac{dY}{ds}\bigg|_{s=0} \in \mathfrak{g}.
+\]    
+\end{theorem}
+
+\subsection*{Example}
+Consider a path \( Y(s) \) in \( G \) defined by:
+\[
+Y(s) = \begin{pmatrix} \cos s & -\sin s \\ \sin s & \cos s \end{pmatrix}.
+\]
+The derivative of \( Y(s) \) with respect to \( s \) is given by:
+\[
+\frac{dY}{ds} = \begin{pmatrix} -\sin s & -\cos s \\ \cos s & -\sin s \end{pmatrix}.
+\]
+Evaluating this derivative at \( s = 0 \), we obtain:
+\[
+\frac{dY}{ds}\bigg|_{s=0} = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}.
+\]
+
+This matrix, which is skew-symmetric, represents an element of the Lie algebra \(\mathfrak{g}\) associated with the rotation group \(SO(2)\), thus confirming the theorem that the derivative at \(s = 0\) lies in the Lie algebra.
+Now to prove the theorem, 
+
+Define the function \( h(s) = \log Y(s) \) for small \(s\), assuming the logarithm map is well-defined near \(I\). The derivative of \(h(s)\) at \(s=0\) is:
+\[
+\frac{dh}{ds}\bigg|_{s=0} = \left. \frac{d}{ds} \log Y(s) \right|_{s=0} = \left. \frac{d}{ds} Y(s) \right|_{s=0},
+\]
+where \( \frac{d\log}{dY} \) acts as the identity on the derivative of \(Y(s)\) due to the properties of the logarithmic map being the inverse of the exponential map.
+
+We aim to show that:
+\[
+\exp\left( \frac{dh}{ds}\bigg|_{s=0} \right) \in G \text{ for all } t,
+\]
+since \( h(0) = 0 \) and \( Y(0) = \exp(h(0)) = I \), indicating that \( h(s) \) traces a curve in the Lie algebra \(\mathfrak{g}\).
+
+\textbf{Calculating \( \frac{dh}{ds}\bigg|_{s=0} \)}:
+\[
+\frac{dh}{ds}\bigg|_{s=0} = \lim_{s \to 0} \frac{h(s) - h(0)}{s} = \lim_{s \to 0} \frac{h(s)}{s} = \lim_{n \to \infty} n h\left(\frac{1}{n}\right),
+\]
+assuming \( h(s) \) is linear for small \(s\). For \(Y(s) = \exp(h(s))\), \(Y(s)\) is a path in \(G\) for small \(s\), implying \( \exp(n h(\frac{1}{n})) \in G \) for all \(n\), leading to:
+\[
+\exp\left(\frac{dh}{ds}\bigg|_{s=0}\right) \in G.
+\]
+
+\section*{Path Correspondence in Lie Groups}
+
+\textbf{Claim:} If \( X \) is an element of the Lie algebra \(\mathfrak{g}\) of a Lie group \(G\), then there exists a path \( Y(s) \) within \( G \) such that the derivative of \( Y(s) \) at \( s = 0 \) is equal to \( X \) and \( Y(0) = I \) (the identity element of \( G \)).
+
+\textbf{Proof:}
+Consider the path \( Y(s) = \exp(sX) \), where \( \exp \) denotes the exponential map from the Lie algebra \(\mathfrak{g}\) to the Lie group \(G\). This path is well-defined as it uses the standard property of the exponential map to trace a curve within the group \(G\).
+
+\begin{itemize}
+    \item At \( s = 0 \), we have:
+    \[
+    Y(0) = \exp(0 \cdot X) = I,
+    \]
+    confirming that \( Y(s) \) starts at the identity element of \( G \).
+
+    \item The derivative of \( Y(s) \) at \( s = 0 \) is:
+    \[
+    \frac{dY}{ds}\bigg|_{s=0} = \left. \frac{d}{ds} \exp(sX) \right|_{s=0} = X.
+    \]
+    This follows from the property of the exponential map, where the derivative of \(\exp(sX)\) with respect to \(s\) at \(s = 0\) is \(X\), due to the series expansion of the exponential function.
+\end{itemize}
+
+Therefore, we confirm that for every element \( X \) in the Lie algebra \(\mathfrak{g}\), there exists a corresponding path \( Y(s) = \exp(sX) \) in the Lie group \( G \) that satisfies the conditions of the claim. 
+
+\begin{theorem}
+    
+Let \( Y(s) \) be a path in a Lie group \( G \) such that \( Y(0) = I \), where \( I \) is the identity element of \( G \). Then the derivative of \( Y(s) \) at \( s = 0 \), denoted as \( \frac{dY}{ds}\bigg|_{s=0} \), belongs to the Lie algebra \(\mathfrak{g}\) of \( G \):
+
+\[
+\text{If } Y(s) \in G \text{ and } Y(0) = I \text{ then } \frac{dY}{ds}\bigg|_{s=0} \in \mathfrak{g}.
+\]
+
+\end{theorem}
+
+
+\section{\(\mathfrak{g} \) is a lie algebra }
+So far we have proved that \( \mathfrak{g} \) is the tangent space to \( G \) at the identity. In this section we will prove that it is a vector space and its commutator is also a vector space. To prove that we will show that \( X,Y \in \mathfrak{g} \) can be added and rescaled. To go on with this, we first use the previous theorem to show the below: 
+
+Consider paths \(Y_1(s)\), \(Y_2(s)\), and \(Y_3(s)\) within a Lie group \(G\), all passing through the identity element at \(s=0\). The derivatives of these paths at \(s=0\) are related to elements of the group's Lie algebra:
+
+\begin{itemize}
+    \item For \(Y_1(s)\):
+    \[
+    Y_1(0) = I, \quad \frac{dY_1}{ds}\bigg|_{s=0} = X+Y.
+    \]
+    
+    \item For \(Y_2(s)\):
+    \[
+    Y_2(0) = I, \quad \frac{dY_2}{ds}\bigg|_{s=0} = \lambda X.
+    \]
+    
+    \item For \(Y_3(s)\):
+    \[
+    Y_3(0) = I, \quad \frac{dY_3}{ds}\bigg|_{s=0} = [X, Y].
+    \]
+\end{itemize}
+
+These derivatives indicate that \(Y_1(s)\), \(Y_2(s)\), and \(Y_3(s)\) are paths in \(G\) whose tangent vectors at the identity are elements of the Lie algebra \(\mathfrak{g}\) of \(G\), demonstrating the rich interplay between the group's geometry and its algebraic structure.
+
+Consider the exponential map \( Y_1(s) \) in a Lie group \( G \) defined by:
+\[
+Y_1(s) = \exp(sX) \exp(sY),
+\]
+where \( X \) and \( Y \) are elements of the Lie algebra of \( G \), and \(\exp\) denotes the exponential map from the Lie algebra to the group.
+
+\begin{itemize}
+    \item At \( s = 0 \), the path satisfies \( Y_1(0) = I \), where \( I \) is the identity element of \( G \).
+    \item The derivative of \( Y_1(s) \) at \( s = 0 \) is computed as follows:
+    \[
+    \frac{dY_1}{ds}\bigg|_{s=0} = X\exp(sX)\exp(sY) + \exp(sX)Y\exp(sY).
+    \]
+    Evaluating at \( s = 0 \) gives:
+    \[
+    \frac{dY_1}{ds}\bigg|_{s=0} = X + Y.
+    \]
+\end{itemize} 
+
+
+now Consider a path \( Y_2(s) \) in a Lie group \( G \), defined by:
+\[
+Y_2(s) = \exp(s \lambda X)
+\]
+where \( \lambda \) is a scalar and \( X \) is an element of the Lie algebra associated with \( G \).
+
+The derivative of \( Y_2(s) \) at \( s = 0 \) is given by:
+\[
+\frac{dY_2}{ds}\bigg|_{s=0} = \lambda X.
+\]
+This demonstrates that the tangent vector at \( s = 0 \) is a scaled version of the Lie algebra element \( X \).
+
+to prove the third property, Consider the path \( Y_3(s) \) defined in a Lie group \( G \) as:
+\[
+Y_3(s) = \exp( \sqrt{s} X) \exp( \sqrt{s} Y) \exp(- \sqrt{s}X) \exp(-\sqrt{s}Y),
+\]
+where \( X \) and \( Y \) are elements of the Lie algebra of \( G \).
+
+Applying the Campbell-Baker-Hausdorff formula, we approximate \( Y_3(s) \) as follows:
+\[
+    Y_3(s) = \exp \left(X \sqrt{s} + Y \sqrt{s} + \frac{1}{2} s [X,Y] + O(s^{\frac{3}{2}}) \right) \exp \left( -X \sqrt{s} - Y \sqrt{s} + \frac{1}{2} s [X,Y] + O(s^{\frac{3}{2}}) \right)
+\]
+which after crossing out terms becomes 
+\[ \exp \left( s[X,Y] + O(s^{\frac{3}{2}}) \right) \]
+The derivative at \( s = 0 \) is then:
+\[
+\frac{dY_3}{ds}\bigg|_{s=0} = [X, Y]
+\]
+
+This calculation confirms that the tangent vector at \( s = 0 \) of the path \( Y_3(s) \) is the Lie bracket \([X, Y]\), which is a foundational element of the associated Lie algebra.  
+
+This is sufficient to prove that \( \mathfrak{g} \) is a lie algebra. 
+
+\section{Homomorphisms}
+In this discussion, we will focus exclusively on matrix groups. Matrix groups provide a concrete framework for exploring abstract algebraic concepts through the properties of matrices and their operations.
+
+A function \( F: G \to H \) between two groups is called a \emph{homomorphism} if it satisfies:
+\begin{itemize}
+    \item \( F(g_1 g_2) = F(g_1) F(g_2) \) for all \( g_1, g_2 \in G \),
+    \item \( F(1_G) = 1_H \),
+\end{itemize}
+where \( 1_G \) and \( 1_H \) are the identity elements of \( G \) and \( H \), respectively.
+
+A classical example of a homomorphism between matrix groups:
+\[
+\text{det}: GL(n, \mathbb{R}) \to GL(1, \mathbb{R})
+\]
+defined by mapping a matrix \( A \) to its determinant \( \text{det}(A) \). This function satisfies:
+\[
+\text{det}(A_1 A_2) = \text{det}(A_1) \text{det}(A_2), \quad \text{det}(I) = 1.
+\]
+
+Now, A homomorphism \( f: G \rightarrow H \) between matrix groups is defined as \emph{smooth} if it can be expressed smoothly in local exponential charts. Specifically, the homomorphism \( f \) is smooth if it operates in the form:
+\[
+f = \log \circ F \circ \exp,
+\]
+where \( F \) is the functional representation of \( f \), and this formulation is applicable primarily in a neighborhood of the identity element of \( G \). This expression involves:
+\begin{itemize}
+  \item The \(\exp\) map, which translates elements from the Lie algebra (\(\mathfrak{g}\)) to the group (\(G\)).
+  \item The \(\log\) map, the inverse of \(\exp\), which maps elements from the group back to the Lie algebra.
+\end{itemize}
+
+The smoothness criterion ensures that \( f \) maintains continuity and differentiability. By representing \( f \) through the composition of \(\log\), \(F\), and \(\exp\), we encapsulate how homomorphisms translate structural elements between matrix groups via their algebraic counterparts. 
+
+\textbf{Note:}
+For any element \(X\) in the neighborhood of the identity element \(0\) in the Lie algebra \(\mathfrak{g}\), the following equivalence holds under a smooth homomorphism \( F \):
+\[
+F(\exp(X)) = \exp(f(X))
+\]
+where \( \exp \) is the exponential map from the Lie algebra to the group.
+
+\textbf{Theorem:}
+If \( F: G \to H \) is a smooth homomorphism between matrix groups, then the following properties are satisfied:
+\begin{enumerate}
+    \item \( f \) is linear, meaning it is the restriction of a linear map \( F_*: \mathfrak{g} \to \mathfrak{h} \) to the neighborhood of \( 0 \) in the Lie algebra \(\mathfrak{g}\).
+    \item For every \( X \) in \(\mathfrak{g}\), the homomorphism respects the exponential map:
+    \[
+    F(\exp(X)) = \exp(F_*(X)) 
+    \]
+    \item For all \( X, Y \) in \(\mathfrak{g}\), the homomorphism \( F \) satisfies:
+    \[
+    F_*([X, Y]) = [F_*(X), F_*(Y)]
+    \]
+    This indicates that \( F \) preserves the Lie bracket, thereby maintaining the Lie algebra structure.
+\end{enumerate}
+
+The beauty of this theorem is shown below: 
+\subsection*{Example: Determinant of Exponential Map}
+Consider the linear map \(\text{det}_t\) defined on \( \mathfrak{gl}(n, \mathbb{R}) \) by:
+\[
+\text{det}_t(A) = e^{\operatorname{tr}(A)},
+\]
+where \( \operatorname{tr}(A) \) is the trace of \( A \), summing all diagonal elements \( A_{ii} \). This map satisfies:
+\[
+\text{det}(\exp(A)) = e^{\text{det}_t(A)} = e^{\operatorname{tr}(A)}.
+\]
+
+This is true for all A. 
+
+\section*{Determinant of the Exponential of a Matrix}
+
+\textbf{Hint:} Consider a complex matrix that can be expressed in Jordan normal form. Recall that the determinant of a triangular matrix is the product of its diagonal elements.
+
+\textbf{Derivation:}
+Let \( A \) be any square matrix with its Jordan decomposition \( A = S^{-1}JS \). The exponential of \( A \) can be expressed using its Jordan form:
+\[
+\exp(A) = \exp(S^{-1}JS) = S^{-1}\exp(J)S.
+\]
+Since the trace function is invariant under similarity transformations:
+\[
+\det(\exp(A)) = \det(\exp(SJS^{-1})) = \det(S \exp(J) S^{-1}).
+\]
+Applying the properties of determinants, we get:
+\[
+\det(\exp(A)) = \det(S) \det(\exp(J)) \det(S^{-1}) = \det(\exp(J)).
+\]
+For a Jordan matrix \( J \), which is triangular, the determinant of \( \exp(J) \) is:
+\[
+\det(\exp(J)) = \prod_{i=1}^n \exp(j_{ii}),
+\]
+where \( j_{ii} \) are the diagonal entries of \( J \). Therefore, we can simplify:
+\[
+\det(\exp(J)) = \exp\left(\sum_{i=1}^n j_{ii}\right) = \exp(\operatorname{tr}(J)).
+\]
+Thus, it follows that:
+\[
+\det(\exp(A)) = \exp(\operatorname{tr}(A)),
+\]
+since the trace of \( A \) is equal to the trace of \( J \).
+
+
+\section{One-parameter Subgroups}
+The first step into understanding homomorphisms between matrix group is to understand the 1-parameter subgroups.
+
+\begin{theorem}
+    A one-parameter subgroup of a group \( G \) is a smooth homomorphism \( F \) from the real numbers under addition \((\mathbb{R}, +)\) to \( G \). It satisfies the following properties:
+\begin{itemize}
+  \item For all \( t_1, t_2 \in \mathbb{R} \), \( F(t_1 + t_2) = F(t_1)F(t_2) \),
+  \item \( F(0) = I \),
+\end{itemize}
+where \( I \) is the identity element of \( G \). 
+\end{theorem}
+
+\textbf{Example:} For any \( X \) in the Lie algebra \(\mathfrak{g}\), the function \( F(t) = \exp(tX) \) is a one-parameter subgroup.
+
+\textbf{Proof:}
+The product of two elements in the subgroup can be expressed as:
+\[
+\exp(t_1 X) \exp(t_2 X) = \exp((t_1 + t_2)X),
+\]
+utilizing the property of the exponential map where the sum of exponents corresponds to the product of exponentials when the exponents commute. Since \([X, X] = 0\), this condition is satisfied, leading to:
+\[
+\exp((t_1 + t_2)X).
+\]
+Additionally, the identity element is given by:
+\[
+\exp(0X) = I.
+\]
+Thus, \( F(t) = \exp(tX) \) forms a one-parameter subgroup under the group operation.
+
+It turns out that it is the only way to parameterise this. 
+
+\begin{theorem} 
+    Any one-parameter subgroup \( F: \mathbb{R} \to G \) can be expressed in the form \( F(t) = \exp(tX) \) for some \( X \) in the Lie algebra \( \mathfrak{g} \) of \( G \).
+\end{theorem}
+
+\textbf{Proof:}
+Given the properties of a one-parameter subgroup, we have:
+\[
+F(s + t) = F(s)F(t) \quad \text{and} \quad F(0) = I.
+\]
+Differentiating both sides of \( F(s + t) = F(s)F(t) \) with respect to \( s \) at \( s = 0 \), we obtain the differential equation:
+\[
+\frac{dF}{dt}(t) = F'(0)F(t).
+\]
+This ordinary differential equation (ODE) has a unique solution given the initial condition \( F(0) = I \). Observing that:
+\[
+\exp(tF'(0))
+\]
+is a solution satisfying the initial condition, we deduce that:
+\[
+F(t) = \exp(tF'(0)).
+\]
+Thus, setting \( X = F'(0) \), we conclude that \( F(t) = \exp(tX) \).
+
+\section{Linearity}
+
+\section*{Homomorphisms in Exponential Charts}
+
+\textbf{Theorem:} If \( F: G \to H \) is a smooth homomorphism of matrix groups and \( f = \log \circ F \circ \exp \) (locally defined map of \(\mathfrak{g} \to \mathfrak{h}\)) then:
+\begin{enumerate}
+    \item \( f \) is the restriction of a linear map \( F_*: \mathfrak{g} \to \mathfrak{h} \) to an neighborhood of \( 0 \) in \(\mathfrak{g}\).
+    \item \( F(\exp(X)) = \exp(F_*(X)) \) for all \( X \in \mathfrak{g} \).
+    \item \( F_*([X, Y]) = [F_*(X), F_*(Y)] \) for all \( X, Y \in \mathfrak{g} \).
+\end{enumerate}
+
+\textbf{Proof 1:} For every \( X \in \mathfrak{g} \), since \(\exp(tX)\) is a one-parameter subgroup in \( G \), \( F(\exp(tX)) \) is a one-parameter subgroup in \( H \). Therefore, \( F(\exp(tX)) = \exp(tY) \) for some \( Y \in \mathfrak{h} \). For small \( t \), \( \exp(tX) \) and \( \exp(tY) \) are both within the image of exponential charts on \( G \) and \( H \) respectively. Thus, we have:
+\[
+F(\exp(tX)) = \exp(f(tX)) \quad \text{for small } t = \exp(tY).
+\]
+For small \( t \):
+\[
+f(tX) = tY \quad (\text{taking logarithms}),
+\]
+\[
+f(tX) = t \cdot d_0(X) + \text{higher order terms}.
+\]
+This implies:
+\[
+d_0(X) = Y \quad \text{and higher order terms} = 0.
+\]
+Thus:
+\[
+f(tX) = tY = t \cdot d_0(X) = d_0(tX)
+\]
+\[
+f = d_0 \quad \text{on exponential chart}.
+\]
+\( F_* = d_0 \) and:
+\[
+d_0 = \left( \frac{\partial f_i}{\partial x_j} \right).
+\]
+
+This satisfies the first part of our theorem. The second part follows because:
+\[
+F(\exp(tX)) = \exp(tY) = \exp(tF_*(X)) \quad \text{for all } t.
+\]
+
+By setting \( t = 1 \), we confirm:
+    \[
+    F(\exp(X)) = \exp(F_*(X)) \quad \text{for all } X \in \mathfrak{g}.
+    \]
+
+for the third one we Consider the expression:
+\[
+F(\exp(tX) \exp(tY) \exp(-tX) \exp(-tY)) = \exp(t^2 [F_*(X), F_*(Y)]) + O(t^3),
+\]
+which simplifies to:
+\[
+\exp(t [F_*(X), F_*(Y)]) + O(t^3) = \exp(t F_*(X) + t F_*(Y) - t F_*(X) - t F_*(Y) + t^2 [F_*(X), F_*(Y)]).
+\]
+For small \( t \), taking logarithms gives:
+\[
+t^2 [F_*(X), F_*(Y)] + O(t^3) = t^2 [F_*(X), F_*(Y)] + O(t^3),
+\]
+implying that:
+\[
+[F_*(X), F_*(Y)] = F_*([X, Y]).
+\]
+This demonstrates that \( F \) preserves the Lie bracket, thereby maintaining the algebraic structure under the homomorphism.
+
+\section{Lie's Theorem on homomorphism}
+
+Lie's theorem bridges the gap between Lie groups and their associated Lie algebras through the concept of smooth homomorphisms. This theorem provides a way to understand how structures in the algebra (infinitesimal transformations) extend to the entire group via exponential maps.
+
+\textbf{Key Points of the Theorem:}
+\begin{enumerate}
+    \item A homomorphism \( F: G \to H \) implies the existence of a corresponding linear map \( F_* \) between their Lie algebras. This map preserves the linear structure of Lie algebras.
+    \item The map \( F \) converts the exponential of an element in one group to the exponential of a mapped element in another, maintaining the group structure.
+    \item Lie brackets are preserved under this map, ensuring that the fundamental relationships between elements (infinitesimal transformations) are maintained.
+\end{enumerate}
+
+\textbf{Example with Circle Groups:}
+
+For \( G = H = U(1) \) and \( \mathfrak{g} = \mathfrak{h} = i\mathbb{R} \), the map \( F_*: i\mathbb{R} \to i\mathbb{R} \) such that \( F_*(i\theta) = i\lambda \theta \) for some \( \lambda \in \mathbb{R} \) leads to:
+\[
+F(e^{i\theta}) = e^{i\lambda \theta}.
+\]
+This requires \( \lambda \in \mathbb{Z} \) because \( e^{i2\pi} = 1 \) implies \( e^{i2\pi \lambda} = 1 \).
+
+If we consider the unit circle \( U(1) \) where both groups and their algebras are \( U(1) \) and \( i\mathbb{R} \) respectively, a homomorphism \( F \) might be represented as \( F(e^{i\theta}) = e^{i\lambda\theta} \). The integer \( \lambda \) must be a whole number due to the properties of the circle group.
+
+\textbf{Lemma:}
+The maps \( F_n(e^{i\theta}) = e^{in\theta} \), \( n \in \mathbb{Z} \), are all homomorphisms from \( U(1) \) to \( U(1) \), and every smooth homomorphism \( U(1) \to U(1) \) is one of these, related to the winding number of loops in \( U(1) \).  
+
+
+All smooth homomorphisms from the circle group \( U(1) \) back to itself are of the form \( e^{in\theta} \), corresponding to the integer winding numbers around the circle. These homomorphisms capture the essence of how many times a loop around the circle is made.
+
+Lie's theorem on homomorphisms essentially states that for any smooth homomorphism between two Lie groups, there exists a corresponding linear map between their Lie algebras that preserves the algebraic structures (like Lie brackets).
+
+\begin{theorem}
+Let \( G \) be a simply-connected matrix group and \( H \) any matrix group. Then for every Lie algebra homomorphism \( f: \mathfrak{g} \to \mathfrak{h} \), there exists a smooth homomorphism \( F: G \to H \) such that the induced map on the Lie algebras, \( F_* \), is equal to \( f \).
+\end{theorem}
+
+\section{Representation of lie groups}
+
+Consider a representation \( R \) of a group \( G \) into the general linear group of \( n \times n \) matrices over the complex numbers, \( \text{GL}(n, \mathbb{C}) \). This representation maps each element \( g \) of the group \( G \) to an invertible matrix \( R(g) \) such that the group operation is preserved under the mapping. Specifically, for any elements \( g_1, g_2 \) in \( G \), the representation satisfies the homomorphism property:
+\[
+R(g_1 g_2) = R(g_1) R(g_2).
+\]
+
+This equation ensures that the matrix representation of the product of any two group elements is the product of their respective matrix representations, thereby maintaining the group structure within the space of matrices.
+
+\section*{Why Study Representations?}
+
+\subsection*{Applications}
+\begin{itemize}
+    \item \textbf{Internal Applications:} The primary internal motivation is to classify semisimple Lie groups using invariant theory. Understanding the representations of these groups facilitates a deeper grasp of their structure and the symmetries they embody.
+    \item \textbf{External Applications:} In particle physics, group representations, particularly of groups like \( SU(3) \), play a crucial role in understanding the symmetries and interactions of elementary particles. These representations help in formulating theories that describe the fundamental forces and constituents of matter.
+\end{itemize}
+
+Given a representation \( R: G \to \mathrm{GL}(n, \mathbb{C}) \), we derive a \textbf{linear representation} of the Lie algebra \( \mathfrak{g} \) of \( G \), denoted as \( R_*: \mathfrak{g} \to \mathfrak{gl}(n, \mathbb{C}) \). Here, \( R_* \) is a linear map that satisfies:
+\[
+R_*([X, Y]) = [R_*(X), R_*(Y)]
+\]
+for all \( X, Y \in \mathfrak{g} \), where \([X, Y]\) and \([R_*(X), R_*(Y)]\) denote the Lie brackets in \( \mathfrak{g} \) and \( \mathfrak{gl}(n, \mathbb{C}) \), respectively.
+
+Given the relationship 
+\[
+R(\exp X) = \exp(R_* X) \quad \forall X \in \mathfrak{g},
+\]
+it follows that:
+\begin{itemize}
+    \item The group representation \( R \) determines the Lie algebra representation \( R_* \) by differentiation.
+    \item \( R_* \) determines \( R(g) \) for all \( g \) in the image of the exponential map, \(\exp(\mathfrak{g})\).
+\end{itemize}
+
+This raises the question: Does \( R_* \) determine \( R(g) \) for all \( g \in G \)?
+
+If \( G \) is path-connected, then the answer is yes, because \( R \) is determined by \( R_* \) since \( G \) is generated as a group by the exponential map. This scenario is particularly true in cases where \( G \) is simply-connected, allowing every element to be expressed as an exponential of some element in \( \mathfrak{g} \).
+
+Given a Lie algebra representation \( R_*: \mathfrak{g} \to \mathfrak{gl}(n, \mathbb{C}) \), one might ask if this implies a well-defined group representation \( R \) where:
+\[
+R(\exp X) = \exp(R_* X) \quad \text{for all } X \in \mathfrak{g}.
+\]
+
+\textbf{Lie's Theorem:} Yes, if \( G \) is simply-connected. If not, further considerations are required.
+
+This relationship holds particularly for simply-connected groups because every element in such a group can be written as an exponential of a Lie algebra element, ensuring the entire group structure is recoverable from its Lie algebra via \( R_* \).
+
+For groups like \( U(1) \), \( SU(2) \), and \( SU(3) \), which play significant roles in both mathematical structures and physical theories, understanding these relationships helps in constructing representations that are crucial in fields such as particle physics and general theory.
+
+\section{Complete Reducibility}
+
+\textbf{Definition:} A decomposition of a representation \( R: G \to \mathrm{GL}(n, \mathbb{C}) \) is termed complete reducibility if it consists of a splitting of \( \mathbb{C}^n \) into a direct sum:
+\[
+\mathbb{C}^n = V_1 \oplus \dots \oplus V_k,
+\]
+where each \( V_i \subseteq \mathbb{C}^n \) is a subrepresentation of \( \mathbb{C}^n \). This means for each subrepresentation \( V_i \), and for any vector \( v \in V_i \), it holds that:
+\[
+R(g) v \in V_i \quad \forall g \in G.
+\]
+In other words, \( R(g) \) maps each \( V_i \) into itself for all \( g \in G \).
+
+Given the decomposition of the representation \( R \) into a direct sum of subrepresentations:
+\[
+R = R_{V_1} \oplus \dots \oplus R_{V_k},
+\]
+the action of \( R \) on a vector from the space \( \mathbb{C}^n \) can be represented as a block diagonal matrix:
+\[
+R(g) = \begin{pmatrix}
+R(g)_{V_1} & 0 & \cdots & 0 \\
+0 & R(g)_{V_2} & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & R(g)_{V_k}
+\end{pmatrix},
+\]
+where \( R(g)_{V_i} \) is the restriction of \( R(g) \) to the subspace \( V_i \), and each block corresponds to one of the subrepresentations \( V_i \). This matrix structure ensures that \( R(g) \) maps each \( V_i \) into itself, hence preserving the subrepresentation structure under the group action.
+
+\section*{Irreducible Representations}
+
+\textbf{Definition:} A subrepresentation \( V \subseteq \mathbb{C}^n \) is \textit{irreducible} if it has no proper subrepresentations. That is, there are no nontrivial subspaces \( W \subset V \) such that \( R(g) W \subseteq W \) for all \( g \in G \), other than \( W = V \) and \( W = \{0\} \).
+
+\paragraph{Lemma:} If the vector space \( \mathbb{C}^n \) admits an invariant Hermitian inner product, then the representation \( R \) can be decomposed into irreducible summands. This means that \( \mathbb{C}^n \) can be written as a direct sum of irreducible subspaces:
+\[
+\mathbb{C}^n = V_1 \oplus \dots \oplus V_k,
+\]
+where each \( V_i \) is an irreducible subrepresentation of \( \mathbb{C}^n \). The invariant Hermitian inner product ensures that each subspace \( V_i \) is orthogonal to the others under the group action, thereby facilitating the decomposition into orthogonal irreducible components.
+
+\section*{Decomposition of a Non-Irreducible Representation}
+
+\textbf{Proof Idea:} If a subrepresentation \( V \subseteq \mathbb{C}^n \) is not irreducible, then it contains a proper subrepresentation \( U \subset V \). We can consider the orthogonal complement \( U^\perp \) of \( U \) within \( V \). This leads to a decomposition:
+\[
+V = U \oplus U^\perp.
+\]
+This decomposition demonstrates that \( V \) can be expressed as the direct sum of \( U \) and its orthogonal complement \( U^\perp \), where each part is a subrepresentation. The reason behind this being valid is that 1-dimensional representations (which can be obtained if \( U \) or \( U^\perp \) reduce to such dimensions) are inherently irreducible.
+
+\section*{Hermitian Inner Product}
+
+\textbf{Definition:} A Hermitian inner product \( \langle \cdot, \cdot \rangle \) on \( \mathbb{C}^n \) is a map from \( \mathbb{C}^n \times \mathbb{C}^n \) to \( \mathbb{C} \) that satisfies the following properties:
+\begin{itemize}
+    \item \( \langle v, v \rangle \in \mathbb{R} \) and \( \langle v, v \rangle > 0 \) for all \( v \neq 0 \).
+    \item \( \langle u, v \rangle = \overline{\langle v, u \rangle} \) for all \( u, v \in \mathbb{C}^n \).
+    \item \( \langle a u + b v, w \rangle = a \langle u, w \rangle + b \langle v, w \rangle \) for all \( u, v, w \in \mathbb{C}^n \) and \( a, b \in \mathbb{C} \).
+    \item \( \langle u, a v + b w \rangle = \overline{a} \langle u, v \rangle + \overline{b} \langle u, w \rangle \) for all \( u, v, w \in \mathbb{C}^n \) and \( a, b \in \mathbb{C} \).
+\end{itemize}
+
+\textbf{Example:}
+\[
+\langle u, v \rangle = \sum_{k=1}^n u_k \overline{v_k}.
+\]
+
+\textbf{Invariance:}
+\[
+\langle R(h) u, R(h) v \rangle = \langle u, v \rangle
+\]
+for all \( u, v \in \mathbb{C}^n \) and \( h \in G \), where \( R \) is a representation of the group \( G \).
+
+\section*{Invariance of the Orthogonal Complement}
+
+\textbf{Claim:} Given a Hermitian inner product \( \langle \cdot, \cdot \rangle \) and a subrepresentation \( U \), the orthogonal complement \( U^\perp = \{ w \in \mathbb{C}^n : \langle u, w \rangle = 0 \text{ for all } u \in U \} \) is also a subrepresentation.
+
+\textbf{Proof:}
+Consider \( w \in U^\perp \). We need to show that \( R(g)w \in U^\perp \) for all \( g \in G \), where \( G \) is the group and \( R \) its representation. 
+
+By the invariance of the Hermitian inner product under \( R \), we have:
+\[
+\langle u, R(g)w \rangle = \langle R(g^{-1})u, R(g^{-1})R(g)w \rangle = \langle R(g^{-1})u, w \rangle.
+\]
+Since \( R(g^{-1})u \in U \) because \( U \) is a subrepresentation and \( w \in U^\perp \), it follows that:
+\[
+\langle R(g^{-1})u, w \rangle = 0.
+\]
+Thus, \( \langle u, R(g)w \rangle = 0 \) for all \( u \in U \), proving that \( R(g)w \in U^\perp \).
+
+\section{Representation of \( U(1) \)}
+
+\textbf{Theorem:} If \( R: U(1) \to \mathrm{GL}(n, \mathbb{C}) \) is a smooth representation, then there exists a basis of \( \mathbb{C}^n \) with respect to which the representation is given by:
+\[
+R(e^{i\theta}) = \begin{pmatrix}
+e^{im_1\theta} & 0 & \cdots & 0 \\
+0 & e^{im_2\theta} & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & e^{im_n\theta}
+\end{pmatrix},
+\]
+where \( m_1, m_2, \ldots, m_n \in \mathbb{Z} \) are the "weights" of the representation.
+
+This means that \( \mathbb{C}^n \) can be decomposed into direct sums \( V_1 \oplus \cdots \oplus V_n \), and the representation \( R \) on each of these subspaces \( V_i \) is given by the scalar multiplication \( R_i(e^{i\theta}) = e^{im_i\theta} \). Each \( V_i \) corresponds to a one-dimensional subspace of \( \mathbb{C}^n \) where the representation is simply multiplication by a complex exponential, characterizing the behavior of the group action on \( \mathbb{C}^n \).
+
+\subsection*{Example Representation}
+Consider the representation \( R \) of \( U(1) \) given by:
+\[
+R(e^{i\theta}) = \begin{pmatrix}
+\cos\theta & -\sin\theta \\
+\sin\theta & \cos\theta
+\end{pmatrix},
+\]
+which is a typical rotation matrix in \( \mathbb{C}^2 \).
+
+\subsection*{Characteristic Polynomial and Eigenvalues}
+The characteristic polynomial of this matrix is calculated as follows:
+\[
+\lambda I - R(e^{i\theta}) = \begin{pmatrix}
+\lambda - \cos\theta & \sin\theta \\
+-\sin\theta & \lambda - \cos\theta
+\end{pmatrix},
+\]
+leading to the polynomial:
+\[
+\lambda^2 - 2\lambda\cos\theta + 1.
+\]
+Solving for \( \lambda \), we find:
+\[
+\lambda = 2\cos\theta \pm \sqrt{4\cos^2\theta - 4} = \cos\theta \pm i\sin\theta = e^{i\theta}, e^{-i\theta}.
+\]
+
+\subsection*{Weights and Eigenvectors}
+The eigenvalues \( e^{i\theta} \) and \( e^{-i\theta} \) correspond to the weights \( 1 \) and \( -1 \) respectively. The eigenvectors corresponding to these eigenvalues are given by:
+\[
+\text{For } e^{i\theta}: \begin{pmatrix} i \\ 1 \end{pmatrix}, \quad \text{For } e^{-i\theta}: \begin{pmatrix} -i \\ 1 \end{pmatrix}.
+\]
+
+These calculations show that the representation \( R \) diagonalizes in a basis corresponding to the eigenvectors, each associated with a weight indicating the action of \( U(1) \) through a rotation encoded in the exponential functions \( e^{i\theta} \) and \( e^{-i\theta} \).
+
+\[
+R(e^{i\theta}) = \begin{pmatrix} e^{i\theta} & 0 \\ 0 & e^{-i\theta} \end{pmatrix}.
+\]
+
+This representation clearly shows that in the basis of the eigenvectors, the action of \( R \) on \( \mathbb{C}^2 \) simplifies to scaling by the eigenvalues along the directions of the eigenvectors. This diagonal form is typical for representations that decompose into one-dimensional subspaces, each associated with a distinct action of the group element, corresponding here to rotations by \( \theta \) and \( -\theta \).
+
+\subsection*{Lemmas on \( U(1) \) Representations}
+\begin{itemize}
+    \item \textbf{Lemma (Invariant Hermitian Inner Product):} Any representation of \( U(1) \) admits an invariant Hermitian inner product, facilitating the unitarian trick. This inner product preserves the norm under the group action, allowing for a straightforward analysis of the transformations.
+    \item \textbf{Schur's Lemma:} Any irreducible representation of \( U(1) \) is one-dimensional, and such representations can be expressed as \( R(e^{i\theta}) = e^{im\theta} \) for some integer \( m \). This reflects the group's abelian nature, where each element commutes, simplifying the structure of its representations.
+\end{itemize}
+
+
+\section*{Proof of Invariance of the Hermitian Inner Product for \(U(1)\) Representations}
+
+\textbf{Lemma:} Every representation of \(U(1)\) admits an invariant Hermitian inner product.
+
+\textbf{Proof:}
+
+We start by defining an invariant Hermitian inner product for any representation \(R\) of \(U(1)\). Consider the standard Hermitian product \(\langle u, v \rangle\) on \(\mathbb{C}^n\). We construct a new inner product that averages the standard product over all transformations induced by \(R\) across the group \(U(1)\).
+
+Define the invariant inner product \(\langle u, v \rangle_{\text{inv}}\) by:
+\[
+\langle u, v \rangle_{\text{inv}} = \int_0^{2\pi} \langle R(e^{i\theta}) u, R(e^{i\theta}) v \rangle \frac{d\theta}{2\pi}
+\]
+
+\subsection*{Demonstrating Invariance}
+
+To show that \(\langle u, v \rangle_{\text{inv}}\) is invariant under any \(R(e^{i\phi})\), we compute:
+\[
+\begin{aligned}
+\langle R(e^{i\phi}) u, R(e^{i\phi}) v \rangle_{\text{inv}} &= \int_0^{2\pi} \langle R(e^{i\theta}) R(e^{i\phi}) u, R(e^{i\theta}) R(e^{i\phi}) v \rangle \frac{d\theta}{2\pi} \\
+&= \int_0^{2\pi} \langle R(e^{i(\theta+\phi)}) u, R(e^{i(\theta+\phi)}) v \rangle \frac{d\theta}{2\pi}
+\end{aligned}
+\]
+
+Using the change of variable \(\theta' = \theta + \phi\) (and noting that \(d\theta' = d\theta\) and the periodicity over \(2\pi\)), this integral transforms back to:
+\[
+\int_0^{2\pi} \langle R(e^{i\theta'}) u, R(e^{i\theta'}) v \rangle \frac{d\theta'}{2\pi} = \langle u, v \rangle_{\text{inv}}
+\]
+
+This demonstrates that \(\langle u, v \rangle_{\text{inv}}\) constructed in this manner is indeed invariant under the action of \(U(1)\). This invariant product allows us to analyze the representation's properties without the influence of specific group element transformations.
+
+\textbf{Remark:}
+This proof technique utilizes the Haar integral, which ensures that the averaging process is well-defined and independent of the choice of group element, applicable broadly to any compact group \(G\).
+
+\section*{Proof of Irreducibility for \(U(1)\) Representations}
+
+\textbf{Lemma 2:} Each irreducible representation of \(U(1)\) is one-dimensional.
+
+\textbf{Proof:}
+
+Fix an element \( e^{i\theta} \in U(1) \). Consider the representation \( R(e^{i\theta}) \) within the general linear group \( GL(n, \mathbb{C}) \). Suppose \( R(e^{i\theta}) \) has an eigenvalue \(\lambda\), and let \( V_\lambda \) be the eigenspace associated with \(\lambda\), defined by:
+\[
+V_\lambda = \{ v \in \mathbb{C}^n : R(e^{i\theta}) v = \lambda v \}
+\]
+
+\textbf{Claim:} \(V_\lambda\) is a subrepresentation of \(\mathbb{C}^n\).
+
+\textbf{Proof of Claim:}
+To show \(V_\lambda\) is stable under \(R\), consider any \(v \in V_\lambda\) and any \( \phi \in [0, 2\pi] \). We examine the behavior of \( v \) under the combined transformations of \( R(e^{i\phi}) \) and \( R(e^{i\theta}) \):
+\[
+\begin{aligned}
+R(e^{i\phi}) R(e^{i\theta}) v &= R(e^{i\phi}) (\lambda v) \\
+&= \lambda R(e^{i\phi}) v.
+\end{aligned}
+\]
+This equation shows \( R(e^{i\phi}) v \) is also an eigenvector of \( R(e^{i\theta}) \) corresponding to the same eigenvalue \(\lambda\), hence \( R(e^{i\phi}) v \in V_\lambda \).
+
+Therefore, \(V_\lambda\) is invariant under \( R \), proving it is a subrepresentation. If the representation \( R \) is irreducible, \( \mathbb{C}^n \) must equal \( V_\lambda \), implying the representation space is one-dimensional as all vectors in \(\mathbb{C}^n\) share the same eigenvalue under \( R(e^{i\theta}) \).
+
+The argument establishes that every irreducible representation of \( U(1) \) must operate in a one-dimensional space, as the presence of a common eigenvalue for all elements means any vector in the space transforms by merely scaling, characteristic of one-dimensional representations.
+
+\textbf{Remark:}
+This proof utilizes eigenvalues and eigenvectors to demonstrate that \(U(1)\)'s irreducible representations maintain their structure across the entire group, leveraging the simplicity of abelian group structures where every subgroup is normal and every element commutes.
+
+\section*{Unitarity and Dimensionality in \(U(1)\) Representations}
+
+\textbf{Claim:} For a character \(\lambda\) of \(U(1)\), \(\lambda(\theta) \in U(1)\) itself, meaning it must be of the form \(e^{im\theta}\) for some \(m \in \mathbb{Z}\).
+
+\textbf{Proof:}
+
+Let \( R(e^{i\theta}) \) be a representation of \( U(1) \) on \(\mathbb{C}^n\) such that for any vector \( v \) in \(\mathbb{C}^n\), the transformed vector under \( R(e^{i\theta}) \) remains within the span of \( v \) scaled by a character \(\lambda(\theta)\). This is expressed as:
+\[
+R(e^{i\theta}) v = \lambda(\theta) v
+\]
+Considering the unitarity of the representation, we have:
+\[
+\langle R(e^{i\theta}) v, R(e^{i\theta}) v \rangle = \langle v, v \rangle
+\]
+Expanding the left-hand side gives:
+\[
+\langle \lambda(\theta) v, \lambda(\theta) v \rangle = |\lambda(\theta)|^2 \langle v, v \rangle
+\]
+Equating both sides implies:
+\[
+|\lambda(\theta)|^2 = 1
+\]
+Therefore, \(\lambda(\theta)\) is a complex number on the unit circle, hence \(\lambda(\theta) = e^{im\theta}\) for some integer \(m\), which corresponds to the character of the representation.
+
+\textbf{Corollary:}
+Given the representation \( R(e^{i\theta}) = \lambda(\theta)I \) where \( I \) is the identity matrix and \( \lambda(\theta) \) is a character, the representation simplifies to:
+\[
+R(e^{i\theta}) = e^{im\theta}I
+\]
+Since \( \mathbb{C}^n \) is irreducible under this representation and any \( v \in \mathbb{C}^n \) spans the entire space under \( R \), it must be that \( n = 1 \). This confirms that the representation space is one-dimensional:
+\[
+\mathbb{C}^n = \mathbb{C}
+\]
+\textbf{Conclusion:}
+This proof demonstrates that any irreducible representation of \(U(1)\) is not only one-dimensional but also described entirely by characters of the form \( e^{im\theta} \), emphasizing the profound simplicity and symmetry in \(U(1)\) representations.
+
+\section{Representation of \( SU(2) \)}
+
+\subsection*{Group SU(2)}
+The group \( SU(2) \) consists of 2x2 unitary matrices with determinant 1. It can be defined as:
+\[
+SU(2) = \{ M \in \mathbb{C}^{2 \times 2} : M^\dagger M = I, \, \det(M) = 1 \}
+\]
+where \( M^\dagger \) denotes the conjugate transpose of \( M \). In terms of matrix components, \( SU(2) \) can be expressed as:
+\[
+SU(2) = \left\{ \begin{pmatrix} a & b \\ -\overline{b} & \overline{a} \end{pmatrix} : a, b \in \mathbb{C}, \, |a|^2 + |b|^2 = 1 \right\}
+\]
+This description highlights that \( SU(2) \) is a 3-dimensional group because it is parameterized by three independent real parameters (since \( |a|^2 + |b|^2 = 1 \) reduces the four real degrees of freedom of \( a \) and \( b \) by one).
+
+\subsection*{Lie Algebra \( \mathfrak{su}(2) \)}
+The Lie algebra \( \mathfrak{su}(2) \) of the group \( SU(2) \) consists of all 2x2 skew-Hermitian matrices with zero trace. It is given by:
+\[
+\mathfrak{su}(2) = \{ X \in \mathbb{C}^{2 \times 2} : X^\dagger = -X, \, \text{Tr}(X) = 0 \}
+\]
+A general element of \( \mathfrak{su}(2) \) can be written as:
+\[
+\mathfrak{su}(2) = \left\{ \begin{pmatrix} ix & y+iz \\ -y+iz & -ix \end{pmatrix} : x, y, z \in \mathbb{R} \right\}
+\]
+Here, \( ix, y+iz, \) and \( -y+iz \) are the components of the matrix that satisfy the skew-Hermitian condition, and \( ix \) and \( -ix \) ensure the trace is zero.
+
+These matrices form a basis for the Lie algebra, which can be used to express any infinitesimal transformation in \( SU(2) \).
+
+Also, We define, 
+Given a vector \( v = (x, y, z) \) in \( \mathbb{R}^3 \), the corresponding matrix \( M_v \) in the Lie algebra \( \mathfrak{su}(2) \) is represented as:
+\[
+M_v = \begin{pmatrix}
+ix & y + iz \\
+-y + iz & -ix
+\end{pmatrix}
+\]
+This matrix is a skew-Hermitian matrix with trace zero, characteristic of elements in \( \mathfrak{su}(2) \).
+
+\subsection*{Overview}
+\(SU(2)\) is a fundamental group in mathematics and physics, representing special unitary transformations in 2 dimensions. Below are various representations of \(SU(2)\) into general linear groups of different dimensions.
+
+\subsubsection*{Standard Representation}
+The standard representation of \(SU(2)\) is a 2-dimensional complex representation:
+\[
+SU(2) \rightarrow GL(2, \mathbb{C}), \quad g \mapsto g
+\]
+where \( g \) is a \( 2 \times 2 \) matrix in \( SU(2) \).
+
+\subsubsection*{Representation into \(GL(\mathfrak{su}(2) \otimes \mathbb{C})\)}
+This representation maps \(SU(2)\) into a 3-dimensional representation, acting on the complexified Lie algebra:
+\[
+SU(2) \rightarrow GL(\mathfrak{su}(2) \otimes \mathbb{C}), \quad g \mapsto (M_v \mapsto g M_v g^\dagger)
+\]
+where \( M_v \) is a matrix in the Lie algebra \( \mathfrak{su}(2) \), and \( g^\dagger \) is the conjugate transpose of \( g \).
+
+\subsubsection*{Trivial Representation}
+The trivial representation maps any element of \(SU(2)\) to the identity in \(GL(1, \mathbb{C})\):
+\[
+SU(2) \rightarrow GL(1, \mathbb{C}), \quad g \mapsto (1)
+\]
+which is a 1-dimensional complex representation where every element of \(SU(2)\) acts as the identity transformation.
+
+These representations showcase the versatility of \(SU(2)\) in connecting with spaces of various dimensions, reflecting its pivotal role in both theoretical and applied aspects of group theory, particularly in the context of quantum mechanics and field theory.
+
+\section*{Zero-Dimensional Representation of \(SU(2)\)}
+
+\subsection*{Trivial Representation to \(GL(0)\)}
+In an abstract sense, \(SU(2)\) can be represented in a zero-dimensional space, which leads to the trivial group \(GL(0)\). This is conceptually akin to mapping every element of \(SU(2)\) to an "identity" in a zero-dimensional space:
+\[
+SU(2) \rightarrow GL(0), \quad \begin{pmatrix} a & b \\ -\overline{b} & \overline{a} \end{pmatrix} \mapsto \text{id}
+\]
+This representation is trivial because it acts on a space with no dimensions, effectively performing no operation.
+
+This representation is purely formal and used primarily for theoretical considerations in group theory. The concept of a zero-dimensional representation (often just a point or null operator) helps in understanding and describing algebraic structures, particularly when dealing with direct sums of representations or the definition of the group representation's kernel.
+
+\section*{Theorem on Irreducible Representations of \(SU(2)\)}
+
+\textbf{Theorem:}
+For any nonnegative integer \( n \), there exists an irreducible representation (irrep) \( R_n \) such that \( R_n: SU(2) \rightarrow GL(n, \mathbb{C}) \). Moreover, any irreducible representation \( R: SU(2) \rightarrow GL(V) \) is isomorphic to one of these.
+
+This theorem asserts that the irreducible representations of \(SU(2)\) are parameterized by nonnegative integers, reflecting different dimensions in which \(SU(2)\) can act linearly on complex vector spaces. The irrep \( R_n \) corresponds specifically to the \( (n+1) \)-dimensional complex space, showcasing the rich and structured representation theory of \( SU(2) \). Each irrep uniquely corresponds to a specific \( n \), encapsulating the algebraic and geometric properties of \( SU(2) \) actions.
+
+\section*{Definition and Diagram of Representation Morphism}
+
+\textbf{Definition:} Given two representations \(R: G \to GL(V)\) and \(S: G \to GL(W)\), a linear map \(L: V \to W\) is a \textit{morphism of representations} from \(R\) to \(S\) if it satisfies:
+\[
+L \circ R(g) = S(g) \circ L \quad \forall g \in G
+\]
+This condition means that the diagram below commutes for every \(g \in G\), making \(L\) an \textit{intertwining operator} or a \textit{homomorphism} of representations.
+
+\begin{center}
+\begin{tikzcd}
+V \arrow[r, "R(g)"] \arrow[d, "L"'] & V \arrow[d, "L"] \\
+W \arrow[r, "S(g)"'] & W
+\end{tikzcd}
+\end{center}
+
+This diagram illustrates that applying \(R(g)\) to a vector in \(V\) and then using \(L\) to map it to \(W\) is equivalent to first mapping the vector with \(L\) and then applying \(S(g)\) in \(W\). It asserts that \(L\) is compatible with the group actions described by \(R\) and \(S\).
+
+This is an isomorphism if L is invertible. 
+
+\section*{Example of a Representation Isomorphism}
+
+\textbf{Example:} Consider when \( V = W = \mathbb{C}^n \) and \( L \) is an isomorphism. In this case, \( L \) acts as a change of basis matrix. For two representations \( R \) and \( S \) of a group \( G \), the morphism condition implies:
+\[
+S(g) = L \circ R(g) \circ L^{-1} \quad \forall g \in G
+\]
+This equation illustrates that \( S \) is similar to \( R \) through the change of basis provided by \( L \). Here, \( L \) conjugates \( R(g) \) to produce \( S(g) \), effectively demonstrating that \( S \) and \( R \) are equivalent representations modulo the isomorphism \( L \).
+
+\section{New Representations from Old}
+
+\subsection*{Direct Sum Representation}
+Given two representations \( R: G \to GL(V) \) and \( S: G \to GL(W) \), their direct sum \( R \oplus S: G \to GL(V \oplus W) \) is defined as:
+\[
+(R \oplus S)(g) = \begin{pmatrix} R(g) & 0 \\ 0 & S(g) \end{pmatrix}
+\]
+This representation maps each group element \( g \) in \( G \) to a block diagonal matrix where \( R(g) \) and \( S(g) \) act independently on \( V \) and \( W \), respectively.
+
+\subsection*{Tensor Product Representation}
+Similarly, the tensor product of \( R \) and \( S \), denoted \( R \otimes S: G \to GL(V \otimes W) \), acts on the tensor product space \( V \otimes W \) (which is \( mn \)-dimensional if \( V \) and \( W \) are \( m \)-dimensional and \( n \)-dimensional respectively). The action is defined by:
+\[
+(R \otimes S)(g)(v \otimes w) = (R(g)v) \otimes (S(g)w)
+\]
+for \( v \in V \) and \( w \in W \).
+
+\subsection*{Example: Tensor Product Representation of \(SU(2)\)}
+Consider \(R = S\) as the standard representation of \(SU(2)\), where \(V = W = \mathbb{C}^2\).
+The basis for \(\mathbb{C}^2 \otimes \mathbb{C}^2\) is given by \( \{ e_1 \otimes f_1, e_1 \otimes f_2, e_2 \otimes f_1, e_2 \otimes f_2 \} \), where:
+\[
+e_1 = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \quad
+e_2 = \begin{pmatrix} 0 \\ 1 \end{pmatrix}, \quad
+f_1 = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \quad
+f_2 = \begin{pmatrix} 0 \\ 1 \end{pmatrix}.
+\]
+
+The representation \(R\) of a matrix \(\begin{pmatrix} a & b \\ -\overline{b} & \overline{a} \end{pmatrix}\) in \(SU(2)\) acts on \(e_1\) and \(e_2\) as:
+\[
+R\left(\begin{pmatrix} a & b \\ -\overline{b} & \overline{a} \end{pmatrix}\right) e_1 = \begin{pmatrix} a \\ -\overline{b} \end{pmatrix}, \quad
+R\left(\begin{pmatrix} a & b \\ -\overline{b} & \overline{a} \end{pmatrix}\right) e_2 = \begin{pmatrix} b \\ \overline{a} \end{pmatrix}.
+\]
+
+The tensor product \( (R \otimes S) \) then maps:
+\[
+(R \otimes S) \left(\begin{pmatrix} a & b \\ -\overline{b} & \overline{a} \end{pmatrix}\right) (e_i \otimes f_j) = R\left(\begin{pmatrix} a & b \\ -\overline{b} & \overline{a} \end{pmatrix}\right) e_i \otimes S\left(\begin{pmatrix} a & b \\ -\overline{b} & \overline{a} \end{pmatrix}\right) f_j.
+\]
+
+Applying this to the basis vectors:
+\begin{align*}
+(R \otimes S)\left(\begin{pmatrix} a & b \\ -\overline{b} & \overline{a} \end{pmatrix}\right) (e_1 \otimes f_1) &= \begin{pmatrix} a^2 \\ -a \overline{b} \\ -b \overline{a} \\ b^2 \end{pmatrix}, \\
+(R \otimes S)\left(\begin{pmatrix} a & b \\ -\overline{b} & \overline{a} \end{pmatrix}\right) (e_1 \otimes f_2) &= \begin{pmatrix} ab \\ a \overline{a} \\ -b^2 \\ -b \overline{a} \end{pmatrix}, \\
+(R \otimes S)\left(\begin{pmatrix} a & b \\ -\overline{b} & \overline{a} \end{pmatrix}\right) (e_2 \otimes f_1) &= \begin{pmatrix} ba \\ -b \overline{b} \\ a \overline{a} \\ -a \overline{b} \end{pmatrix}, \\
+(R \otimes S)\left(\begin{pmatrix} a & b \\ -\overline{b} & \overline{a} \end{pmatrix}\right) (e_2 \otimes f_2) &= \begin{pmatrix} b^2 \\ -b \overline{a} \\ a \overline{b} \\ a^2 \end{pmatrix}.
+\end{align*}
+
+This representation is not irreducible as it is possible to block diagonalize the representation.
+
+\section*{Symmetric Powers in Representation Theory}
+
+Symmetric powers of representations provide a method to construct new representations from existing ones. Given a representation \( R: G \to GL(V) \), the \(n\)-th symmetric power, denoted by \( R^n \), maps the group \( G \) into \( GL(V^{\otimes n}) \), where \( V^{\otimes n} \) is the space of symmetric tensors of order \(n\).
+
+\subsection*{Example: Symmetric Power of \( \mathbb{C}^2 \)}
+For the vector space \( \mathbb{C}^2 \), consider a basis \( \{e_1, e_2\} \). The basis for the symmetric square \( \text{Sym}^2 \mathbb{C}^2 \) would be:
+\[ \{ e_1 \otimes e_1, e_2 \otimes e_2, e_1 \otimes e_2 + e_2 \otimes e_1 \} \]
+These elements are symmetric as they are invariant under the permutation of tensor components.
+
+\subsection*{Construction of Symmetric Power Representation}
+If \( V \) is represented by \( R \), then the symmetric power representation \( R^n \) acts on the symmetric tensors. The action is defined by:
+\[ R^n(g)(v_1 \otimes \cdots \otimes v_n) = R(g)v_1 \otimes \cdots \otimes R(g)v_n \]
+This action is extended linearly to all of \( V^{\otimes n} \).
+
+\subsection*{Example: Symmetric Cube of \( \mathbb{C}^3 \)}
+For \( \mathbb{C}^3 \) and a basis \( \{e_1, e_2, e_3\} \), the symmetric cube \( \text{Sym}^3 \mathbb{C}^3 \) involves elements such as:
+\[ \frac{1}{6}(e_1 \otimes e_2 \otimes e_3 + \text{permutations}) \]
+These represent all the symmetric combinations of the basis elements of \( \mathbb{C}^3 \).
+
+\subsection*{Morphism of Representations}
+For a representation \( V \), the operation \( A_V: V^{\otimes n} \to V^{\otimes n} \) defined by:
+\[ A_V(v_1 \otimes \cdots \otimes v_n) = \frac{1}{n!} \sum_{\sigma \in S_n} R_{\sigma}(v_{\sigma(1)} \otimes \cdots \otimes v_{\sigma(n)}) \]
+averages over the symmetric group \( S_n \) to ensure symmetry. The image of this map, \( \text{Sym}^n V \), forms the subspace of \( V^{\otimes n} \) that is symmetric and hence invariant under the symmetric group action. This is significant as it demonstrates that \( A_V \) is a morphism of representations, mapping symmetric tensors to symmetric tensors, a crucial aspect in the study of representation theory.
+
+\section*{Symmetric Powers}
+
+\textbf{Definition:} Let \( R : G \rightarrow \text{GL}(V) \) be a representation. The $n$-th symmetric power of \( V \), denoted \( \text{Sym}^n V \), is the image of the map \( A_V : V^{\otimes n} \rightarrow V^{\otimes n} \) defined by 
+\[
+A_V (v_1 \otimes \cdots \otimes v_n) = \frac{1}{n!} \sum_{\sigma \in S_n} v_{\sigma(1)} \otimes \cdots \otimes v_{\sigma(n)},
+\]
+where \( S_n \) is the symmetric group on \( n \) elements.
+
+\textbf{Properties:}
+\begin{itemize}
+    \item If \( V \) is a representation, then \( A_V \) is a morphism of representations.
+    \item The image of \( A_V \), \( \text{Sym}^n V \), is a subrepresentation of \( V^{\otimes n} \).
+\end{itemize}
+
+\section*{Examples}
+\subsection*{Symmetric Powers of \( \mathbb{C}^2 \)}
+Consider the standard representation \( R \) of \( SU(2) \) on \( \mathbb{C}^2 \). We can construct the symmetric powers:
+\begin{itemize}
+    \item \( \text{Sym}^2 \mathbb{C}^2 \) is spanned by \( \{ e_1 \otimes e_1, e_1 \otimes e_2 + e_2 \otimes e_1, e_2 \otimes e_2 \} \).
+    \item \( \text{Sym}^3 \mathbb{C}^2 \) involves combinations like \( \frac{1}{3!}(e_1 \otimes e_2 \otimes e_3 + \text{permutations}) \).
+\end{itemize}
+
+\textbf{Dimension Analysis:}
+\begin{itemize}
+    \item The dimension of \( \text{Sym}^n \mathbb{C}^2 \) is \( n+1 \).
+    \item This is because the symmetric product involves homogeneous polynomials of degree \( n \) in two variables, which are independent.
+\end{itemize}
+
+\subsection*{General Formula for \( \text{Sym}^n V \)}
+If \( V \) is a representation, then
+\[
+\text{Sym}^n V = \{ \text{homogeneous polynomials of degree } n \text{ in basis of } V \}.
+\]
+For \( \mathbb{C}^2 \), \( \text{Sym} \mathbb{C}^2 \) is \( (n+1) \)-dimensional, reflecting the number of independent terms in a degree \( n \) polynomial.
+
+\section{Weight Space Decomposition}
+
+Consider a semisimple Lie algebra \(\mathfrak{g}\) over the complex numbers. We focus on matrices that represent elements of \(\mathfrak{g}\) and its corresponding Lie group \(G\).
+
+\subsection*{Cartan Subalgebra and Root Spaces}
+
+Let \(\mathfrak{h}\) be a Cartan subalgebra of \(\mathfrak{g}\), which is a maximal abelian subalgebra consisting of diagonalizable elements. Elements of \(\mathfrak{h}\) are known as \emph{Cartan elements}.
+
+Define the root spaces by the eigenvalue decomposition due to the adjoint action:
+\[
+\mathfrak{g}_\alpha = \{ X \in \mathfrak{g} : \text{ad}(H)(X) = \alpha(H)X \text{ for all } H \in \mathfrak{h} \},
+\]
+where \(\alpha\) is a root if \(\mathfrak{g}_\alpha \neq \{0\}\). The collection of all such roots, denoted \(\Delta\), decomposes \(\mathfrak{g}\) into:
+\[
+\mathfrak{g} = \mathfrak{h} \oplus \bigoplus_{\alpha \in \Delta} \mathfrak{g}_\alpha.
+\]
+
+\subsection*{Weight Space Decomposition}
+
+Consider a representation \(\pi: \mathfrak{g} \rightarrow \mathfrak{gl}(V)\) where \(V\) is a vector space. Define weight spaces of \(V\) as:
+\[
+V_\lambda = \{ v \in V : \pi(H)(v) = \lambda(H)v \text{ for all } H \in \mathfrak{h} \},
+\]
+with \(\lambda\) as a weight. The space \(V\) then decomposes into:
+\[
+V = \bigoplus_{\lambda \text{ weight}} V_\lambda.
+\]
+
+The theory extends to Lie groups via the exponential map from \(\mathfrak{g}\) to the Lie group \(G\), linking Cartan subalgebra elements to a maximal torus \(T\) within \(G\). The weights and roots critically influence the structure and representation theory of the group.
+
+The weight space decomposition elucidates the internal structure of Lie algebras and their associated groups, providing insights into their symmetry properties and theoretical underpinnings.
+
+
+\section*{Representation of \(SU(3)\)}
+
+In \(SU(3)\), the torus \(T\) is the group of diagonal matrices, which is a subset of \(SU(3)\) represented as:
+\[
+T = \left\{ 
+\begin{pmatrix} 
+e^{i\theta_1} & 0 & 0 \\ 
+0 & e^{i\theta_2} & 0 \\ 
+0 & 0 & e^{-i(\theta_1+\theta_2)} 
+\end{pmatrix}
+: \theta_1, \theta_2 \in \mathbb{R} 
+\right\}
+\]
+These matrices form a subgroup isomorphic to \(U(1) \times U(1)\).
+
+\section*{Weight Space Decomposition in Representations of \(SU(3)\)}
+
+\textbf{Lemma:} If \( R: SU(3) \rightarrow GL(V) \) is a complex representation, then the vector space \( V \) can be decomposed into weight spaces \( W_{k,\ell} \), where:
+\[
+W_{k,\ell} \sim \left\{ v \in V : R(D(\theta_1, \theta_2))v = e^{i(k\theta_1 + \ell\theta_2)}v \right\},
+\]
+with \( k, \ell \in \mathbb{Z} \).
+
+\section*{\( \mathbb{C}^3 \) Standard Representation of \( SU(3) \)}
+
+Consider the standard representation of \( SU(3) \) on \( \mathbb{C}^3 \). The action of \( SU(3) \) on \( \mathbb{C}^3 \) is given by:
+\[
+R(D(\theta_1, \theta_2)) = 
+\begin{bmatrix} 
+e^{i\theta_1} & 0 & 0 \\ 
+0 & e^{i\theta_2} & 0 \\ 
+0 & 0 & e^{-i(\theta_1+\theta_2)} 
+\end{bmatrix}
+\]
+This leads to the transformation of the standard basis vectors \( e_1, e_2, \) and \( e_3 \) as follows:
+\begin{align*}
+e_1 & \mapsto e^{i\theta_1} e_1, \\
+e_2 & \mapsto e^{i\theta_2} e_2, \\
+e_3 & \mapsto e^{-i(\theta_1+\theta_2)} e_3.
+\end{align*}
+
+\subsection*{Weight Spaces}
+
+The weight spaces associated with this representation are defined by the eigenvectors corresponding to the eigenvalues under the action of \( R \). They are given by:
+\begin{itemize}
+\item \( W_{1,0} = \mathbb{C} \cdot e_1 \) corresponding to the weight \( (1,0) \).
+\item \( W_{0,1} = \mathbb{C} \cdot e_2 \) corresponding to the weight \( (0,1) \).
+\item \( W_{-1,-1} = \mathbb{C} \cdot e_3 \) corresponding to the weight \( (-1,-1) \).
+\end{itemize}
+
+\section*{Symmetric Square of \( \mathbb{C}^3 \) under \( SU(3) \)}
+
+Consider the action of \( SU(3) \) on the symmetric square \( S^2 \mathbb{C}^3 \), which involves the square of basis vectors and their tensor products. The representation matrix \( R(D(\theta_1, \theta_2)) \) acts as follows:
+
+\begin{align*}
+e_1^2 & \mapsto e^{2i\theta_1} e_1^2, \\
+e_1 e_2 & \mapsto e^{i(\theta_1 + \theta_2)} e_1 e_2, \\
+e_1 e_3 & \mapsto e^{i(\theta_1 - \theta_2)} e_1 e_3, \\
+e_2^2 & \mapsto e^{2i\theta_2} e_2^2, \\
+e_2 e_3 & \mapsto e^{i(-\theta_1 + 2\theta_2)} e_2 e_3, \\
+e_3^2 & \mapsto e^{-2i(\theta_1 + \theta_2)} e_3^2.
+\end{align*}
+
+\subsection*{Weight Identifications}
+
+The corresponding weights for these transformations are identified as:
+\begin{align*}
+\text{Weight of } e_1^2 & : (2, 0), \\
+\text{Weight of } e_1 e_2 & : (1, 1), \\
+\text{Weight of } e_1 e_3 & : (1, -1), \\
+\text{Weight of } e_2^2 & : (0, 2), \\
+\text{Weight of } e_2 e_3 & : (-1, 1), \\
+\text{Weight of } e_3^2 & : (-2, -2).
+\end{align*}
+
+\end{document}
+ 
