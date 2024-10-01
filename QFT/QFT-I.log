@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/nixos.org) (preloaded format=pdflatex 1980.1.1)  22 JUL 2024 15:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/nixos.org) (preloaded format=pdflatex 1980.1.1)  10 AUG 2024 10:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -643,40 +643,36 @@ Package hyperref Info: Link coloring OFF on input line 47.
 \@outlinefile=\write4
 \openout4 = `QFT-I.out'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 66.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 67.
  (/nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 66.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 67.
  (/nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{/nix/store/r1416ad3hn86b3dnv5bpaxf1qkzs5ngj-texlive-combined-full-2023-final/share/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./QFT-I.toc)
-\tf@toc=\write5
-\openout5 = `QFT-I.toc'.
-
- [2] [3] [4] (./QFT-I.aux)
+{/nix/store/r1416ad3hn86b3dnv5bpaxf1qkzs5ngj-texlive-combined-full-2023-final/share/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2{/nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [3] [4] [5] [6] (./QFT-I.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
 Package rerunfilecheck Info: File `QFT-I.out' has not changed.
-(rerunfilecheck)             Checksum: B91FFFA40E816ED3C599CB659C8DC893;183.
+(rerunfilecheck)             Checksum: DC58CFB55D9BCC60D4AA00B7B7A61565;104.
  ) 
 Here is how much of TeX's memory you used:
- 24554 strings out of 474116
- 490101 string characters out of 5717523
- 1929187 words of memory out of 5000000
- 46496 multiletter control sequences out of 15000+600000
- 564841 words of font info for 61 fonts, out of 8000000 for 9000
+ 24582 strings out of 474116
+ 490539 string characters out of 5717523
+ 1940187 words of memory out of 5000000
+ 46512 multiletter control sequences out of 15000+600000
+ 567919 words of font info for 73 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 83i,6n,87p,542b,456s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmr10.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-Output written on QFT-I.pdf (4 pages, 71389 bytes).
+ 83i,10n,87p,758b,465s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmex10.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmr10.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmr12.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmr7.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmti10.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/cm-super/sfrm1000.pfb>
+Output written on QFT-I.pdf (6 pages, 170142 bytes).
 PDF statistics:
- 67 PDF objects out of 1000 (max. 8388607)
- 50 compressed objects within 1 object stream
- 8 named destinations out of 1000 (max. 500000)
- 29 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 119 PDF objects out of 1000 (max. 8388607)
+ 84 compressed objects within 1 object stream
+ 17 named destinations out of 1000 (max. 500000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

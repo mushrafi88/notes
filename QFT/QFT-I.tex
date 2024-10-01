@@ -63,22 +63,200 @@
 		}
 
 \maketitle
-\newpage
+%\newpage
 
-\tableofcontents
-\newpage
+%\tableofcontents
+%\newpage
 
-\section*{Preface} % The asterisk prevents LaTeX from numbering the section
-\addcontentsline{toc}{section}{Preface} 
+%\section*{Preface} % The asterisk prevents LaTeX from numbering the section
+%\addcontentsline{toc}{section}{Preface} 
 
-This document is based on the classes taken by Dr. Arshad Momen for the PG-501 Course during the year 2024. He does not follow any books. Since its a collection of multiple books. I will include their names when found. Also I have added my perspective as well for ease of clarity. 
-\newpage 
+%This document is based on the classes taken by Dr. Arshad Momen for the PG-501 Course during the year 2024. He does not follow any books. Since its a collection of multiple books. I will include their names when found. Also I have added my perspective as well for ease of clarity. 
+%\newpage 
 
 
 % ------------------------------------------------------------------------------
 
-\section{Lecture - 1}
+\section{Lecture - 6}
 
+\section*{Field Transformation}
+The field transformation under Lorentz transformations in quantum field theory, along with the coordinate transformation \( x \to x' \), is given by:
+\begin{equation}
+\phi_a(x) \to \phi_a'(x') = S_{ab}(\Lambda) \phi_b(x)
+\end{equation}
+The field transformation under Lorentz transformations in quantum field theory is described as follows: \( \phi_a(x) \) denotes a field component indexed by \( a \) at position \( x \). Under a Lorentz transformation \( \Lambda \), the field transforms to \( \phi_a'(x') \), where \( x' \) is the transformed coordinate position. The transformation of the field is governed by the matrix \( S_{ab}(\Lambda) \), which is specific to the Lorentz transformation applied and determines how each component of the original field \( \phi_b(x) \) contributes to the transformed field component \( \phi_a'(x') \). 
+
+This transformation ensures that the field theory is Lorentz invariant, meaning that the physical laws it describes remain consistent regardless of the frame of reference's speed or direction.
+
+\section*{DeWitt Notation}
+
+\subsection*{Features}
+\begin{itemize}
+    \item \textbf{Index Compression}: A field variable $\phi^a(x)$ is written as $\phi^i$, where $i$ includes both $a$ and $x$.
+    
+    \item \textbf{Functional Derivatives}: The functional derivative is denoted by $A_{,i}$ and is defined as:
+    \[
+    A_{,i}[\phi] \equiv \frac{\delta}{\delta \phi^a(x)} A[\phi]
+    \]
+    
+    \item \textbf{Summation and Integration}: In expressions like $A_i B^i$, summation over discrete indices and integration over spatial variables are combined:
+    \[
+    A_i B^i \equiv \int_M \sum_{\alpha} A^a(x) B_a(x) \, d^D x
+    \]
+\end{itemize}
+
+\begin{align*}
+    \langle \phi | \psi \rangle &= \int d^{D}x \langle \phi | x \rangle \langle x | \psi \rangle \\ 
+    &= \int d^D x \phi^\mu(x) \psi_\mu(x)  \\
+ &= \phi^{*}_i(x) \psi_i(x)  \\
+\end{align*}
+
+\section*{Action for a scalar field}
+
+The action \( S \) for a scalar field \( \phi \) can be expressed as:
+\begin{align*}
+    S &= \int d^4 x \left( \frac{1}{2} \partial^\mu \phi \partial_\mu \phi - \frac{1}{2} m^2 \phi^2 \right) \\ 
+    S  &= \frac{1}{2} \partial^\mu \phi_i \partial_\mu \phi_i - \frac{1}{2} m^2 \phi_{i}^{2} \\ 
+    \delta S &= \partial_\mu(\delta \phi_i) (\partial^\mu \phi_i ) - m^2 \phi_i \delta \phi  \\ 
+     \delta S &= -\delta \phi \left( \partial^\mu \partial_\mu \phi + m^2 \phi \right) = 0  \\
+\end{align*}
+
+This action describes a free scalar field, incorporating both kinetic and mass terms.
+
+\section*{Canonical Formalism}
+
+In the canonical formalism, the evolution of a system is described by specifying the initial conditions on a phase space, consisting of position coordinates and corresponding momenta. The dynamics of the system are then governed by the Hamiltonian, which typically depends on these phase space variables and possibly on time. The canonical formalism, which singles out time as a unique direction for evolution, contrasts with formulations where space and time enter the equations on an equal footing, such as in the covariant Lagrangian formalism used in field theory. In the canonical formalism, time is treated differently from spatial coordinates, breaking the symmetry between them and hence not being manifestly covariant.
+
+The canonical momentum \(\pi(x)\) is given by:
+\[
+\pi(x) = \frac{\partial \mathcal{L}}{\partial \dot{\phi}(x)}
+\]
+where \(\mathcal{L}\) is the Lagrangian density, \(\phi(x)\) is the field variable, and \(\dot{\phi}(x)\) represents the time derivative of the field.
+
+In DeWitt notation:
+\[
+    \pi_i = \dot{ \phi_i }
+\]
+This suggests a simplified notation where momenta are directly related to the indices of the field variables.
+
+\begin{align*}
+    \mathcal{H} &= \pi_i(x) \dot{\phi_i}(x) - \mathcal{L} \\
+    &= \frac{1}{2} \left( \pi^2 + (\nabla \phi)^2 + m^2 \phi^2 \right) \\
+\end{align*}
+
+\section*{Phase space}
+In classical mechanics, the \emph{phase space} of a system is a space in which all possible states of a system are represented, with each state corresponding to one unique point in the phase space. The coordinates of phase space are given by the canonical position and momentum coordinates \((q, p)\) of the system. 
+
+The \textbf{equations of motion} derived from Hamilton's or Lagrange's formulations are fundamental because they describe how the state of a system evolves over time in phase space. Each point in phase space moves according to these equations, which are often encapsulated in Hamilton's equations:
+\[
+\dot{q} = \frac{\partial H}{\partial p}, \quad \dot{p} = -\frac{\partial H}{\partial q}
+\]
+where \(H\) is the Hamiltonian of the system. 
+
+Thus, the collection of all equations of motion provides a complete description of the dynamics of the system in phase space, highlighting how states transition from one point to another over time.
+
+\subsection*{Poisson Brackets}
+The expression involving Poisson brackets is given by:
+\[
+\{ q_i, p_j \} = \delta^j_i
+\]
+This represents the fundamental Poisson bracket relation where \( q_i \) and \( p_j \) are generalized coordinates and momenta, respectively, and \( \delta^j_i \) is the Kronecker delta, which is 1 when \( i = j \) and 0 otherwise.
+
+The expression for the Poisson bracket between field variables \(\phi(x)\) and \(\pi(y)\) is given by:
+\[
+\{ \phi(x), \pi(y) \} = \delta(x - y)
+\]
+where \(\delta(x - y)\) is the Dirac delta function, representing the canonical commutation relation in field theory.
+
+The commutation relation for the position operators \( q_i \) and \( q_j \) at the same time \( t \) is given by:
+\[
+[q_i(t), q_j(t)] = 0
+\]
+However, this relation is only valid for a specific time \( t \) and does not necessarily hold for different times \( t_a \) and \( t_b \), where:
+\[
+[q_i(t_a), q_j(t_b)] \neq 0
+\]
+This highlights the temporal non-commutativity of position operators in quantum mechanics.
+
+The Poisson bracket for any two functions \(U\) and \(V\) of canonical variables is given by:
+\[
+\{U, V\} = \left(\frac{\partial U}{\partial q_i}\frac{\partial V}{\partial p_i} - \frac{\partial U}{\partial p_i}\frac{\partial V}{\partial q_i}\right)
+\]
+For field variables \(\phi\) and Hamiltonian \(H\) which depends on \(\phi(x)\) and \(\pi(x)\), the Poisson brackets are:
+\[
+\{\phi, H\} = \int d^3x \left( \frac{\delta \phi}{\delta \phi(x)} \frac{\delta H}{\delta \pi(x)} - \frac{\delta \phi}{\delta \pi(x)} \frac{\delta H}{\delta \phi(x)} \right)
+\]
+Assuming \(H\) has dependencies such that:
+\[
+\frac{\delta H}{\delta \pi(x)} = \frac{\partial H}{\partial \pi(x)}, \quad \frac{\delta H}{\delta \phi(x)} = \frac{\partial H}{\partial \phi(x)}
+\]
+and knowing that:
+\[
+\frac{\delta \phi}{\delta \phi(x)} = \delta(x-y), \quad \frac{\delta \phi}{\delta \pi(x)} = 0
+\]
+We can simplify the Poisson bracket as:
+\[
+\{\phi, H\} = \frac{\partial H}{\partial \pi(x)}
+\]
+Thus, the time evolution of \(\phi(x)\) can be expressed as:
+\[
+\dot{\phi}(x) = \{\phi(x), H\} = \frac{\partial H}{\partial \pi(x)}
+\]
+
+The calculation for the time derivative of the field variable \(\phi_i\) using the Poisson bracket with the Hamiltonian \(H\) is detailed as follows:
+
+\begin{align*}
+    \dot{\phi}_i &= \{\phi_i, H\} = \int d^3y \, \{ \phi_i(x) H(y) \} \\ 
+    \dot{\phi}_i &= \sum_i \{\phi_i, H\} = \frac{1}{2} \int d^3y \, \{\phi(x), \pi^2(y) + (\nabla \phi(y))^2 - m^2 \phi^2(y)\} \\ 
+    \dot{\phi}_i &= \frac{1}{2} \int d^3y \, \{\phi(x), \pi^2(y)\} + 0 \\ 
+    \dot{\phi}_i &= \int d^3y \, \{\phi(x), \pi(y)\} \pi(y) \\ 
+    \dot{\phi}_i(x) &= \int d^3y \, \delta^3(x-y) \pi(y) \\ 
+    \dot{\phi}_i(x) &= \pi(x) \\ 
+\end{align*}
+
+\section*{Electromagnetism}
+
+The Lagrangian density \(\mathcal{L}\) and action \(S\) for a field described by the tensor \(F_{\mu\nu}\) are given by:
+\begin{align*}
+    \mathcal{L} &= -\frac{1}{4} F_{\mu\nu} F^{\mu\nu} \\
+    S &= \int d^4x \, \mathcal{L} \\
+    \delta S &= - \frac{1}{2} \int d^4x \,  F_{\mu\nu} \delta F^{\mu\nu} \\ 
+\end{align*}
+
+But we know that \( F_{\mu \nu} = \partial_\mu A_\nu - \partial_\nu A_\mu  \)
+so 
+\[ \delta F_{\mu \nu} = \partial_\mu(\delta A_\nu) - \partial_\nu( \delta A_\mu) \]
+
+The variation of the action \(S\) for a field described by the tensor \(F_{\mu\nu}\) is given by:
+\begin{align*}
+    \delta S &= - \frac{1}{2} \int d^4 x \, F_{\mu \nu}  \left( \partial^\mu (\delta A^\nu) - \partial^\nu (\delta A^\mu) \right) \\
+    &= - \frac{1}{2} \int d^4 x \, F_{\mu \nu} \left( \partial^\mu \delta A^\nu - \partial^\nu \delta A^\mu \right) \\
+    &= - \int d^4 x \, F_{\mu \nu} \partial^\mu \delta A^\nu \\
+    &= - \int d^4 x \, \left( \partial^\mu F_{\mu \nu} \right) \delta A^\nu \\ 
+    &= \int d^4 x \, \left( \partial^\mu F_{\mu \nu} \right) \delta A^\nu  \\
+\end{align*}
+
+This derivation utilizes the antisymmetry of \(F_{\mu\nu}\) and integrates by parts, assuming boundary terms vanish. The final line uses the definition of the electromagnetic field tensor and the properties of derivatives and variations.
+
+\textbf{Observation}
+Since the time derivative of \( A_0 \) does not appear in the equation. So this is not a dynamical variable. This reflects its role in gauge theories, particularly in electromagnetism, where \( A_0 \) serves as a Lagrange multiplier to enforce constraints like Gauss's law, emphasizing its non-dynamical nature and influence on the physical state configurations rather than on the dynamics itself. 
+
+Now, 
+\begin{align*}
+    B_i &= \frac{1}{2} \epsilon_{ijk} F^{jk} \\
+    E_i &= \partial_0 A_i - \partial_i A_0 \\
+    \mathcal{L} &= \frac{1}{2} \left( E^2 - B^2 \right) \\
+    &= \frac{1}{2} \left( \partial_0 A_i - \partial_i A_0 \right)^2 - \frac{1}{2} \left( \frac{1}{2} \epsilon_{ijk} (\partial^j A^k - \partial^k A^j) \right)^2 \\ 
+    &= \frac{1}{2} ( \dot{A_i}^2 - (\partial_i A_0)^2 ) - \dot{A_i} \partial_i A_0    \\
+\end{align*} 
+
+So the variation of the Lagrange is given by 
+
+\begin{align*}
+    \delta \mathcal{L} &= - [ \partial_i A_0 \partial_i(\delta A_0) - \dot{A_i}\partial_i \delta A_0  ]  \\
+           &= - [ \partial_i A_0 + \dot{A_i} ] \partial_i (\delta A_0)  \\
+           &= - E_i \partial_i (\delta A_0) + \rho \delta A_0 , \textit{  if there is a source} \\
+\end{align*}
 
 \end{document}
  

@@ -1,0 +1,32 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{Preface}{4}{section*.2}%
+\contentsline {section}{\numberline {1}Introduction}{5}{section.1}%
+\contentsline {section}{\numberline {2}Critical Field}{5}{section.2}%
+\contentsline {section}{\numberline {3}Empirical Relation for Critical Field}{6}{section.3}%
+\contentsline {section}{\numberline {4}Type I and Type II Superconductors}{6}{section.4}%
+\contentsline {section}{\numberline {5}Comparison between Type I and Type II Superconductors}{8}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Type I Superconductors}{8}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Type II Superconductors}{9}{subsection.5.2}%
+\contentsline {section}{\numberline {6}London Equations and Superconductors}{9}{section.6}%
+\contentsline {section}{\numberline {7}Magnetic Field Decay in a One-Dimensional Perfect Conductor}{10}{section.7}%
+\contentsline {section}{\numberline {8}Distinction Between Superconductors and Perfect Conductors}{10}{section.8}%
+\contentsline {section}{\numberline {9}London Equations and the Meissner Effect}{11}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Second London Equation}{11}{subsection.9.1}%
+\contentsline {section}{\numberline {10}Magnetic Vector Potential and the Coulomb Gauge}{11}{section.10}%
+\contentsline {section}{\numberline {11}Field and Current in a Superconductor with a Varying Magnetic Field}{12}{section.11}%
+\contentsline {section}{\numberline {12}Magnetic Field Decay in Superconductors}{13}{section.12}%
+\contentsline {section}{\numberline {13}Penetration Depth for Different Elements}{13}{section.13}%
+\contentsline {section}{\numberline {14}Temperature Dependence of the Penetration Depth}{13}{section.14}%
+\contentsline {section}{\numberline {15}Third Conclusion: Surface Currents in Superconductors}{14}{section.15}%
+\contentsline {section}{\numberline {16}Thermodynamics of Superconductors}{14}{section.16}%
+\contentsline {section}{\numberline {17}Thermodynamic Potential of Superconductors}{14}{section.17}%
+\contentsline {section}{\numberline {18}Ginzburg-Landau Theory}{15}{section.18}%
+\contentsline {section}{\numberline {19}Ginzburg-Landau Theory for Superconductors}{18}{section.19}%
+\contentsline {section}{\numberline {20}Boundary Condition}{20}{section.20}%
+\contentsline {section}{\numberline {21}Free Energy in the London Limit}{20}{section.21}%
+\contentsline {section}{\numberline {22}Equilibrium value of $|\psi |$ and determination of the material parameters}{21}{section.22}%
+\contentsline {section}{\numberline {23}Physical content of the Ginzburg-Landau equations}{22}{section.23}%
+\contentsline {section}{\numberline {24}Coherence length, $\xi $}{23}{section.24}%
+\contentsline {section}{\numberline {25}Case: When $\mathbf {A}$ is zero}{23}{section.25}%
+\contentsline {section}{\numberline {26}Penetration Depth}{25}{section.26}%
+\contentsline {section}{\numberline {27}Ratio of Penetration Depth and Coherence Length}{25}{section.27}%
