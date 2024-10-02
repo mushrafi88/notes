@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/nixos.org) (preloaded format=pdflatex 1980.1.1)  2 OCT 2024 01:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/nixos.org) (preloaded format=pdflatex 1980.1.1)  2 OCT 2024 13:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -602,6 +602,9 @@ LaTeX Warning: Label `fig:' multiply defined.
 
 LaTeX Warning: Label `fig:' multiply defined.
 
+
+LaTeX Warning: Label `fig:' multiply defined.
+
 )
 \openout1 = `superconductivity.aux'.
 
@@ -690,117 +693,150 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 67.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{/nix/store/r1416ad3hn86b3dnv5bpaxf1qkzs5ngj-texlive-combined-full-2023-final/share/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./superconductivity.toc [2])
+{/nix/store/r1416ad3hn86b3dnv5bpaxf1qkzs5ngj-texlive-combined-full-2023-final/share/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./superconductivity.toc)
 \tf@toc=\write5
 \openout5 = `superconductivity.toc'.
 
- [3] [4]
-Overfull \hbox (3.71014pt too wide) in paragraph at lines 80--81
+ [2] [3] [4]
+Overfull \hbox (3.71014pt too wide) in paragraph at lines 88--89
 \OT1/cmr/m/n/10 In 1911, Heike Kamer-lingh Onnes dis-cov-ered that the elec-tri-cal re-sis-tance of mer-cury abruptly
  []
 
-<figures/1.png, id=188, 540.0175pt x 357.335pt>
+<figures/1.png, id=228, 540.0175pt x 357.335pt>
 File: figures/1.png Graphic file (type png)
 <use figures/1.png>
-Package pdftex.def Info: figures/1.png  used on input line 96.
+Package pdftex.def Info: figures/1.png  used on input line 104.
 (pdftex.def)             Requested size: 198.7425pt x 131.5085pt.
-<figures/2.png, id=189, 1174.3875pt x 507.8975pt>
+<figures/2.png, id=229, 1174.3875pt x 507.8975pt>
 File: figures/2.png Graphic file (type png)
 <use figures/2.png>
-Package pdftex.def Info: figures/2.png  used on input line 106.
+Package pdftex.def Info: figures/2.png  used on input line 114.
 (pdftex.def)             Requested size: 377.60951pt x 163.30551pt.
 [5 <./figures/1.png (PNG copy)>]
-<figures/3.png, id=197, 534.99875pt x 403.5075pt>
+<figures/3.png, id=237, 534.99875pt x 403.5075pt>
 File: figures/3.png Graphic file (type png)
 <use figures/3.png>
-Package pdftex.def Info: figures/3.png  used on input line 126.
+Package pdftex.def Info: figures/3.png  used on input line 134.
 (pdftex.def)             Requested size: 377.60951pt x 284.81146pt.
-<figures/4.png, id=198, 779.91376pt x 406.51875pt>
+<figures/4.png, id=238, 779.91376pt x 406.51875pt>
 File: figures/4.png Graphic file (type png)
 <use figures/4.png>
-Package pdftex.def Info: figures/4.png  used on input line 133.
+Package pdftex.def Info: figures/4.png  used on input line 141.
 (pdftex.def)             Requested size: 377.60951pt x 196.82019pt.
-Package hyperref Info: bookmark level for unknown theorem defaults to 0 on input line 151.
- [6 <./figures/2.png (PNG copy)>] [7 <./figures/3.png (PNG copy)> <./figures/4.png (PNG copy)>] [8] [9]
-Overfull \hbox (11.71959pt too wide) in paragraph at lines 252--252
-[]\OT1/cmr/bx/n/14.4 Distinction Be-tween Su-per-con-duc-tors and Per-fect Con-
- []
-
-[10] [11]
-<figures/5.png, id=260, 578.16pt x 599.23875pt>
+Package hyperref Info: bookmark level for unknown theorem defaults to 0 on input line 159.
+ [6 <./figures/2.png (PNG copy)>] [7 <./figures/3.png (PNG copy)> <./figures/4.png (PNG copy)>] [8] [9] [10] [11]
+<figures/5.png, id=301, 578.16pt x 599.23875pt>
 File: figures/5.png Graphic file (type png)
 <use figures/5.png>
-Package pdftex.def Info: figures/5.png  used on input line 335.
+Package pdftex.def Info: figures/5.png  used on input line 343.
 (pdftex.def)             Requested size: 198.7425pt x 205.98781pt.
- [12 <./figures/5.png (PNG copy)>]
-<figures/6.png, id=269, 448.67625pt x 369.38pt>
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[12 <./figures/5.png (PNG copy)>]
+<figures/6.png, id=310, 448.67625pt x 369.38pt>
 File: figures/6.png Graphic file (type png)
 <use figures/6.png>
-Package pdftex.def Info: figures/6.png  used on input line 376.
+Package pdftex.def Info: figures/6.png  used on input line 384.
 (pdftex.def)             Requested size: 178.86702pt x 147.25339pt.
  [13 <./figures/6.png (PNG copy)>] [14] [15]
-<figures/8.png, id=291, 1404.24625pt x 407.5225pt>
+<figures/8.png, id=331, 1404.24625pt x 407.5225pt>
 File: figures/8.png Graphic file (type png)
 <use figures/8.png>
-Package pdftex.def Info: figures/8.png  used on input line 503.
+Package pdftex.def Info: figures/8.png  used on input line 511.
 (pdftex.def)             Requested size: 377.60951pt x 109.58482pt.
- [16 <./figures/8.png (PNG copy)>] [17] [18{/nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [19
-pdfTeX warning (ext4): destination with the same identifier (name{equation.19.8}) has been already used, duplicate ignored
+ [16 <./figures/8.png (PNG copy)>] [17{/nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [18
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1.8}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.644 
-      ] [20
-pdfTeX warning (ext4): destination with the same identifier (name{equation.19.9}) has been already used, duplicate ignored
+l.652 
+      ] [19
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1.9}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.665 \]
+l.673 \]
         ]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 677.
+(hyperref)                removing `math shift' on input line 685.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\psi' on input line 677.
+(hyperref)                removing `\psi' on input line 685.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 677.
+(hyperref)                removing `math shift' on input line 685.
 
-<figures/9.png, id=338, 1342.01375pt x 494.84875pt>
+<figures/9.png, id=374, 1342.01375pt x 494.84875pt>
 File: figures/9.png Graphic file (type png)
 <use figures/9.png>
-Package pdftex.def Info: figures/9.png  used on input line 683.
+Package pdftex.def Info: figures/9.png  used on input line 691.
 (pdftex.def)             Requested size: 377.60951pt x 139.23627pt.
-[21 <./figures/9.png (PNG copy)>]
+[20 <./figures/9.png (PNG copy)>]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 738.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\xi' on input line 738.
+(hyperref)                removing `math shift' on input line 746.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 738.
+(hyperref)                removing `\xi' on input line 746.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 746.
+
+[21]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 778.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 778.
 
 [22]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 770.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 770.
-
-[23]
-<figures/7.png, id=370, 778.91pt x 495.8525pt>
+<figures/7.png, id=407, 778.91pt x 495.8525pt>
 File: figures/7.png Graphic file (type png)
 <use figures/7.png>
-Package pdftex.def Info: figures/7.png  used on input line 820.
+Package pdftex.def Info: figures/7.png  used on input line 828.
 (pdftex.def)             Requested size: 258.36281pt x 164.47166pt.
- [24 <./figures/7.png (PNG copy)>] [25] (./superconductivity.aux)
+ [23 <./figures/7.png (PNG copy)>] [24] [25]
+<figures/fermi_sphere.png, id=432, 496.85625pt x 239.89626pt>
+File: figures/fermi_sphere.png Graphic file (type png)
+<use figures/fermi_sphere.png>
+Package pdftex.def Info: figures/fermi_sphere.png  used on input line 900.
+(pdftex.def)             Requested size: 158.99156pt x 76.7647pt.
+ [26 <./figures/fermi_sphere.png (PNG copy)>]
+<figures/electron_lattice_interaction.png, id=438, 275.0275pt x 162.6075pt>
+File: figures/electron_lattice_interaction.png Graphic file (type png)
+<use figures/electron_lattice_interaction.png>
+Package pdftex.def Info: figures/electron_lattice_interaction.png  used on input line 939.
+(pdftex.def)             Requested size: 158.99156pt x 94.00475pt.
+ [27 <./figures/electron_lattice_interaction.png (PNG copy)>]
+<figures/scattering_diagram_1.png, id=448, 384.43625pt x 222.8325pt>
+File: figures/scattering_diagram_1.png Graphic file (type png)
+<use figures/scattering_diagram_1.png>
+Package pdftex.def Info: figures/scattering_diagram_1.png  used on input line 960.
+(pdftex.def)             Requested size: 119.2467pt x 69.11815pt.
+<figures/scattering_diagram_2.png, id=449, 444.66125pt x 225.84375pt>
+File: figures/scattering_diagram_2.png Graphic file (type png)
+<use figures/scattering_diagram_2.png>
+Package pdftex.def Info: figures/scattering_diagram_2.png  used on input line 966.
+(pdftex.def)             Requested size: 119.2467pt x 60.56508pt.
+<figures/pairing.png, id=450, 478.78876pt x 432.61626pt>
+File: figures/pairing.png Graphic file (type png)
+<use figures/pairing.png>
+Package pdftex.def Info: figures/pairing.png  used on input line 972.
+(pdftex.def)             Requested size: 119.2467pt x 107.74452pt.
+ [28 <./figures/scattering_diagram_1.png (PNG copy)> <./figures/scattering_diagram_2.png (PNG copy)> <./figures/pairing.png (PNG copy)>] [29] [30] [31] [32]
+<figures/epsilon_k.png, id=485, 830.10126pt x 530.98375pt>
+File: figures/epsilon_k.png Graphic file (type png)
+<use figures/epsilon_k.png>
+Package pdftex.def Info: figures/epsilon_k.png  used on input line 1262.
+(pdftex.def)             Requested size: 139.12216pt x 88.9859pt.
+ [33] [34 <./figures/epsilon_k.png (PNG copy)>] (./superconductivity.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -810,22 +846,22 @@ L3 programming layer <2024-02-20>
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `superconductivity.out' has not changed.
-(rerunfilecheck)             Checksum: 203411321B4EC5D496764E5D0135A073;7358.
+(rerunfilecheck)             Checksum: 6ED3350677FB3252E54F82EDB893BBFB;9208.
  ) 
 Here is how much of TeX's memory you used:
- 25746 strings out of 474116
- 523568 string characters out of 5717523
- 1945187 words of memory out of 5000000
- 47521 multiletter control sequences out of 15000+600000
- 569087 words of font info for 78 fonts, out of 8000000 for 9000
+ 25835 strings out of 474116
+ 525758 string characters out of 5717523
+ 1946187 words of memory out of 5000000
+ 47570 multiletter control sequences out of 15000+600000
+ 568461 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 116i,14n,121p,689b,541s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmex10.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmr10.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmr12.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmr5.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmr7.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-comb
-ined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmti10.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on superconductivity.pdf (25 pages, 3417182 bytes).
+ 116i,14n,121p,742b,541s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmex10.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmr10.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmr12.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmr5.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmr7.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-comb
+ined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/cm/cmti10.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></nix/store/m0ikp1pfxcv6vfhi7n4mh367v5a6his2-texlive-combined-full-2023-final-texmfdist/fonts/type1/public/cm-super/sfrm1000.pfb>
+Output written on superconductivity.pdf (34 pages, 4668625 bytes).
 PDF statistics:
- 507 PDF objects out of 1000 (max. 8388607)
- 428 compressed objects within 5 object streams
- 151 named destinations out of 1000 (max. 500000)
- 306 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 624 PDF objects out of 1000 (max. 8388607)
+ 527 compressed objects within 6 object streams
+ 189 named destinations out of 1000 (max. 500000)
+ 400 words of extra memory for PDF output out of 10000 (max. 10000000)
 

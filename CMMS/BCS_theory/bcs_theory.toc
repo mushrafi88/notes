@@ -1,0 +1,8 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{Preface}{3}{section*.2}%
+\contentsline {subsection}{\numberline {0.1}Introduction}{4}{subsection.0.1}%
+\contentsline {subsection}{\numberline {0.2}Electron Pairing and BCS Theory}{4}{subsection.0.2}%
+\contentsline {subsection}{\numberline {0.3}Formation of Cooper Pairs}{5}{subsection.0.3}%
+\contentsline {subsection}{\numberline {0.4}Scattering of Cooper Pairs}{6}{subsection.0.4}%
+\contentsline {subsection}{\numberline {0.5}BCS Ground State}{9}{subsection.0.5}%
+\contentsline {subsubsection}{\numberline {0.5.1}The Energy of the BCS Ground State}{9}{subsubsection.0.5.1}%
